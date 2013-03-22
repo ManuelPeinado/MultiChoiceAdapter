@@ -56,7 +56,7 @@ import com.manuelpeinado.multichoicelistadapter.R;
  * multiChoiceAdapter.setOnItemClickListener(myItemListClickListener);</code>
  * <p><br>Do not call setOnItemClickListener on your ListView, call it on the adapter instead</p> 
  * <p><br>Do not forget to derive your activity from one of the ActionBarSherlock activities, except SherlockListActivity</p> 
- * <p><br>See the accompanying sample project for a full working application that uses this library</p>
+ * <p><br>See the accompanying sample project for a full working application that implements this class</p>
  */
 public abstract class MultiChoiceAdapter extends BaseAdapter 
 									     implements OnItemLongClickListener, 
@@ -68,7 +68,10 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
 	private OnItemClickListener itemClickListener;
 
 	/**
-	 * @param adapterView
+	 * Sets the adapter view on which this adapter will operate. You should call this method
+	 * from the onCreate method of your activity. This method calls setAdapter on the adapter
+	 * view, so you don't have to do it yourself
+	 * @param The adapter view (typically a ListView) this adapter will operate on
 	 */
 	public void setAdapterView(AdapterView<? super MultiChoiceAdapter> adapterView) {
 		this.adapterView = adapterView;
@@ -79,15 +82,18 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
 	}
 	
 	/**
-	 * @param itemClickListener
+	 * Register a callback to be invoked when an item in the associated AdapterView has been clicked
+	 * @param listener The callback that will be invoked 
 	 */
-	public void setOnItemClickListener(OnItemClickListener itemClickListener) {
-		this.itemClickListener = itemClickListener;
+	public void setOnItemClickListener(OnItemClickListener listener) {
+		this.itemClickListener = listener;
 	}
 
 	/**
-	 * @param position
-	 * @param selected
+	 * Changes the selection of an item. If the item was already in the specified state, nothing is done.
+	 * May cause the activation of the action mode if an item is selected an no items were previously selected
+	 * @param position The position of the item to select
+	 * @param selected The desired state (selected or not) for the item
 	 */
 	public void select(int position, boolean selected) {
 		if (selected) {
@@ -96,28 +102,11 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
 			unselect(position);
 		}
 	}
-
-	/**
-	 * @param position
-	 * @param convertView
-	 * @param parent
-	 * @return
-	 */
-	protected abstract View getViewImpl(int position, View convertView, ViewGroup parent);
-
-	/**
-	 * 
-	 */
-	protected void finishActionMode() {
-		actionMode.finish();
-	}
 	
-	protected Context getContext() {
-		return adapterView.getContext();
-	}
-
 	/**
-	 * @param position
+	 * Causes an item to be selected. If the item was already selected, nothing is done
+	 * May cause the activation of the action mode if no items were previously selected
+	 * @param position The position of the item to select
 	 */
 	public void select(int position) {
 		boolean wasSelected = isSelected(position);
@@ -130,7 +119,9 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
 	}
 
 	/**
-	 * @param position
+	 * Causes an item to stop being selected. If the item was not selected, nothing is done
+	 * May cause the deactivation of the action mode if this was the only selected item
+	 * @param position The position of the item to select
 	 */
 	public void unselect(int position) {
 		boolean wasSelected = isSelected(position);
@@ -145,9 +136,10 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
 		notifyDataSetChanged();
 		onItemSelectedStateChanged(actionMode, position, false);
 	}
-
+	
 	/**
-	 * @return
+	 * Returns the indices of the currently selectly items. 
+	 * @return Indices of the currently selectly items. The empty set if no item is selected
 	 */
 	public Set<Integer> getSelection() {
 		// Return a copy to prevent concurrent modification problems
@@ -155,18 +147,45 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
 	}
 
 	/**
-	 * @return
+	 * Returns the number of selected items
+	 * @return Number of selected items
 	 */
 	public int getSelectionCount() {
 		return selection.size();
 	}
 
-	/**
-	 * @param position
-	 * @return
+	/** 
+	 * Returns true if the item at the specified position is selected 
+	 * @param position The item position
+	 * @return Whether the item is selected
 	 */
 	public boolean isSelected(int position) {
 		return selection.contains(position);
+	}
+
+	/**
+	 * Get a View that displays the data at the specified position in the data set.
+	 * Subclasses should implement this method instead of the traditional ListAdapter#getView
+	 * @param position
+	 * @param convertView
+	 * @param parent
+	 * @return
+	 */
+	protected abstract View getViewImpl(int position, View convertView, ViewGroup parent);
+
+	/**
+	 * Subclasses can invoke this method in order to finish the action mode. This has
+	 * the side effect of unselecting all items 
+	 */
+	protected void finishActionMode() {
+		actionMode.finish();
+	}
+	
+	/**
+	 * Convenience method for subclasses that need an activity context 
+	 */
+	protected Context getContext() {
+		return adapterView.getContext();
 	}
 
 	private void clearSelection() {
@@ -195,6 +214,17 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
 		}
 		throw new RuntimeException("ListView must belong to an activity which subclasses SherlockActivity");
 	}
+	
+	private void startActionMode() {
+		try {
+			Activity activity = (Activity) adapterView.getContext();
+			Method method = activity.getClass().getMethod("startActionMode", ActionMode.Callback.class);
+			actionMode = (ActionMode) method.invoke(activity, this);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	}
 
 	//
 	// OnItemLongClickListener implementation
@@ -208,17 +238,6 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
 		boolean wasChecked = isSelected(position);
 		select(position, !wasChecked);
 		return true;
-	}
-
-	private void startActionMode() {
-		try {
-			Activity activity = (Activity) adapterView.getContext();
-			Method method = activity.getClass().getMethod("startActionMode", ActionMode.Callback.class);
-			actionMode = (ActionMode) method.invoke(activity, this);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}
 	}
 
 	//
@@ -256,7 +275,7 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
 	//
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public final View getView(int position, View convertView, ViewGroup parent) {
 		View v = getViewImpl(position, convertView, parent);
 		Resources res = adapterView.getResources();
 		if (isSelected(position)) {
