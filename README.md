@@ -66,6 +66,6 @@ License
 
  [1]: http://developer.android.com/reference/android/widget/AbsListView.MultiChoiceModeListener.html
  [2]: http://actionbarsherlock.com
- [3]: http://actionbarsherlock.com/static/feature.png
+ [3]: https://raw.github.com/ManuelPeinado/MultiChoiceAdapter/master/art/screenshot.png
  [4]: https://play.google.com/store/apps/details?id=com.actionbarsherlock.sample.demos
  [5]: https://play.google.com/store/apps/details?id=com.actionbarsherlock.sample.demos
