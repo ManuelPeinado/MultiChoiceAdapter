@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="items">
+        <item>One World Trade Center</item>
+        <item>Empire State Building</item>
+        <item>Bank of America Building</item>
+        <item>Chrysler Building</item>
+    </string-array>
+
+</resources>
