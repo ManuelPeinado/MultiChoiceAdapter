@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.manuelpeinado.multichoicetest;
+package com.manuelpeinado.multichoiceadapter.demo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.manuelpeinado.multichoiceadapter.MultiChoiceAdapter;
+import com.manuelpeinado.multichoiceadapter.demo.R;
 
 public class MainActivity extends SherlockActivity implements OnItemClickListener {
 	private MultiChoiceAdapter adapter;

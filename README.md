@@ -38,10 +38,18 @@ Do not call setOnItemClickListener on your ListView, call it on the adapter inst
 
 Do not forget to derive your activity from one of the ActionBarSherlock activities, except SherlockListActivity.
 
+Coming soon
+=========
+
+* Support for checkboxes
+* Support for cursor and array adapters
+* Better support for customization of selected item appearance
+
 Developed By
-============
+==========
 
 * Manuel Peinado - <manuelpeinado@gmail.com>
+
 
 License
 =======

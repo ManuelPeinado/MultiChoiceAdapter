@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.manuelpeinado.multichoicetest;
+package com.manuelpeinado.multichoiceadapter.demo;
 
 import java.util.List;
 import java.util.Set;
@@ -29,6 +29,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.manuelpeinado.multichoiceadapter.MultiChoiceAdapter;
+import com.manuelpeinado.multichoiceadapter.demo.R;
 
 public class MySelectionAdapter extends MultiChoiceAdapter {
 
