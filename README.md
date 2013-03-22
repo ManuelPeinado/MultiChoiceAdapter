@@ -10,7 +10,7 @@ with every version of Android from 2.x. Of course, this requires that your proje
 
 Try out the [sample application][4] on Google Play.
 
-See the [accompanying sample project][5] for a small application that shows how to use this library.
+Browse the source code of the [sample application][5] for a complete example of use.
 
 Usage
 =====
@@ -75,5 +75,5 @@ License
  [1]: http://developer.android.com/reference/android/widget/AbsListView.MultiChoiceModeListener.html
  [2]: http://actionbarsherlock.com
  [3]: https://raw.github.com/ManuelPeinado/MultiChoiceAdapter/master/art/screenshot.png
- [4]: https://play.google.com/store/apps/details?id=com.actionbarsherlock.sample.demos
- [5]: https://play.google.com/store/apps/details?id=com.actionbarsherlock.sample.demos
+ [4]: https://play.google.com/store/apps/details?id=com.manuelpeinado.multichoiceadapter.demo
+ [5]: https://github.com/ManuelPeinado/MultiChoiceAdapter/tree/master/sample
