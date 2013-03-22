@@ -38,33 +38,25 @@ import com.actionbarsherlock.view.Menu;
 import com.manuelpeinado.multichoicelistadapter.R;
 
 /**
- * MultiChoiceAdapter provides a ListView adapter with support for multiple choice modal selection as in the native GMail app. 
- * <p>
- * It provides a functionality similar to that of the CHOICE_MODE_MULTIPLE_MODAL ListView mode [1], but in a manner that is compatible 
- * with every version of Android from 2.1
- * <p>
- * You'll have to implement the following methods:
- * <br><br>
- * <b>ActionMode methods:</b>
+ * MultiChoiceAdapter is an implementation of ListAdapter which adds support for modal multiple choice selection as in the native GMail app. 
+ * <p>It provides a functionality similar to that of the CHOICE_MODE_MULTIPLE_MODAL ListView mode, but in a manner that is  
+ * compatible with every version of Android from 2.1. Of course, this requires that your project uses ActionBarSherlock
+ * <hr><p>You'll have to implement the following methods:
+ * <p><b>ActionMode methods:</b>
  * <li><b>onCreateActionMode.</b> Create the action mode that will be displayed when at least one item is selected
  * <li><b>onActionModeClicked.</b> Respond to any of your action mode's actions
- * <br><br>
- * <b>ListAdapter methods:</b><br><br>
+ * <p><br><b>ListAdapter methods:</b><br><br>
  * <li><b>getCount.</b> Return the number of items to show
  * <li><b>getItem.</b> Return the item at a given position
  * <li><b>getItemId.</b> Return the id of the item at a given position
  * <li><b>getViewImpl.</b> Returns the view to show for a given position. <b>Important:</b> do not override ListAdapter's getView method, override this method instead
- * <br><br><hr><br>
- * Once you've implemented your class that derives from SelectionAdapter, you'll have
- * to attach it to a ListView like this:
- * <br><br><code>
+ * <hr><p>Once you've implemented your class that derives from SelectionAdapter, you'll have
+ * to attach it to a ListView like this:<p><br><code>
  * multiChoiceAdapter.setListView(listView);
- * multiChoiceAdapter.setOnItemClickListener(myItemListClickListener);
- * </code><br><br> 
- * Do not call setOnItemClickListener on your ListView, call it on the adapter instead 
- * <br><br>
- * Do not forget to derive your activity from one of the ActionBarSherlock activities, except SherlockListActivity 
- * <br><br>See the accompanying sample project for a full working application that uses this library 
+ * multiChoiceAdapter.setOnItemClickListener(myItemListClickListener);</code>
+ * <p><br>Do not call setOnItemClickListener on your ListView, call it on the adapter instead</p> 
+ * <p><br>Do not forget to derive your activity from one of the ActionBarSherlock activities, except SherlockListActivity</p> 
+ * <p><br>See the accompanying sample project for a full working application that uses this library</p>
  */
 public abstract class MultiChoiceAdapter extends BaseAdapter 
 									     implements OnItemLongClickListener, 
@@ -75,6 +67,9 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
 	private ActionMode actionMode;
 	private OnItemClickListener itemClickListener;
 
+	/**
+	 * @param adapterView
+	 */
 	public void setAdapterView(AdapterView<? super MultiChoiceAdapter> adapterView) {
 		this.adapterView = adapterView;
 		checkActivity();
@@ -83,10 +78,17 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
 		adapterView.setAdapter(this);
 	}
 	
+	/**
+	 * @param itemClickListener
+	 */
 	public void setOnItemClickListener(OnItemClickListener itemClickListener) {
 		this.itemClickListener = itemClickListener;
 	}
 
+	/**
+	 * @param position
+	 * @param selected
+	 */
 	public void select(int position, boolean selected) {
 		if (selected) {
 			select(position);
@@ -95,8 +97,17 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
 		}
 	}
 
+	/**
+	 * @param position
+	 * @param convertView
+	 * @param parent
+	 * @return
+	 */
 	protected abstract View getViewImpl(int position, View convertView, ViewGroup parent);
 
+	/**
+	 * 
+	 */
 	protected void finishActionMode() {
 		actionMode.finish();
 	}
@@ -105,6 +116,9 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
 		return adapterView.getContext();
 	}
 
+	/**
+	 * @param position
+	 */
 	public void select(int position) {
 		boolean wasSelected = isSelected(position);
 		if (wasSelected) {
@@ -115,31 +129,49 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
 		onItemSelectedStateChanged(actionMode, position, true);
 	}
 
+	/**
+	 * @param position
+	 */
 	public void unselect(int position) {
 		boolean wasSelected = isSelected(position);
 		if (!wasSelected) {
 			return;
 		}
 		selection.remove(Integer.valueOf(position));
+		if (getSelectionCount() == 0) {
+			finishActionMode();
+			return;
+		}
 		notifyDataSetChanged();
 		onItemSelectedStateChanged(actionMode, position, false);
 	}
 
+	/**
+	 * @return
+	 */
 	public Set<Integer> getSelection() {
-		return selection;
+		// Return a copy to prevent concurrent modification problems
+		return new HashSet<Integer>(selection);
 	}
 
-	public void clearSelection() {
-		selection.clear();
-		notifyDataSetChanged();
-	}
-
+	/**
+	 * @return
+	 */
 	public int getSelectionCount() {
 		return selection.size();
 	}
 
+	/**
+	 * @param position
+	 * @return
+	 */
 	public boolean isSelected(int position) {
 		return selection.contains(position);
+	}
+
+	private void clearSelection() {
+		selection.clear();
+		notifyDataSetChanged();
 	}
 
 	private void onItemSelectedStateChanged(ActionMode actionMode, int position, boolean selected) {

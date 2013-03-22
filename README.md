@@ -8,7 +8,7 @@ with every version of Android from 2.1. Of course, this requires that your proje
 
 ![Example Image][3]
 
-Try out the sample applications on the Android Market: [Google Play Sample App][4].
+Try out the [sample application][4] on Google Play.
 
 See the [accompanying sample project][5] for a small application that shows how to use this library.
 
@@ -29,9 +29,9 @@ Instead of deriving your adapter from BaseAdapter or one of its subclasses, deri
 * *getItemId.* Returns the id of the item at a given position
 * *getViewImpl.* Returns the view to show for a given position. *Important:* do not override ListAdapter's getView method, override this method instead
 
-Once you've implemented your class that derives from SelectionAdapter, you'll have to attach it to a ListView like this:
+Once you've implemented your class that derives from MultiChoiceAdapter, you'll have to attach it to a ListView like this:
 
-	multiChoiceAdapter.setListView(listView);
+	multiChoiceAdapter.setAdapterView(listView);
 	multiChoiceAdapter.setOnItemClickListener(myItemListClickListener);
 
 Do not call setOnItemClickListener on your ListView, call it on the adapter instead
@@ -64,8 +64,8 @@ License
 
 
 
- [1]: http://android-developers.blogspot.com/2011/03/fragments-for-all.html
- [2]: http://developer.android.com/guide/topics/ui/actionbar.html
+ [1]: http://developer.android.com/reference/android/widget/AbsListView.MultiChoiceModeListener.html
+ [2]: http://actionbarsherlock.com
  [3]: http://actionbarsherlock.com/static/feature.png
  [4]: https://play.google.com/store/apps/details?id=com.actionbarsherlock.sample.demos
  [5]: https://play.google.com/store/apps/details?id=com.actionbarsherlock.sample.demos

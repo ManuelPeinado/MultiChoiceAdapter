@@ -63,9 +63,8 @@ public class MySelectionAdapter extends MultiChoiceAdapter {
 		Set<Integer> positions = getSelection();
 		for (Integer position : positions) {
 			items.remove((int)position);
+			unselect(position);
 		}
-		notifyDataSetChanged();
-		finishActionMode();
 	}
 
 	@Override
