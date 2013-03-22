@@ -1,10 +1,10 @@
 MultiChoiceAdapter
 ==================
 
-MultiChoiceAdapter is an implementation of ListAdapter which adds support for modal multiple choice selection as in the native GMail app. 
+MultiChoiceAdapter is an implementation of ListAdapter which adds support for modal multiple choice selection as in the native Gmail app. 
 
 It provides a functionality similar to that of the [`CHOICE_MODE_MULTIPLE_MODAL`][1] ListView mode, but in a manner that is compatible 
-with every version of Android from 2.1. Of course, this requires that your project uses [ActionBarSherlock][2].
+with every version of Android from 2.x. Of course, this requires that your project uses [ActionBarSherlock][2].
 
 ![Example Image][3]
 
@@ -19,24 +19,24 @@ Instead of deriving your adapter from BaseAdapter or one of its subclasses, deri
 
 #### ActionMode methods
 
-* *onCreateActionMode.* Creates the action mode that will be displayed when at least one item is selected
-* *onActionModeClicked.* Responds to a click on any of your action mode's actions
+* <code>onCreateActionMode.</code> Creates the action mode that will be displayed when at least one item is selected
+* <code>onActionModeClicked.</code> Responds to a click on any of your action mode's actions
 
 #### ListAdapter methods
 
-* *getCount.* Returns the number of items to show
-* *getItem.* Returns the item at a given position
-* *getItemId.* Returns the id of the item at a given position
-* *getViewImpl.* Returns the view to show for a given position. *Important:* do not override ListAdapter's getView method, override this method instead
+* <code>getCount.</code> Returns the number of items to show
+* <code>getItem.</code> Returns the item at a given position
+* <code>getItemId.</code> Returns the id of the item at a given position
+* <code>getViewImpl.</code> Returns the view to show for a given position. **Important:** do not override ListAdapter's getView method, override this method instead
 
-Once you've implemented your class that derives from MultiChoiceAdapter, you'll have to attach it to a ListView like this:
+Once you've implemented your class that derives from MultiChoiceAdapter, you attach an instance of it to your ListView like this:
 
 	multiChoiceAdapter.setAdapterView(listView);
 	multiChoiceAdapter.setOnItemClickListener(myItemListClickListener);
 
-Do not call setOnItemClickListener on your ListView, call it on the adapter instead
+Do not call setOnItemClickListener on your ListView, call it on the adapter instead.
 
-Do not forget to derive your activity from one of the ActionBarSherlock activities, except SherlockListActivity
+Do not forget to derive your activity from one of the ActionBarSherlock activities, except SherlockListActivity.
 
 Developed By
 ============
