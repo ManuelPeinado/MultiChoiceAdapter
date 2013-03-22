@@ -4,5 +4,6 @@
     <string name="app_name">MultiChoiceTest</string>
     <string name="menu_settings">Settings</string>
     <string name="menu_share">Share</string>
+    <string name="menu_discard">Discard</string>
 
 </resources>

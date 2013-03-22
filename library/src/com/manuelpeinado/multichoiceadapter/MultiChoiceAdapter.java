@@ -1,4 +1,19 @@
-package com.manuelpeinado.multichoicetest;
+/*
+ * Copyright (C) 2013 Manuel Peinado
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.manuelpeinado.multichoiceadapter;
 
 import java.lang.reflect.Method;
 import java.util.HashSet;
@@ -23,30 +38,44 @@ import com.actionbarsherlock.view.Menu;
 import com.manuelpeinado.multichoicelistadapter.R;
 
 /**
- * A ListView adapter with support for multiple choice modal selection. The behavior
- * it provides is similar to that of CHOICE_MODE_MULTIPLE_MODAL ListView mode,
- * but it is compatible with API 8+
+ * MultiChoiceAdapter provides a ListView adapter with support for multiple choice modal selection as in the native GMail app. 
+ * <p>
+ * It provides a functionality similar to that of the CHOICE_MODE_MULTIPLE_MODAL ListView mode [1], but in a manner that is compatible 
+ * with every version of Android from 2.1
+ * <p>
+ * You'll have to implement the following methods:
  * <br><br>
- * <b>Guidelines:</b> 
- * 	<li>Derive your activity from one of the ActionBarSherlock
- * activities, except SherlockListActivity 
- * 	<li>Call setListView as soon as you
- * can, normally in your activity onCreate 
- * 	<li>Do not call
- * setOnItemClickListener on your ListView, call it on this adapter 
- * 	<li>Do not implement BaseAdapter.getView, implement getViewImpl instead 
+ * <b>ActionMode methods:</b>
+ * <li><b>onCreateActionMode.</b> Create the action mode that will be displayed when at least one item is selected
+ * <li><b>onActionModeClicked.</b> Respond to any of your action mode's actions
  * <br><br>
+ * <b>ListAdapter methods:</b><br><br>
+ * <li><b>getCount.</b> Return the number of items to show
+ * <li><b>getItem.</b> Return the item at a given position
+ * <li><b>getItemId.</b> Return the id of the item at a given position
+ * <li><b>getViewImpl.</b> Returns the view to show for a given position. <b>Important:</b> do not override ListAdapter's getView method, override this method instead
+ * <br><br><hr><br>
+ * Once you've implemented your class that derives from SelectionAdapter, you'll have
+ * to attach it to a ListView like this:
+ * <br><br><code>
+ * multiChoiceAdapter.setListView(listView);
+ * multiChoiceAdapter.setOnItemClickListener(myItemListClickListener);
+ * </code><br><br> 
+ * Do not call setOnItemClickListener on your ListView, call it on the adapter instead 
+ * <br><br>
+ * Do not forget to derive your activity from one of the ActionBarSherlock activities, except SherlockListActivity 
+ * <br><br>See the accompanying sample project for a full working application that uses this library 
  */
-public abstract class SelectionAdapter extends BaseAdapter 
-									   implements OnItemLongClickListener, 
-									   			  ActionMode.Callback, 
-									   			  OnItemClickListener {
+public abstract class MultiChoiceAdapter extends BaseAdapter 
+									     implements OnItemLongClickListener, 
+									   	   		    ActionMode.Callback, 
+									   			    OnItemClickListener {
 	private Set<Integer> selection = new HashSet<Integer>();
-	private AdapterView<? super SelectionAdapter> adapterView;
+	private AdapterView<? super MultiChoiceAdapter> adapterView;
 	private ActionMode actionMode;
 	private OnItemClickListener itemClickListener;
 
-	public void setAdapterView(AdapterView<? super SelectionAdapter> adapterView) {
+	public void setAdapterView(AdapterView<? super MultiChoiceAdapter> adapterView) {
 		this.adapterView = adapterView;
 		checkActivity();
 		adapterView.setOnItemLongClickListener(this);
@@ -115,6 +144,10 @@ public abstract class SelectionAdapter extends BaseAdapter
 
 	private void onItemSelectedStateChanged(ActionMode actionMode, int position, boolean selected) {
 		int count = getSelectionCount();
+		if (count == 0) {
+			finishActionMode();
+			return;
+		}
 		Resources res = adapterView.getResources();
 		String title = res.getQuantityString(R.plurals.selected_items, count, count);
 		actionMode.setTitle(title);
