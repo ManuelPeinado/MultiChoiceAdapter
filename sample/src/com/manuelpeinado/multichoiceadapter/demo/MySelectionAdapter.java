@@ -15,8 +15,9 @@
  */
 package com.manuelpeinado.multichoiceadapter.demo;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +30,6 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.manuelpeinado.multichoiceadapter.MultiChoiceAdapter;
-import com.manuelpeinado.multichoiceadapter.demo.R;
 
 public class MySelectionAdapter extends MultiChoiceAdapter {
 
@@ -61,7 +61,9 @@ public class MySelectionAdapter extends MultiChoiceAdapter {
 	}
 
 	private void discardSelectedItems() {
-		Set<Integer> positions = getSelection();
+		// http://stackoverflow.com/a/4950905/244576
+		List<Integer> positions = new ArrayList<Integer>(getSelection());
+		Collections.sort(positions, Collections.reverseOrder());
 		for (Integer position : positions) {
 			items.remove((int)position);
 			unselect(position);

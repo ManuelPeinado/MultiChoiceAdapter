@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="MultiChoiceAdapter_DefaultSelectedItemBackground">
+        <item name="selectedItemBackground">@color/mca__default_selected_item_background</item>
+    </style>
+    
+</resources>

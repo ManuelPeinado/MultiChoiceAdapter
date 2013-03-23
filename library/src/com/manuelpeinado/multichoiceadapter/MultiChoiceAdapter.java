@@ -23,6 +23,8 @@ import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -66,6 +68,7 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
 	private AdapterView<? super MultiChoiceAdapter> adapterView;
 	private ActionMode actionMode;
 	private OnItemClickListener itemClickListener;
+	private Drawable selectedItemBackground;
 
 	/**
 	 * Sets the adapter view on which this adapter will operate. You should call this method
@@ -79,6 +82,7 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
 		adapterView.setOnItemLongClickListener(this);
 		adapterView.setOnItemClickListener(this);
 		adapterView.setAdapter(this);
+		extractBackgroundColor();
 	}
 	
 	/**
@@ -112,6 +116,9 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
 		boolean wasSelected = isSelected(position);
 		if (wasSelected) {
 			return;
+		}
+		if (actionMode == null) {
+			startActionMode();
 		}
 		selection.add(position);
 		notifyDataSetChanged();
@@ -225,6 +232,15 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
 			throw new RuntimeException(e);
 		}
 	}
+	
+	private void extractBackgroundColor() {
+		Context ctx = getContext();
+		int styleAttr = R.attr.multiChoiceAdapterStyle;
+		int defStyle = R.style.MultiChoiceAdapter_DefaultSelectedItemBackground;
+		TypedArray ta = ctx.obtainStyledAttributes(null, R.styleable.MultiChoiceAdapter, styleAttr, defStyle);
+		selectedItemBackground = ta.getDrawable(0);
+		ta.recycle();
+	}
 
 	//
 	// OnItemLongClickListener implementation
@@ -232,9 +248,6 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
 
 	@Override
 	public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
-		if (actionMode == null) {
-			startActionMode();
-		}
 		boolean wasChecked = isSelected(position);
 		select(position, !wasChecked);
 		return true;
@@ -274,12 +287,13 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
 	// BaseAdapter implementation
 	//
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public final View getView(int position, View convertView, ViewGroup parent) {
 		View v = getViewImpl(position, convertView, parent);
 		Resources res = adapterView.getResources();
 		if (isSelected(position)) {
-			v.setBackgroundColor(res.getColor(R.color.selected_list_item_bg));
+			v.setBackgroundDrawable(selectedItemBackground);
 		} else {
 			v.setBackgroundColor(res.getColor(android.R.color.transparent));
 		}
