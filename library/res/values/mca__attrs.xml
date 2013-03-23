@@ -4,7 +4,7 @@
     <declare-styleable name="MultiChoiceAdapter">
         <attr name="selectedItemBackground" format="reference|color" />
     </declare-styleable>
-    
+
     <attr name="multiChoiceAdapterStyle" format="reference" />
-    
+
 </resources>

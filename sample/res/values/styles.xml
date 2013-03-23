@@ -3,9 +3,9 @@
     <style name="AppTheme" parent="Theme.Sherlock.Light.DarkActionBar">
         <item name="multiChoiceAdapterStyle">@style/MultiChoiceAdapter</item>
     </style>
-    
+
     <style name="MultiChoiceAdapter">
-    	<item name="selectedItemBackground">@color/selected_item_background</item>
+        <item name="selectedItemBackground">@color/selected_item_background</item>
     </style>
 
 </resources>

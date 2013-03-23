@@ -38,12 +38,22 @@ Do not call setOnItemClickListener on your ListView, call it on the adapter inst
 
 Do not forget to derive your activity from one of the ActionBarSherlock activities, except SherlockListActivity.
 
+Customization
+=============
+
+You can use a custom background (drawable or color) for the selected items of your list. To do so, add an item named <code>multiChoiceAdapterStyle</code> to your theme, and have it reference an additional style which you define like this:
+
+    <style name="MyCustomMultiChoiceAdapter">
+        <item name="selectedItemBackground">@color/my_custom_selected_item_background</item>
+    </style>
+
+See the sample application for a complete example.
+
 Coming soon
 =========
 
 * Support for checkboxes
 * Support for cursor and array adapters
-* Better support for customization of selected item appearance
 
 Developed By
 ==========

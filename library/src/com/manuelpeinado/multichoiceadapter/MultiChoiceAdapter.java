@@ -61,242 +61,254 @@ import com.manuelpeinado.multichoicelistadapter.R;
  * <p><br>See the accompanying sample project for a full working application that implements this class</p>
  */
 public abstract class MultiChoiceAdapter extends BaseAdapter 
-									     implements OnItemLongClickListener, 
-									   	   		    ActionMode.Callback, 
-									   			    OnItemClickListener {
-	private Set<Integer> selection = new HashSet<Integer>();
-	private AdapterView<? super MultiChoiceAdapter> adapterView;
-	private ActionMode actionMode;
-	private OnItemClickListener itemClickListener;
-	private Drawable selectedItemBackground;
+                                         implements OnItemLongClickListener, 
+                                         ActionMode.Callback, 
+                                         OnItemClickListener {
+    private Set<Integer> selection = new HashSet<Integer>();
+    private AdapterView<? super MultiChoiceAdapter> adapterView;
+    private ActionMode actionMode;
+    private OnItemClickListener itemClickListener;
+    private Drawable selectedItemBackground;
 
-	/**
-	 * Sets the adapter view on which this adapter will operate. You should call this method
-	 * from the onCreate method of your activity. This method calls setAdapter on the adapter
-	 * view, so you don't have to do it yourself
-	 * @param The adapter view (typically a ListView) this adapter will operate on
-	 */
-	public void setAdapterView(AdapterView<? super MultiChoiceAdapter> adapterView) {
-		this.adapterView = adapterView;
-		checkActivity();
-		adapterView.setOnItemLongClickListener(this);
-		adapterView.setOnItemClickListener(this);
-		adapterView.setAdapter(this);
-		extractBackgroundColor();
-	}
-	
-	/**
-	 * Register a callback to be invoked when an item in the associated AdapterView has been clicked
-	 * @param listener The callback that will be invoked 
-	 */
-	public void setOnItemClickListener(OnItemClickListener listener) {
-		this.itemClickListener = listener;
-	}
+    /**
+     * Sets the adapter view on which this adapter will operate. You should call
+     * this method from the onCreate method of your activity. This method calls
+     * setAdapter on the adapter view, so you don't have to do it yourself
+     * 
+     * @param The adapter view (typically a ListView) this adapter will operate on
+     */
+    public void setAdapterView(AdapterView<? super MultiChoiceAdapter> adapterView) {
+        this.adapterView = adapterView;
+        checkActivity();
+        adapterView.setOnItemLongClickListener(this);
+        adapterView.setOnItemClickListener(this);
+        adapterView.setAdapter(this);
+        extractBackgroundColor();
+    }
 
-	/**
-	 * Changes the selection of an item. If the item was already in the specified state, nothing is done.
-	 * May cause the activation of the action mode if an item is selected an no items were previously selected
-	 * @param position The position of the item to select
-	 * @param selected The desired state (selected or not) for the item
-	 */
-	public void select(int position, boolean selected) {
-		if (selected) {
-			select(position);
-		} else {
-			unselect(position);
-		}
-	}
-	
-	/**
-	 * Causes an item to be selected. If the item was already selected, nothing is done
-	 * May cause the activation of the action mode if no items were previously selected
-	 * @param position The position of the item to select
-	 */
-	public void select(int position) {
-		boolean wasSelected = isSelected(position);
-		if (wasSelected) {
-			return;
-		}
-		if (actionMode == null) {
-			startActionMode();
-		}
-		selection.add(position);
-		notifyDataSetChanged();
-		onItemSelectedStateChanged(actionMode, position, true);
-	}
+    /**
+     * Register a callback to be invoked when an item in the associated
+     * AdapterView has been clicked
+     * @param listener The callback that will be invoked
+     */
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.itemClickListener = listener;
+    }
 
-	/**
-	 * Causes an item to stop being selected. If the item was not selected, nothing is done
-	 * May cause the deactivation of the action mode if this was the only selected item
-	 * @param position The position of the item to select
-	 */
-	public void unselect(int position) {
-		boolean wasSelected = isSelected(position);
-		if (!wasSelected) {
-			return;
-		}
-		selection.remove(Integer.valueOf(position));
-		if (getSelectionCount() == 0) {
-			finishActionMode();
-			return;
-		}
-		notifyDataSetChanged();
-		onItemSelectedStateChanged(actionMode, position, false);
-	}
-	
-	/**
-	 * Returns the indices of the currently selectly items. 
-	 * @return Indices of the currently selectly items. The empty set if no item is selected
-	 */
-	public Set<Integer> getSelection() {
-		// Return a copy to prevent concurrent modification problems
-		return new HashSet<Integer>(selection);
-	}
+    /**
+     * Changes the selection of an item. If the item was already in the
+     * specified state, nothing is done. May cause the activation of the action
+     * mode if an item is selected an no items were previously selected
+     * @param position The position of the item to select
+     * @param selected The desired state (selected or not) for the item
+     */
+    public void select(int position, boolean selected) {
+        if (selected) {
+            select(position);
+        } else {
+            unselect(position);
+        }
+    }
 
-	/**
-	 * Returns the number of selected items
-	 * @return Number of selected items
-	 */
-	public int getSelectionCount() {
-		return selection.size();
-	}
+    /**
+     * Causes an item to be selected. If the item was already selected, nothing
+     * is done May cause the activation of the action mode if no items were
+     * previously selected
+     * @param position The position of the item to select
+     */
+    public void select(int position) {
+        boolean wasSelected = isSelected(position);
+        if (wasSelected) {
+            return;
+        }
+        if (actionMode == null) {
+            startActionMode();
+        }
+        selection.add(position);
+        notifyDataSetChanged();
+        onItemSelectedStateChanged(actionMode, position, true);
+    }
 
-	/** 
-	 * Returns true if the item at the specified position is selected 
-	 * @param position The item position
-	 * @return Whether the item is selected
-	 */
-	public boolean isSelected(int position) {
-		return selection.contains(position);
-	}
+    /**
+     * Causes an item to stop being selected. If the item was not selected,
+     * nothing is done May cause the deactivation of the action mode if this was
+     * the only selected item
+     * 
+     * @param position The position of the item to select
+     */
+    public void unselect(int position) {
+        boolean wasSelected = isSelected(position);
+        if (!wasSelected) {
+            return;
+        }
+        selection.remove(Integer.valueOf(position));
+        if (getSelectionCount() == 0) {
+            finishActionMode();
+            return;
+        }
+        notifyDataSetChanged();
+        onItemSelectedStateChanged(actionMode, position, false);
+    }
 
-	/**
-	 * Get a View that displays the data at the specified position in the data set.
-	 * Subclasses should implement this method instead of the traditional ListAdapter#getView
-	 * @param position
-	 * @param convertView
-	 * @param parent
-	 * @return
-	 */
-	protected abstract View getViewImpl(int position, View convertView, ViewGroup parent);
+    /**
+     * Returns the indices of the currently selectly items.
+     * 
+     * @return Indices of the currently selectly items. The empty set if no item
+     *         is selected
+     */
+    public Set<Integer> getSelection() {
+        // Return a copy to prevent concurrent modification problems
+        return new HashSet<Integer>(selection);
+    }
 
-	/**
-	 * Subclasses can invoke this method in order to finish the action mode. This has
-	 * the side effect of unselecting all items 
-	 */
-	protected void finishActionMode() {
-		actionMode.finish();
-	}
-	
-	/**
-	 * Convenience method for subclasses that need an activity context 
-	 */
-	protected Context getContext() {
-		return adapterView.getContext();
-	}
+    /**
+     * Returns the number of selected items
+     * 
+     * @return Number of selected items
+     */
+    public int getSelectionCount() {
+        return selection.size();
+    }
 
-	private void clearSelection() {
-		selection.clear();
-		notifyDataSetChanged();
-	}
+    /**
+     * Returns true if the item at the specified position is selected
+     * 
+     * @param position The item position
+     * @return Whether the item is selected
+     */
+    public boolean isSelected(int position) {
+        return selection.contains(position);
+    }
 
-	private void onItemSelectedStateChanged(ActionMode actionMode, int position, boolean selected) {
-		int count = getSelectionCount();
-		if (count == 0) {
-			finishActionMode();
-			return;
-		}
-		Resources res = adapterView.getResources();
-		String title = res.getQuantityString(R.plurals.selected_items, count, count);
-		actionMode.setTitle(title);
-	}
+    /**
+     * Get a View that displays the data at the specified position in the data
+     * set. Subclasses should implement this method instead of the traditional
+     * ListAdapter#getView
+     * 
+     * @param position
+     * @param convertView
+     * @param parent
+     * @return
+     */
+    protected abstract View getViewImpl(int position, View convertView, ViewGroup parent);
 
-	private void checkActivity() {
-		Context context = adapterView.getContext();
-		if (context instanceof ListActivity) {
-			throw new RuntimeException("ListView cannot belong to an activity which subclasses ListActivity");
-		}
-		if (context instanceof SherlockActivity || context instanceof SherlockFragmentActivity || context instanceof SherlockPreferenceActivity) {
-			return;
-		}
-		throw new RuntimeException("ListView must belong to an activity which subclasses SherlockActivity");
-	}
-	
-	private void startActionMode() {
-		try {
-			Activity activity = (Activity) adapterView.getContext();
-			Method method = activity.getClass().getMethod("startActionMode", ActionMode.Callback.class);
-			actionMode = (ActionMode) method.invoke(activity, this);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}
-	}
-	
-	private void extractBackgroundColor() {
-		Context ctx = getContext();
-		int styleAttr = R.attr.multiChoiceAdapterStyle;
-		int defStyle = R.style.MultiChoiceAdapter_DefaultSelectedItemBackground;
-		TypedArray ta = ctx.obtainStyledAttributes(null, R.styleable.MultiChoiceAdapter, styleAttr, defStyle);
-		selectedItemBackground = ta.getDrawable(0);
-		ta.recycle();
-	}
+    /**
+     * Subclasses can invoke this method in order to finish the action mode.
+     * This has the side effect of unselecting all items
+     */
+    protected void finishActionMode() {
+        actionMode.finish();
+    }
 
-	//
-	// OnItemLongClickListener implementation
-	//
+    /**
+     * Convenience method for subclasses that need an activity context
+     */
+    protected Context getContext() {
+        return adapterView.getContext();
+    }
 
-	@Override
-	public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
-		boolean wasChecked = isSelected(position);
-		select(position, !wasChecked);
-		return true;
-	}
+    private void clearSelection() {
+        selection.clear();
+        notifyDataSetChanged();
+    }
 
-	//
-	// ActionMode.Callback implementation
-	//
+    private void onItemSelectedStateChanged(ActionMode actionMode, int position, boolean selected) {
+        int count = getSelectionCount();
+        if (count == 0) {
+            finishActionMode();
+            return;
+        }
+        Resources res = adapterView.getResources();
+        String title = res.getQuantityString(R.plurals.selected_items, count, count);
+        actionMode.setTitle(title);
+    }
 
-	@Override
-	public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-		return false;
-	}
+    private void checkActivity() {
+        Context context = adapterView.getContext();
+        if (context instanceof ListActivity) {
+            throw new RuntimeException("ListView cannot belong to an activity which subclasses ListActivity");
+        }
+        if (context instanceof SherlockActivity || context instanceof SherlockFragmentActivity || context instanceof SherlockPreferenceActivity) {
+            return;
+        }
+        throw new RuntimeException("ListView must belong to an activity which subclasses SherlockActivity");
+    }
 
-	@Override
-	public void onDestroyActionMode(ActionMode mode) {
-		clearSelection();
-		actionMode = null;
-	}
+    private void startActionMode() {
+        try {
+            Activity activity = (Activity) adapterView.getContext();
+            Method method = activity.getClass().getMethod("startActionMode", ActionMode.Callback.class);
+            actionMode = (ActionMode) method.invoke(activity, this);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
 
-	//
-	// OnItemClickListener implementation
-	//
+    private void extractBackgroundColor() {
+        Context ctx = getContext();
+        int styleAttr = R.attr.multiChoiceAdapterStyle;
+        int defStyle = R.style.MultiChoiceAdapter_DefaultSelectedItemBackground;
+        TypedArray ta = ctx.obtainStyledAttributes(null, R.styleable.MultiChoiceAdapter, styleAttr, defStyle);
+        selectedItemBackground = ta.getDrawable(0);
+        ta.recycle();
+    }
 
-	@Override
-	public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-		if (actionMode != null) {
-			actionMode.finish();
-			return;
-		}
-		if (itemClickListener != null) {
-			itemClickListener.onItemClick(adapterView, view, position, id);
-		}
-	}
+    //
+    // OnItemLongClickListener implementation
+    //
 
-	//
-	// BaseAdapter implementation
-	//
+    @Override
+    public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
+        boolean wasChecked = isSelected(position);
+        select(position, !wasChecked);
+        return true;
+    }
 
-	@SuppressWarnings("deprecation")
-	@Override
-	public final View getView(int position, View convertView, ViewGroup parent) {
-		View v = getViewImpl(position, convertView, parent);
-		Resources res = adapterView.getResources();
-		if (isSelected(position)) {
-			v.setBackgroundDrawable(selectedItemBackground);
-		} else {
-			v.setBackgroundColor(res.getColor(android.R.color.transparent));
-		}
-		return v;
-	}
+    //
+    // ActionMode.Callback implementation
+    //
+
+    @Override
+    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+        return false;
+    }
+
+    @Override
+    public void onDestroyActionMode(ActionMode mode) {
+        clearSelection();
+        actionMode = null;
+    }
+
+    //
+    // OnItemClickListener implementation
+    //
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+        if (actionMode != null) {
+            actionMode.finish();
+            return;
+        }
+        if (itemClickListener != null) {
+            itemClickListener.onItemClick(adapterView, view, position, id);
+        }
+    }
+
+    //
+    // BaseAdapter implementation
+    //
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public final View getView(int position, View convertView, ViewGroup parent) {
+        View v = getViewImpl(position, convertView, parent);
+        Resources res = adapterView.getResources();
+        if (isSelected(position)) {
+            v.setBackgroundDrawable(selectedItemBackground);
+        } else {
+            v.setBackgroundColor(res.getColor(android.R.color.transparent));
+        }
+        return v;
+    }
 }

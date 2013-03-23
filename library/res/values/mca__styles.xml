@@ -4,5 +4,5 @@
     <style name="MultiChoiceAdapter_DefaultSelectedItemBackground">
         <item name="selectedItemBackground">@color/mca__default_selected_item_background</item>
     </style>
-    
+
 </resources>

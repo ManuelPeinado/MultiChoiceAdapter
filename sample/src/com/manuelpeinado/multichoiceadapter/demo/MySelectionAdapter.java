@@ -33,71 +33,70 @@ import com.manuelpeinado.multichoiceadapter.MultiChoiceAdapter;
 
 public class MySelectionAdapter extends MultiChoiceAdapter {
 
-	protected static final String TAG = MySelectionAdapter.class.getSimpleName();
-	private final List<String> items;
+    protected static final String TAG = MySelectionAdapter.class.getSimpleName();
+    private final List<String> items;
 
-	public MySelectionAdapter(List<String> items) {
-		this.items = items;
-	}
+    public MySelectionAdapter(List<String> items) {
+        this.items = items;
+    }
 
-	@Override
-	public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-		MenuInflater inflater = mode.getMenuInflater();
-		inflater.inflate(R.menu.my_action_mode, menu);
-		return true;
-	}
+    @Override
+    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+        MenuInflater inflater = mode.getMenuInflater();
+        inflater.inflate(R.menu.my_action_mode, menu);
+        return true;
+    }
 
-	@Override
-	public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-		if (item.getItemId() == R.id.menu_share) {
-			Toast.makeText(getContext(), "Share", Toast.LENGTH_SHORT).show();
-			return true;
-		}
-		if (item.getItemId() == R.id.menu_discard) {
-			discardSelectedItems();
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+        if (item.getItemId() == R.id.menu_share) {
+            Toast.makeText(getContext(), "Share", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        if (item.getItemId() == R.id.menu_discard) {
+            discardSelectedItems();
+            return true;
+        }
+        return false;
+    }
 
-	private void discardSelectedItems() {
-		// http://stackoverflow.com/a/4950905/244576
-		List<Integer> positions = new ArrayList<Integer>(getSelection());
-		Collections.sort(positions, Collections.reverseOrder());
-		for (Integer position : positions) {
-			items.remove((int)position);
-			unselect(position);
-		}
-	}
+    private void discardSelectedItems() {
+        // http://stackoverflow.com/a/4950905/244576
+        List<Integer> positions = new ArrayList<Integer>(getSelection());
+        Collections.sort(positions, Collections.reverseOrder());
+        for (Integer position : positions) {
+            items.remove((int) position);
+            unselect(position);
+        }
+    }
 
-	@Override
-	public int getCount() {
-		return items.size();
-	}
+    @Override
+    public int getCount() {
+        return items.size();
+    }
 
-	@Override
-	public String getItem(int position) {
-		return items.get(position);
-	}
+    @Override
+    public String getItem(int position) {
+        return items.get(position);
+    }
 
-	@Override
-	public long getItemId(int position) {
-		return position;
-	}
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
-	@Override
-	protected View getViewImpl(int position, View convertView, ViewGroup parent) {
-		TextView textView;
-		if (convertView != null) {
-			textView = (TextView) convertView; 
-		}
-		else {
-			int layout = android.R.layout.simple_list_item_1;
-			LayoutInflater inflater = LayoutInflater.from(getContext());
-			textView = (TextView)inflater.inflate(layout, parent, false);
-		}
-		String item = getItem(position);
-		textView.setText(item);
-		return textView;
-	}
+    @Override
+    protected View getViewImpl(int position, View convertView, ViewGroup parent) {
+        TextView textView;
+        if (convertView != null) {
+            textView = (TextView) convertView;
+        } else {
+            int layout = android.R.layout.simple_list_item_1;
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            textView = (TextView) inflater.inflate(layout, parent, false);
+        }
+        String item = getItem(position);
+        textView.setText(item);
+        return textView;
+    }
 }

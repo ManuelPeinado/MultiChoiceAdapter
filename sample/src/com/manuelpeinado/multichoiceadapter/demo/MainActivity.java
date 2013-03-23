@@ -30,56 +30,57 @@ import com.actionbarsherlock.view.MenuItem;
 import com.manuelpeinado.multichoiceadapter.MultiChoiceAdapter;
 import com.manuelpeinado.multichoiceadapter.demo.R;
 
-public class MainActivity extends SherlockActivity implements OnItemClickListener {
-	private MultiChoiceAdapter adapter;
+public class MainActivity extends SherlockActivity 
+                          implements OnItemClickListener {
+    private MultiChoiceAdapter adapter;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-		rebuildList();
-	}
+        rebuildList();
+    }
 
-	private ListView getListView() {
-		return (ListView) findViewById(android.R.id.list);
-	}
+    private ListView getListView() {
+        return (ListView) findViewById(android.R.id.list);
+    }
 
-	public void onItemClick(android.widget.AdapterView<?> adapterView, View view, int position, long id) {
-		Toast.makeText(this, "Item click: " + adapter.getItem(position), Toast.LENGTH_SHORT).show();
-	}
+    public void onItemClick(android.widget.AdapterView<?> adapterView, View view, int position, long id) {
+        Toast.makeText(this, "Item click: " + adapter.getItem(position), Toast.LENGTH_SHORT).show();
+    }
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getSupportMenuInflater().inflate(R.menu.activity_main, menu);
-		return true;
-	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case R.id.menu_select_all:
-			selectAll();
-			return true;
-		case R.id.menu_reset_list:
-			rebuildList();
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getSupportMenuInflater().inflate(R.menu.activity_main, menu);
+        return true;
+    }
 
-	private void selectAll() {
-		for (int i = 0; i < adapter.getCount(); ++i) {
-			adapter.select(i);
-		}
-	}
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case R.id.menu_select_all:
+            selectAll();
+            return true;
+        case R.id.menu_reset_list:
+            rebuildList();
+            return true;
+        }
+        return false;
+    }
 
-	private void rebuildList() {
-		String[] itemArray = getResources().getStringArray(R.array.items);
-		ArrayList<String> items = new ArrayList<String>(Arrays.asList(itemArray));
-		adapter = new MySelectionAdapter(items);
-		adapter.setOnItemClickListener(this);
-		adapter.setAdapterView(getListView());
-	}
+    private void selectAll() {
+        for (int i = 0; i < adapter.getCount(); ++i) {
+            adapter.select(i);
+        }
+    }
+
+    private void rebuildList() {
+        String[] itemArray = getResources().getStringArray(R.array.items);
+        ArrayList<String> items = new ArrayList<String>(Arrays.asList(itemArray));
+        adapter = new MySelectionAdapter(items);
+        adapter.setOnItemClickListener(this);
+        adapter.setAdapterView(getListView());
+    }
 
 }
