@@ -30,7 +30,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.manuelpeinado.multichoiceadapter.MultiChoiceAdapter;
 import com.manuelpeinado.multichoiceadapter.demo.R;
 
-public class MainActivity extends SherlockActivity 
+public class BasicUsageActivity extends SherlockActivity 
                           implements OnItemClickListener {
     private MultiChoiceAdapter adapter;
 
@@ -78,7 +78,7 @@ public class MainActivity extends SherlockActivity
     private void rebuildList() {
         String[] itemArray = getResources().getStringArray(R.array.items);
         ArrayList<String> items = new ArrayList<String>(Arrays.asList(itemArray));
-        adapter = new MySelectionAdapter(items);
+        adapter = new BasicUsageAdapter(items);
         adapter.setOnItemClickListener(this);
         adapter.setAdapterView(getListView());
     }

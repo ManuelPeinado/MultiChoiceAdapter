@@ -31,12 +31,12 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.manuelpeinado.multichoiceadapter.MultiChoiceAdapter;
 
-public class MySelectionAdapter extends MultiChoiceAdapter {
+public class BasicUsageAdapter extends MultiChoiceAdapter {
 
-    protected static final String TAG = MySelectionAdapter.class.getSimpleName();
+    protected static final String TAG = BasicUsageAdapter.class.getSimpleName();
     private final List<String> items;
 
-    public MySelectionAdapter(List<String> items) {
+    public BasicUsageAdapter(List<String> items) {
         this.items = items;
     }
 
