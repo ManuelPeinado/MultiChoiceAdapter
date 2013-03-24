@@ -32,6 +32,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -63,14 +66,16 @@ import com.manuelpeinado.multichoicelistadapter.R;
  */
 public abstract class MultiChoiceAdapter extends BaseAdapter 
                                          implements OnItemLongClickListener, 
-                                         ActionMode.Callback, 
-                                         OnItemClickListener {
+                                                    ActionMode.Callback, 
+                                                    OnItemClickListener, 
+                                                    OnCheckedChangeListener {
     private Set<Integer> selection = new HashSet<Integer>();
     private AdapterView<? super MultiChoiceAdapter> adapterView;
     private ActionMode actionMode;
     private OnItemClickListener itemClickListener;
     private Drawable selectedItemBackground;
     private Drawable unselectedItemBackground;
+    private boolean useCheckboxes = true;
 
     /**
      * Sets the adapter view on which this adapter will operate. You should call
@@ -301,12 +306,40 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
     // BaseAdapter implementation
     //
 
-    @SuppressWarnings("deprecation")
     @Override
     public final View getView(int position, View convertView, ViewGroup parent) {
         View v = getViewImpl(position, convertView, parent);
-        Drawable bg = isSelected(position) ? selectedItemBackground : unselectedItemBackground;
-        v.setBackgroundDrawable(bg);
+        if (useCheckboxes) {
+            initItemCheckbox(position, convertView, (ViewGroup) v);
+        }
+        updateItemBackground(position, v);
         return v;
+    }
+
+    private void initItemCheckbox(int position, View convertView, ViewGroup root) {
+        CheckBox checkBox = (CheckBox) root.findViewById(android.R.id.checkbox);
+        boolean selected = isSelected(position);
+        checkBox.setChecked(selected);
+        checkBox.setTag(position);
+        if (convertView == null) {
+            checkBox.setOnCheckedChangeListener(this);
+        }
+    }
+
+    @SuppressWarnings("deprecation")
+    private void updateItemBackground(int position, View v) {
+        boolean selected = isSelected(position);
+        Drawable bg = selected ? selectedItemBackground : unselectedItemBackground;
+        v.setBackgroundDrawable(bg);
+    }
+    
+    //
+    // OnCheckedChangeListener implementation
+    //
+    
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        int position = (Integer) buttonView.getTag();
+        select(position, isChecked);
     }
 }

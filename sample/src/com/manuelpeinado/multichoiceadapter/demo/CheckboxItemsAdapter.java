@@ -22,26 +22,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class BasicUsageAdapter extends BaseAdapter {
+public class CheckboxItemsAdapter extends BaseAdapter {
 
-    protected static final String TAG = BasicUsageAdapter.class.getSimpleName();
+    protected static final String TAG = CheckboxItemsAdapter.class.getSimpleName();
 
-    public BasicUsageAdapter(List<String> items) {
+    public CheckboxItemsAdapter(List<String> items) {
         super(items);
     }
 
     @Override
     protected View getViewImpl(int position, View convertView, ViewGroup parent) {
-        TextView textView;
+        ViewGroup root;
         if (convertView != null) {
-            textView = (TextView) convertView;
+            root = (ViewGroup) convertView;
         } else {
-            int layout = android.R.layout.simple_list_item_1;
+            int layout = R.layout.checkbox_list_item;
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            textView = (TextView) inflater.inflate(layout, parent, false);
+            root = (ViewGroup) inflater.inflate(layout, parent, false);
         }
+        TextView textView = (TextView) root.findViewById(android.R.id.text1);
         String item = getItem(position);
         textView.setText(item);
-        return textView;
+        return root;
     }
 }
