@@ -18,6 +18,7 @@ package com.manuelpeinado.multichoiceadapter.demo;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView.OnItemClickListener;
@@ -28,20 +29,17 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.manuelpeinado.multichoiceadapter.MultiChoiceAdapter;
-import com.manuelpeinado.multichoiceadapter.demo.R;
 
-public abstract class BaseActivity extends SherlockActivity 
-                                   implements OnItemClickListener {
+public abstract class BaseActivity extends SherlockActivity implements OnItemClickListener {
     private MultiChoiceAdapter adapter;
 
     protected abstract MultiChoiceAdapter createAdapter(ArrayList<String> items);
 
-    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         rebuildList();
     }
 
@@ -62,6 +60,12 @@ public abstract class BaseActivity extends SherlockActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+        case android.R.id.home:
+            Intent parentActivityIntent = new Intent(this, HomeActivity.class);
+            parentActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(parentActivityIntent);
+            finish();
+            return true;
         case R.id.menu_select_all:
             selectAll();
             return true;

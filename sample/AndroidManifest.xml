@@ -14,17 +14,21 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".BasicUsageActivity"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
-            android:name=".CheckboxItemsActivity"
+            android:name=".HomeActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".BasicUsageActivity"
+            android:label="@string/activity_title_basic_usage" >
+        </activity>
+        <activity
+            android:name=".CheckboxItemsActivity"
+            android:label="@string/activity_title_checkbox_items" >
         </activity>
     </application>
 

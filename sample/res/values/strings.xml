@@ -6,5 +6,7 @@
     <string name="menu_reset_list">Reset list</string>
     <string name="menu_share">Share</string>
     <string name="menu_discard">Discard</string>
-
+    <string name="activity_title_basic_usage">Basic usage sample</string>
+    <string name="activity_title_checkbox_items">Checkbox items sample</string>
+    
 </resources>
