@@ -28,13 +28,14 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import com.manuelpeinado.multichoiceadapter.MultiChoiceAdapter;
+import com.manuelpeinado.multichoiceadapter.MultiChoiceBaseAdapter;
 
-public abstract class BaseActivity extends SherlockActivity implements OnItemClickListener {
-    private MultiChoiceAdapter adapter;
+public abstract class BaseActivity extends SherlockActivity
+                                   implements OnItemClickListener {
+    private MultiChoiceBaseAdapter adapter;
 
-    protected abstract MultiChoiceAdapter createAdapter(Bundle savedInstanceState, 
-                                                        ArrayList<String> items);
+    protected abstract MultiChoiceBaseAdapter createAdapter(Bundle savedInstanceState, 
+                                                            ArrayList<String> items);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

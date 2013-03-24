@@ -26,9 +26,9 @@ import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.manuelpeinado.multichoiceadapter.MultiChoiceAdapter;
+import com.manuelpeinado.multichoiceadapter.MultiChoiceBaseAdapter;
 
-public abstract class BaseAdapter extends MultiChoiceAdapter {
+public abstract class BaseAdapter extends MultiChoiceBaseAdapter {
 
     protected static final String TAG = BaseAdapter.class.getSimpleName();
     private List<String> items;

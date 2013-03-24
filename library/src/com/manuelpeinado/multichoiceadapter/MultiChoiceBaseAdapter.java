@@ -68,14 +68,14 @@ import com.manuelpeinado.multichoicelistadapter.R;
  * <p><br>Do not forget to call save from your activity's onSaveInstanceState method</p> 
  * <p><br>See the accompanying sample project for a full working application that implements this class</p>
  */
-public abstract class MultiChoiceAdapter extends BaseAdapter 
+public abstract class MultiChoiceBaseAdapter extends BaseAdapter 
                                          implements OnItemLongClickListener, 
                                                     ActionMode.Callback, 
                                                     OnItemClickListener, 
                                                     OnCheckedChangeListener {
     private static final String BUNDLE_KEY = "mca__selection";
     private Set<Integer> selection = new HashSet<Integer>();
-    private AdapterView<? super MultiChoiceAdapter> adapterView;
+    private AdapterView<? super MultiChoiceBaseAdapter> adapterView;
     private ActionMode actionMode;
     private OnItemClickListener itemClickListener;
     private Drawable selectedItemBackground;
@@ -87,7 +87,7 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
      * @param savedInstanceState Pass your activity's saved instance state here. This is necessary
      * for the adapter to retain its selection in the event of a configuration change
      */
-    public MultiChoiceAdapter(Bundle savedInstanceState) {
+    public MultiChoiceBaseAdapter(Bundle savedInstanceState) {
         restoreSelectionFromSavedInstanceState(savedInstanceState);
     }
     
@@ -98,7 +98,7 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
      * 
      * @param The adapter view (typically a ListView) this adapter will operate on
      */
-    public void setAdapterView(AdapterView<? super MultiChoiceAdapter> adapterView) {
+    public void setAdapterView(AdapterView<? super MultiChoiceBaseAdapter> adapterView) {
         this.adapterView = adapterView;
         checkActivity();
         adapterView.setOnItemLongClickListener(this);
