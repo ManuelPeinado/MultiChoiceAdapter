@@ -1,6 +1,11 @@
 Change Log
 ===============================================================================
 
+Version 1.0.3 *(2013-03-24)*
+----------------------------
+
+ * Fixed a bug which caused item selection to be completely broken in Android 2.X
+
 Version 1.0.2 *(2013-03-24)*
 ----------------------------
 

@@ -17,6 +17,7 @@ package com.manuelpeinado.multichoiceadapter;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -80,6 +81,7 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
     private Drawable selectedItemBackground;
     private Drawable unselectedItemBackground;
     private Boolean itemIncludesCheckBox;
+    private HashMap<CheckBox, Integer> tags = new HashMap<CheckBox, Integer>();
     
     /**
      * @param savedInstanceState Pass your activity's saved instance state here. This is necessary
@@ -363,8 +365,9 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
     private void initItemCheckbox(int position, View convertView, ViewGroup root) {
         CheckBox checkBox = (CheckBox) root.findViewById(android.R.id.checkbox);
         boolean selected = isSelected(position);
-        checkBox.setChecked(selected);
         checkBox.setTag(position);
+        checkBox.setChecked(selected);
+        tags.put(checkBox, position);
         if (convertView == null) {
             checkBox.setOnCheckedChangeListener(this);
         }
