@@ -6,6 +6,7 @@ Version 1.0.2 *(2013-03-24)*
 
  * Fixed a bug which prevented the selected item background from being shown the second time items were selected
  * Simplified the code that deals with item removal in the sample app
+ * Added support for checkboxes
 
 Version 1.0.1 *(2013-03-23)*
 ----------------------------

@@ -38,6 +38,11 @@ Do not call setOnItemClickListener on your ListView, call it on the adapter inst
 
 Do not forget to derive your activity from one of the ActionBarSherlock activities, except SherlockListActivity.
 
+Checkboxes
+==========
+
+MultiChoiceAdapter handles list items with checkboxes transparently. Just add a CheckBox to your item's XML layout and give it the id <code>android.R.id.checkbox</code>.
+
 Customization
 =============
 
@@ -52,7 +57,6 @@ See the sample application for a complete example.
 Coming soon
 =========
 
-* Support for checkboxes
 * Support for cursor and array adapters
 
 Developed By

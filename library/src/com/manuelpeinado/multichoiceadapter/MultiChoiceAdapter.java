@@ -75,7 +75,7 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
     private OnItemClickListener itemClickListener;
     private Drawable selectedItemBackground;
     private Drawable unselectedItemBackground;
-    private boolean useCheckboxes = true;
+    private Boolean itemIncludesCheckBox;
 
     /**
      * Sets the adapter view on which this adapter will operate. You should call
@@ -309,11 +309,24 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
     @Override
     public final View getView(int position, View convertView, ViewGroup parent) {
         View v = getViewImpl(position, convertView, parent);
-        if (useCheckboxes) {
+        if (itemIncludesCheckBox(v)) {
             initItemCheckbox(position, convertView, (ViewGroup) v);
         }
         updateItemBackground(position, v);
         return v;
+    }
+
+    private boolean itemIncludesCheckBox(View v) {
+        if (itemIncludesCheckBox == null) {
+            if (!(v instanceof ViewGroup)) {
+                itemIncludesCheckBox = false;
+            }
+            else {
+                ViewGroup root = (ViewGroup)v;
+                itemIncludesCheckBox = root.findViewById(android.R.id.checkbox) != null;
+            }
+        }
+        return itemIncludesCheckBox;
     }
 
     private void initItemCheckbox(int position, View convertView, ViewGroup root) {
