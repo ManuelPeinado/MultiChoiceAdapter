@@ -199,7 +199,9 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
      * This has the side effect of unselecting all items
      */
     protected void finishActionMode() {
-        actionMode.finish();
+        if (actionMode != null) {
+            actionMode.finish();
+        }
     }
 
     /**
@@ -207,11 +209,6 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
      */
     protected Context getContext() {
         return adapterView.getContext();
-    }
-
-    private void clearSelection() {
-        selection.clear();
-        notifyDataSetChanged();
     }
 
     private void onItemSelectedStateChanged(ActionMode actionMode, int position, boolean selected) {
@@ -280,8 +277,9 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
 
     @Override
     public void onDestroyActionMode(ActionMode mode) {
-        clearSelection();
+        selection.clear();
         actionMode = null;
+        notifyDataSetChanged();
     }
 
     //

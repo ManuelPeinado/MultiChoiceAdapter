@@ -66,8 +66,8 @@ public class BasicUsageAdapter extends MultiChoiceAdapter {
         Collections.sort(positions, Collections.reverseOrder());
         for (Integer position : positions) {
             items.remove((int) position);
-            unselect(position);
         }
+        finishActionMode();
     }
 
     @Override
