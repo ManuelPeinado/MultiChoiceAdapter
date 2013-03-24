@@ -41,7 +41,7 @@ Do not forget to derive your activity from one of the ActionBarSherlock activiti
 Checkboxes
 ==========
 
-MultiChoiceAdapter handles list items with checkboxes transparently. Just add a CheckBox to your item's XML layout and give it the id <code>android.R.id.checkbox</code>.
+MultiChoiceAdapter handles list items with check-boxes transparently. Just add a CheckBox to your item's XML layout and give it the id <code>android.R.id.checkbox</code>.
 
 Customization
 =============
