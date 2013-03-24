@@ -17,9 +17,11 @@ package com.manuelpeinado.multichoiceadapter.demo;
 
 import java.util.ArrayList;
 
+import android.os.Bundle;
+
 public class CheckboxItemsActivity extends BaseActivity {
     @Override
-    protected BaseAdapter createAdapter(ArrayList<String> items) {
-        return new CheckboxItemsAdapter(items);
+    protected CheckboxItemsAdapter createAdapter(Bundle savedInstanceState, ArrayList<String> items) {
+        return new CheckboxItemsAdapter(savedInstanceState, items);
     }
 }

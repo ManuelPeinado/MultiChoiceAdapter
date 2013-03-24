@@ -17,9 +17,11 @@ package com.manuelpeinado.multichoiceadapter.demo;
 
 import java.util.ArrayList;
 
+import android.os.Bundle;
+
 public class BasicUsageActivity extends BaseActivity {
     @Override
-    protected BasicUsageAdapter createAdapter(ArrayList<String> items) {
-        return new BasicUsageAdapter(items);
+    protected BasicUsageAdapter createAdapter(Bundle savedInstanceState, ArrayList<String> items) {
+        return new BasicUsageAdapter(savedInstanceState, items);
     }
 }

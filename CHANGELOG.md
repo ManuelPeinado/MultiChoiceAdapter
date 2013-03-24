@@ -8,6 +8,7 @@ Version 1.0.2 *(2013-03-24)*
  * Simplified the code that deals with item removal in the sample app
  * Added support for checkboxes
  * Added support for multiple activities to the sample app
+ * Added code to persist selection state when a configuration change occurs
 
 Version 1.0.1 *(2013-03-23)*
 ----------------------------

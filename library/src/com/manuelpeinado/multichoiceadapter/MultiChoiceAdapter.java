@@ -16,6 +16,7 @@
 package com.manuelpeinado.multichoiceadapter;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,6 +27,7 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -62,6 +64,7 @@ import com.manuelpeinado.multichoicelistadapter.R;
  * multiChoiceAdapter.setOnItemClickListener(myItemListClickListener);</code>
  * <p><br>Do not call setOnItemClickListener on your ListView, call it on the adapter instead</p> 
  * <p><br>Do not forget to derive your activity from one of the ActionBarSherlock activities, except SherlockListActivity</p> 
+ * <p><br>Do not forget to call save from your activity's onSaveInstanceState method</p> 
  * <p><br>See the accompanying sample project for a full working application that implements this class</p>
  */
 public abstract class MultiChoiceAdapter extends BaseAdapter 
@@ -69,6 +72,7 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
                                                     ActionMode.Callback, 
                                                     OnItemClickListener, 
                                                     OnCheckedChangeListener {
+    private static final String BUNDLE_KEY = "mca__selection";
     private Set<Integer> selection = new HashSet<Integer>();
     private AdapterView<? super MultiChoiceAdapter> adapterView;
     private ActionMode actionMode;
@@ -76,7 +80,15 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
     private Drawable selectedItemBackground;
     private Drawable unselectedItemBackground;
     private Boolean itemIncludesCheckBox;
-
+    
+    /**
+     * @param savedInstanceState Pass your activity's saved instance state here. This is necessary
+     * for the adapter to retain its selection in the event of a configuration change
+     */
+    public MultiChoiceAdapter(Bundle savedInstanceState) {
+        restoreSelectionFromSavedInstanceState(savedInstanceState);
+    }
+    
     /**
      * Sets the adapter view on which this adapter will operate. You should call
      * this method from the onCreate method of your activity. This method calls
@@ -100,6 +112,17 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
      */
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.itemClickListener = listener;
+    }
+    
+    /**
+     * Always call this method from your activity's onSaveInstanceState method. This
+     * is necessary for the adapter to retain its selection in the event of a
+     * configuration change
+     * @param outState The same bundle you are passed in onSaveInstanceState 
+     */
+    public void save(Bundle outState) {
+        ArrayList<Integer> list = new ArrayList<Integer>(selection);
+        outState.putIntegerArrayList(BUNDLE_KEY, list);
     }
 
     /**
@@ -214,6 +237,14 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
      */
     protected Context getContext() {
         return adapterView.getContext();
+    }
+    
+    private void restoreSelectionFromSavedInstanceState(Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            return;
+        }
+        ArrayList<Integer> list = savedInstanceState.getIntegerArrayList(BUNDLE_KEY); 
+        selection = new HashSet<Integer>(list);
     }
 
     private void onItemSelectedStateChanged(ActionMode actionMode, int position, boolean selected) {

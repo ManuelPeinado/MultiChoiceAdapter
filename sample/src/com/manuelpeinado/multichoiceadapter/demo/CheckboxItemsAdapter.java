@@ -17,6 +17,7 @@ package com.manuelpeinado.multichoiceadapter.demo;
 
 import java.util.List;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,8 +27,8 @@ public class CheckboxItemsAdapter extends BaseAdapter {
 
     protected static final String TAG = CheckboxItemsAdapter.class.getSimpleName();
 
-    public CheckboxItemsAdapter(List<String> items) {
-        super(items);
+    public CheckboxItemsAdapter(Bundle savedInstanceState, List<String> items) {
+        super(savedInstanceState, items);
     }
 
     @Override

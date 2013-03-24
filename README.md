@@ -34,9 +34,11 @@ Once you've implemented your class that derives from MultiChoiceAdapter, you att
 	multiChoiceAdapter.setAdapterView(listView);
 	multiChoiceAdapter.setOnItemClickListener(myItemListClickListener);
 
-Do not call setOnItemClickListener on your ListView, call it on the adapter instead.
+Do not call <code>setOnItemClickListener()</code> on your ListView, call it on the adapter instead.
 
-Do not forget to derive your activity from one of the ActionBarSherlock activities, except SherlockListActivity.
+Do not forget to derive your activity from one of the ActionBarSherlock activities, except SherlockListActivity which is not supported.
+
+Finally, do not forget to call <code>save(outState)</code> from your activity's <code>onSaveInstanceState()</code> method. This is necessary for the selection state to be persisted across configuration changes.
 
 Checkboxes
 ==========

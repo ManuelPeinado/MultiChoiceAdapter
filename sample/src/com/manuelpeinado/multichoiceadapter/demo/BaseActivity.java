@@ -33,14 +33,15 @@ import com.manuelpeinado.multichoiceadapter.MultiChoiceAdapter;
 public abstract class BaseActivity extends SherlockActivity implements OnItemClickListener {
     private MultiChoiceAdapter adapter;
 
-    protected abstract MultiChoiceAdapter createAdapter(ArrayList<String> items);
+    protected abstract MultiChoiceAdapter createAdapter(Bundle savedInstanceState, 
+                                                        ArrayList<String> items);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        rebuildList();
+        rebuildList(savedInstanceState);
     }
 
     private ListView getListView() {
@@ -70,7 +71,7 @@ public abstract class BaseActivity extends SherlockActivity implements OnItemCli
             selectAll();
             return true;
         case R.id.menu_reset_list:
-            rebuildList();
+            rebuildList(null);
             return true;
         }
         return false;
@@ -82,11 +83,16 @@ public abstract class BaseActivity extends SherlockActivity implements OnItemCli
         }
     }
 
-    private void rebuildList() {
+    private void rebuildList(Bundle savedInstanceState) {
         String[] itemArray = getResources().getStringArray(R.array.items);
         ArrayList<String> items = new ArrayList<String>(Arrays.asList(itemArray));
-        adapter = createAdapter(items);
+        adapter = createAdapter(savedInstanceState, items);
         adapter.setOnItemClickListener(this);
         adapter.setAdapterView(getListView());
+    }
+    
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        adapter.save(outState);
     }
 }

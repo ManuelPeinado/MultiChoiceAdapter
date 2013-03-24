@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import android.os.Bundle;
 import android.widget.Toast;
 
 import com.actionbarsherlock.view.ActionMode;
@@ -32,7 +33,8 @@ public abstract class BaseAdapter extends MultiChoiceAdapter {
     protected static final String TAG = BaseAdapter.class.getSimpleName();
     private List<String> items;
 
-    public BaseAdapter(List<String> items) {
+    public BaseAdapter(Bundle savedInstanceState, List<String> items) {
+        super(savedInstanceState);
         this.items = items;
     }
 
