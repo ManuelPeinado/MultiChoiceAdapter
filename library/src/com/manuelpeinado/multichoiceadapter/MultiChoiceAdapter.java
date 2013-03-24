@@ -24,6 +24,7 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,6 +70,7 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
     private ActionMode actionMode;
     private OnItemClickListener itemClickListener;
     private Drawable selectedItemBackground;
+    private Drawable unselectedItemBackground;
 
     /**
      * Sets the adapter view on which this adapter will operate. You should call
@@ -252,6 +254,8 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
         TypedArray ta = ctx.obtainStyledAttributes(null, R.styleable.MultiChoiceAdapter, styleAttr, defStyle);
         selectedItemBackground = ta.getDrawable(0);
         ta.recycle();
+        Resources res = ctx.getResources();
+        unselectedItemBackground = new ColorDrawable(res.getColor(android.R.color.transparent));
     }
 
     //
@@ -303,12 +307,8 @@ public abstract class MultiChoiceAdapter extends BaseAdapter
     @Override
     public final View getView(int position, View convertView, ViewGroup parent) {
         View v = getViewImpl(position, convertView, parent);
-        Resources res = adapterView.getResources();
-        if (isSelected(position)) {
-            v.setBackgroundDrawable(selectedItemBackground);
-        } else {
-            v.setBackgroundColor(res.getColor(android.R.color.transparent));
-        }
+        Drawable bg = isSelected(position) ? selectedItemBackground : unselectedItemBackground;
+        v.setBackgroundDrawable(bg);
         return v;
     }
 }

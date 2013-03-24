@@ -1,6 +1,11 @@
 Change Log
 ===============================================================================
 
+Version 1.0.2 *(2013-03-24)*
+----------------------------
+
+ * Fixed a bug which prevented the selected item background from being shown the second time items were selected
+
 Version 1.0.1 *(2013-03-23)*
 ----------------------------
 
