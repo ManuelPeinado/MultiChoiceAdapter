@@ -13,23 +13,13 @@ Try out the [sample application][4] on Google Play.
 Browse the source code of the [sample application][5] for a complete example of use.
 
 Usage
-=====
+---------
 
-Instead of deriving your adapter from BaseAdapter or one of its subclasses, derive it from MultiChoiceAdapter. You'll have to implement the following methods:
+### If you need <code>BaseAdapter</code>-like functionality
 
-#### ActionMode methods
+Instead of deriving your adapter from BaseAdapter derive it from MultiChoiceBaseAdapter. You'll have to implement the usual BaseAdapter methods (getCount(), getItem()...), but instead of implementing BaseAdapter.getView(), implement getViewImpl(). You'll also have to implement the different ActionMode.Callback methods (onCreateActionMode, onActionModeClicked()...)
 
-* <code>onCreateActionMode.</code> Creates the action mode that will be displayed when at least one item is selected
-* <code>onActionModeClicked.</code> Responds to a click on any of your action mode's actions
-
-#### ListAdapter methods
-
-* <code>getCount.</code> Returns the number of items to show
-* <code>getItem.</code> Returns the item at a given position
-* <code>getItemId.</code> Returns the id of the item at a given position
-* <code>getViewImpl.</code> Returns the view to show for a given position. **Important:** do not override ListAdapter's getView method, override this method instead
-
-Once you've implemented your class that derives from MultiChoiceAdapter, you attach an instance of it to your ListView like this:
+Once you've implemented your class that derives from MultiChoiceBaseAdapter, you attach an instance of it to your ListView like this:
 
 	multiChoiceAdapter.setAdapterView(listView);
 	multiChoiceAdapter.setOnItemClickListener(myItemListClickListener);
@@ -40,13 +30,17 @@ Do not forget to derive your activity from one of the ActionBarSherlock activiti
 
 Finally, do not forget to call <code>save(outState)</code> from your activity's <code>onSaveInstanceState()</code> method. This is necessary for the selection state to be persisted across configuration changes.
 
+### If you need <code>SimpleCursorAdapter</code>-like functionality
+
+If you derive from MultiChoiceSimpleCursorAdapter instead of from MultiChoiceBaseAdapter, you won't have to implement any of the BaseAdapter methods, including getViewImpl. Instead, just implement the ActionMode.Callback methods and then configure your adapter at construction time using the different parameters of the MultiChoiceSimpleCursorAdapter constructor (cursor, from, to...)
+
 Checkboxes
-==========
+------------------
 
 MultiChoiceAdapter handles list items with check-boxes transparently. Just add a CheckBox to your item's XML layout and give it the id <code>android.R.id.checkbox</code>.
 
 Customization
-=============
+---------------------
 
 You can use a custom background (drawable or color) for the selected items of your list. To do so, add an item named <code>multiChoiceAdapterStyle</code> to your theme, and have it reference an additional style which you define like this:
 
@@ -57,18 +51,24 @@ You can use a custom background (drawable or color) for the selected items of yo
 See the sample application for a complete example.
 
 Coming soon
-=========
+-------------------
 
-* Support for cursor and array adapters
+* Support for array adapters
+
+Libraries used
+--------------------
+
+* [ActionBarSherlock][2] by Jake Wharton
+* The sample app uses the [ProviGen library][6] by Timothee Jeannin
 
 Developed By
-==========
+--------------------
 
 * Manuel Peinado - <manuelpeinado@gmail.com>
 
 
 License
-=======
+-----------
 
     Copyright 2013 Manuel Peinado
 
@@ -93,3 +93,4 @@ License
  [3]: https://raw.github.com/ManuelPeinado/MultiChoiceAdapter/master/art/readme_pic.png
  [4]: https://play.google.com/store/apps/details?id=com.manuelpeinado.multichoiceadapter.demo
  [5]: https://github.com/ManuelPeinado/MultiChoiceAdapter/tree/master/sample
+ [6]: https://github.com/TimotheeJeannin/ProviGen
