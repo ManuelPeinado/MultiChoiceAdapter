@@ -39,6 +39,7 @@ public class CheckboxItemsAdapter extends MultiChoiceBaseAdapter {
 
     public CheckboxItemsAdapter(Bundle savedInstanceState, List<String> items) {
         super(savedInstanceState);
+        this.items = items;
     }
 
     @Override
