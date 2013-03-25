@@ -17,14 +17,14 @@ package com.manuelpeinado.multichoiceadapter.demo;
 
 import java.util.List;
 
-import com.actionbarsherlock.view.ActionMode;
-import com.actionbarsherlock.view.Menu;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.actionbarsherlock.view.ActionMode;
+import com.actionbarsherlock.view.Menu;
 
 public class CheckboxItemsAdapter extends BaseAdapter {
 

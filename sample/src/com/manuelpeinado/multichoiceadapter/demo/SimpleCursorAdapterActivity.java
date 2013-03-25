@@ -19,28 +19,33 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.view.View;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.manuelpeinado.multichoiceadapter.MultiChoiceSimpleCursorAdapter;
 
-public class SimpleCursorAdapterActivity extends SherlockActivity
-                                         implements OnItemClickListener {
+public class SimpleCursorAdapterActivity extends SherlockFragmentActivity
+                            implements OnItemClickListener,
+                                       LoaderManager.LoaderCallbacks<Cursor>{
     private MultiChoiceSimpleCursorAdapter adapter;
+    private Bundle savedInstanceState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.savedInstanceState = savedInstanceState;
         setContentView(R.layout.activity_main);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        initList(savedInstanceState);
+        getSupportLoaderManager().initLoader(0, null, this);
     }
 
     private ListView getListView() {
@@ -48,9 +53,7 @@ public class SimpleCursorAdapterActivity extends SherlockActivity
     }
 
     public void onItemClick(android.widget.AdapterView<?> adapterView, View view, int position, long id) {
-        Uri uri = Uri.withAppendedPath(BuildingsContract.CONTENT_URI, Long.toString(id));
-        Cursor cursor = getContentResolver().query(uri, null, "", null, "");
-        cursor.moveToFirst();
+        Cursor cursor = (Cursor) adapter.getItem(position);
         int index = cursor.getColumnIndex(BuildingsContract.NAME);
         String name = cursor.getString(index);
         Toast.makeText(this, "Item click: " + name, Toast.LENGTH_SHORT).show();
@@ -88,17 +91,14 @@ public class SimpleCursorAdapterActivity extends SherlockActivity
         }
     }
     
-    @SuppressWarnings("deprecation")
-    private void initList(Bundle savedInstanceState) {
+    private void initList(Cursor cursor) {
         SharedPreferences prefs = getPreferences(MODE_PRIVATE);
         if (!prefs.getBoolean("dbInitialized", false)) {
             prefs.edit().putBoolean("dbInitialized", true).commit();
             rebuildList();
         }
-        Cursor cursor = getContentResolver().query(BuildingsContract.CONTENT_URI, null, null, null, null);
-        startManagingCursor(cursor);
         if (adapter == null) {
-            adapter = new MySimpleCursorAdapter(savedInstanceState, this, cursor);
+            adapter = new SimpleCursorAdapter(savedInstanceState, this, cursor);
             adapter.setOnItemClickListener(this);
             adapter.setAdapterView(getListView());
         }
@@ -120,5 +120,24 @@ public class SimpleCursorAdapterActivity extends SherlockActivity
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         adapter.save(outState);
+    }
+
+    //
+    // LoaderCallbacks implementation
+    //
+    
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return new CursorLoader(this, BuildingsContract.CONTENT_URI, null, null, null, null);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        initList(cursor);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        adapter.swapCursor(null);
     }
 }

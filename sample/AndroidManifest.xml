@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.manuelpeinado.multichoiceadapter.demo"
-    android:versionCode="5"
-    android:versionName="1.0.4" >
+    android:versionCode="6"
+    android:versionName="1.0.5" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -31,7 +31,7 @@
         <activity
             android:name=".SimpleCursorAdapterActivity"
             android:label="@string/activity_title_simple_cursor_adapter" />
-
+        
         <provider
             android:name="com.manuelpeinado.multichoiceadapter.demo.BuildingsContentProvider"
             android:authorities="com.manuelpeinado.multichoiceadapter.demo"

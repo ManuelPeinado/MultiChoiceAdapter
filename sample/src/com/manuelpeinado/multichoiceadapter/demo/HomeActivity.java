@@ -31,7 +31,8 @@ public class HomeActivity extends SherlockListActivity {
     private List<ActivityInfo> activitiesInfo = Arrays.asList(
             new ActivityInfo(BasicUsageActivity.class, R.string.activity_title_basic_usage),
             new ActivityInfo(CheckboxItemsActivity.class, R.string.activity_title_checkbox_items),
-            new ActivityInfo(SimpleCursorAdapterActivity.class, R.string.activity_title_simple_cursor_adapter));
+            new ActivityInfo(SimpleCursorAdapterActivity.class, R.string.activity_title_simple_cursor_adapter),
+            new ActivityInfo(SimpleCursorAdapterActivity.class, R.string.activity_title_loader));
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {

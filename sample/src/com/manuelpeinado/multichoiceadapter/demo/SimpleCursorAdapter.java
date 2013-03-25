@@ -26,13 +26,13 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.manuelpeinado.multichoiceadapter.MultiChoiceSimpleCursorAdapter;
 
-public class MySimpleCursorAdapter extends MultiChoiceSimpleCursorAdapter {
+public class SimpleCursorAdapter extends MultiChoiceSimpleCursorAdapter {
 
-    protected static final String TAG = MySimpleCursorAdapter.class.getSimpleName();
+    protected static final String TAG = SimpleCursorAdapter.class.getSimpleName();
     private static final String[] FROM = { "name" };
     private static final int[] TO = { android.R.id.text1 };
 
-    public MySimpleCursorAdapter(Bundle savedInstanceState, Context context, Cursor cursor) {
+    public SimpleCursorAdapter(Bundle savedInstanceState, Context context, Cursor cursor) {
         super(savedInstanceState, context, android.R.layout.simple_list_item_1, cursor, FROM, TO, 0);
     }
 
@@ -56,14 +56,12 @@ public class MySimpleCursorAdapter extends MultiChoiceSimpleCursorAdapter {
         return false;
     }
 
-    @SuppressWarnings("deprecation")
     private void discardSelectedItems() {
         String whereClause = BuildingsContract._ID + " = ?";
         for (long id : getSelection()) {
             String[] whereArgs = { Long.toString(id) };
             getContext().getContentResolver().delete(BuildingsContract.CONTENT_URI, whereClause, whereArgs);
         }
-        getCursor().requery();
         finishActionMode();
     }
 
