@@ -32,11 +32,11 @@ Finally, do not forget to call <code>save(outState)</code> from your activity's 
 
 ### If you need <code>SimpleCursorAdapter</code>-like functionality
 
-If you derive from MultiChoiceSimpleCursorAdapter instead of from MultiChoiceBaseAdapter, you won't have to implement any of the BaseAdapter methods, including getViewImpl. Instead, just implement the ActionMode.Callback methods and then configure your adapter at construction time using the different parameters of the MultiChoiceSimpleCursorAdapter constructor (cursor, from, to...)
+Derive your adapter from MultiChoiceSimpleCursorAdapter, implement the ActionMode.Callback methods and configure it at construction time using the different parameters of the MultiChoiceSimpleCursorAdapter constructor (cursor, from, to...)
 
 ### If you need <code>ArrayAdapter</code>-like functionality
 
-If you derive from MultiChoiceArrayAdapter instead of from MultiChoiceBaseAdapter, you won't have to implement any of the BaseAdapter methods, including getViewImpl. Instead, just implement the ActionMode.Callback methods and then configure your adapter at construction time using the different parameters of the MultiChoiceArrayAdapter constructor (cursor, from, to...)
+Derive your adapter from MultiChoiceArrayAdapter, implement the ActionMode.Callback methods and configure it at construction time using the different parameters of the MultiChoiceArrayAdapter constructor (layoutResourceId, textViewResourceId)
 
 Checkboxes
 ------------------
