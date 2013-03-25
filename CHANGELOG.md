@@ -4,7 +4,8 @@ Change Log
 Version 1.0.5 *(2013-03-XX)*
 ----------------------------
 
- * Added 'Loaders' activity to sample app
+ * The 'SimpleCursorAdapter' sample now uses loaders 
+ * Added new adapter type 'MultiChoiceArrayAdapter'
 
 Version 1.0.4 *(2013-03-25)*
 ----------------------------
