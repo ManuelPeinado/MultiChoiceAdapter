@@ -23,6 +23,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.actionbarsherlock.view.ActionMode;
+import com.actionbarsherlock.view.Menu;
+
 public class BasicUsageAdapter extends BaseAdapter {
 
     protected static final String TAG = BasicUsageAdapter.class.getSimpleName();
@@ -44,5 +47,10 @@ public class BasicUsageAdapter extends BaseAdapter {
         String item = getItem(position);
         textView.setText(item);
         return textView;
+    }
+
+    @Override
+    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+        return false;
     }
 }

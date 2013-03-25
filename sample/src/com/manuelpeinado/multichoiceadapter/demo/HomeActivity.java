@@ -18,6 +18,7 @@ package com.manuelpeinado.multichoiceadapter.demo;
 import java.util.Arrays;
 import java.util.List;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -29,7 +30,8 @@ import com.actionbarsherlock.app.SherlockListActivity;
 public class HomeActivity extends SherlockListActivity {
     private List<ActivityInfo> activitiesInfo = Arrays.asList(
             new ActivityInfo(BasicUsageActivity.class, R.string.activity_title_basic_usage),
-            new ActivityInfo(CheckboxItemsActivity.class, R.string.activity_title_checkbox_items));
+            new ActivityInfo(CheckboxItemsActivity.class, R.string.activity_title_checkbox_items),
+            new ActivityInfo(SimpleCursorAdapterActivity.class, R.string.activity_title_simple_cursor_adapter));
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,7 @@ public class HomeActivity extends SherlockListActivity {
     
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
-        Class<? extends BaseActivity> class_ = activitiesInfo.get(position).activityClass;
+        Class<? extends Activity> class_ = activitiesInfo.get(position).activityClass;
         Intent intent = new Intent(this, class_);
         startActivity(intent);
     }

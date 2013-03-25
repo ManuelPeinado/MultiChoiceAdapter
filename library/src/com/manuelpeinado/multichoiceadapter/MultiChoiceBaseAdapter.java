@@ -15,19 +15,9 @@
  */
 package com.manuelpeinado.multichoiceadapter;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Set;
 
-import android.app.Activity;
-import android.app.ListActivity;
 import android.content.Context;
-import android.content.res.Resources;
-import android.content.res.TypedArray;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,19 +25,11 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.actionbarsherlock.view.ActionMode;
-import com.actionbarsherlock.view.Menu;
-import com.manuelpeinado.multichoicelistadapter.R;
 
 /**
- * MultiChoiceAdapter is an implementation of ListAdapter which adds support for modal multiple choice selection as in the native GMail app. 
+ * MultiChoiceBaseAdapter is an implementation of ListAdapter which adds support for modal multiple choice selection as in the native GMail app. 
  * <p>It provides a functionality similar to that of the CHOICE_MODE_MULTIPLE_MODAL ListView mode, but in a manner that is  
  * compatible with every version of Android from 2.1. Of course, this requires that your project uses ActionBarSherlock
  * <hr><p>You'll have to implement the following methods:
@@ -61,34 +43,24 @@ import com.manuelpeinado.multichoicelistadapter.R;
  * <li><b>getViewImpl.</b> Returns the view to show for a given position. <b>Important:</b> do not override ListAdapter's getView method, override this method instead
  * <hr><p>Once you've implemented your class that derives from SelectionAdapter, you'll have
  * to attach it to a ListView like this:<p><br><code>
- * multiChoiceAdapter.setListView(listView);
- * multiChoiceAdapter.setOnItemClickListener(myItemListClickListener);</code>
+ * MultiChoiceBaseAdapter.setListView(listView);
+ * MultiChoiceBaseAdapter.setOnItemClickListener(myItemListClickListener);</code>
  * <p><br>Do not call setOnItemClickListener on your ListView, call it on the adapter instead</p> 
  * <p><br>Do not forget to derive your activity from one of the ActionBarSherlock activities, except SherlockListActivity</p> 
  * <p><br>Do not forget to call save from your activity's onSaveInstanceState method</p> 
  * <p><br>See the accompanying sample project for a full working application that implements this class</p>
  */
 public abstract class MultiChoiceBaseAdapter extends BaseAdapter 
-                                         implements OnItemLongClickListener, 
-                                                    ActionMode.Callback, 
-                                                    OnItemClickListener, 
-                                                    OnCheckedChangeListener {
-    private static final String BUNDLE_KEY = "mca__selection";
-    private Set<Integer> selection = new HashSet<Integer>();
-    private AdapterView<? super MultiChoiceBaseAdapter> adapterView;
-    private ActionMode actionMode;
-    private OnItemClickListener itemClickListener;
-    private Drawable selectedItemBackground;
-    private Drawable unselectedItemBackground;
-    private Boolean itemIncludesCheckBox;
-    private HashMap<CheckBox, Integer> tags = new HashMap<CheckBox, Integer>();
+                                         implements ActionMode.Callback {
+    
+    private MultiChoiceAdapterHelper helper = new MultiChoiceAdapterHelper(this);
     
     /**
      * @param savedInstanceState Pass your activity's saved instance state here. This is necessary
      * for the adapter to retain its selection in the event of a configuration change
      */
     public MultiChoiceBaseAdapter(Bundle savedInstanceState) {
-        restoreSelectionFromSavedInstanceState(savedInstanceState);
+        helper.restoreSelectionFromSavedInstanceState(savedInstanceState);
     }
     
     /**
@@ -98,13 +70,8 @@ public abstract class MultiChoiceBaseAdapter extends BaseAdapter
      * 
      * @param The adapter view (typically a ListView) this adapter will operate on
      */
-    public void setAdapterView(AdapterView<? super MultiChoiceBaseAdapter> adapterView) {
-        this.adapterView = adapterView;
-        checkActivity();
-        adapterView.setOnItemLongClickListener(this);
-        adapterView.setOnItemClickListener(this);
-        adapterView.setAdapter(this);
-        extractBackgroundColor();
+    public void setAdapterView(AdapterView<? super BaseAdapter> adapterView) {
+        helper.setAdapterView(adapterView);
     }
 
     /**
@@ -113,7 +80,7 @@ public abstract class MultiChoiceBaseAdapter extends BaseAdapter
      * @param listener The callback that will be invoked
      */
     public void setOnItemClickListener(OnItemClickListener listener) {
-        this.itemClickListener = listener;
+        helper.setOnItemClickListener(listener);
     }
     
     /**
@@ -123,8 +90,7 @@ public abstract class MultiChoiceBaseAdapter extends BaseAdapter
      * @param outState The same bundle you are passed in onSaveInstanceState 
      */
     public void save(Bundle outState) {
-        ArrayList<Integer> list = new ArrayList<Integer>(selection);
-        outState.putIntegerArrayList(BUNDLE_KEY, list);
+        helper.save(outState);
     }
 
     /**
@@ -135,11 +101,7 @@ public abstract class MultiChoiceBaseAdapter extends BaseAdapter
      * @param selected The desired state (selected or not) for the item
      */
     public void select(int position, boolean selected) {
-        if (selected) {
-            select(position);
-        } else {
-            unselect(position);
-        }
+        helper.select(position, selected);
     }
 
     /**
@@ -149,16 +111,7 @@ public abstract class MultiChoiceBaseAdapter extends BaseAdapter
      * @param position The position of the item to select
      */
     public void select(int position) {
-        boolean wasSelected = isSelected(position);
-        if (wasSelected) {
-            return;
-        }
-        if (actionMode == null) {
-            startActionMode();
-        }
-        selection.add(position);
-        notifyDataSetChanged();
-        onItemSelectedStateChanged(actionMode, position, true);
+        helper.select(position);
     }
 
     /**
@@ -169,17 +122,7 @@ public abstract class MultiChoiceBaseAdapter extends BaseAdapter
      * @param position The position of the item to select
      */
     public void unselect(int position) {
-        boolean wasSelected = isSelected(position);
-        if (!wasSelected) {
-            return;
-        }
-        selection.remove(Integer.valueOf(position));
-        if (getSelectionCount() == 0) {
-            finishActionMode();
-            return;
-        }
-        notifyDataSetChanged();
-        onItemSelectedStateChanged(actionMode, position, false);
+        helper.unselect(position);
     }
 
     /**
@@ -188,9 +131,8 @@ public abstract class MultiChoiceBaseAdapter extends BaseAdapter
      * @return Indices of the currently selectly items. The empty set if no item
      *         is selected
      */
-    public Set<Integer> getSelection() {
-        // Return a copy to prevent concurrent modification problems
-        return new HashSet<Integer>(selection);
+    public Set<Long> getSelection() {
+        return helper.getSelection();
     }
 
     /**
@@ -199,7 +141,7 @@ public abstract class MultiChoiceBaseAdapter extends BaseAdapter
      * @return Number of selected items
      */
     public int getSelectionCount() {
-        return selection.size();
+        return helper.getSelectionCount();
     }
 
     /**
@@ -209,7 +151,7 @@ public abstract class MultiChoiceBaseAdapter extends BaseAdapter
      * @return Whether the item is selected
      */
     public boolean isSelected(int position) {
-        return selection.contains(position);
+        return helper.isSelected(position);
     }
 
     /**
@@ -229,110 +171,24 @@ public abstract class MultiChoiceBaseAdapter extends BaseAdapter
      * This has the side effect of unselecting all items
      */
     protected void finishActionMode() {
-        if (actionMode != null) {
-            actionMode.finish();
-        }
+        helper.finishActionMode();
     }
 
     /**
      * Convenience method for subclasses that need an activity context
      */
     protected Context getContext() {
-        return adapterView.getContext();
+        return helper.getContext();
     }
     
-    private void restoreSelectionFromSavedInstanceState(Bundle savedInstanceState) {
-        if (savedInstanceState == null) {
-            return;
-        }
-        ArrayList<Integer> list = savedInstanceState.getIntegerArrayList(BUNDLE_KEY); 
-        selection = new HashSet<Integer>(list);
-    }
-
-    private void onItemSelectedStateChanged(ActionMode actionMode, int position, boolean selected) {
-        int count = getSelectionCount();
-        if (count == 0) {
-            finishActionMode();
-            return;
-        }
-        Resources res = adapterView.getResources();
-        String title = res.getQuantityString(R.plurals.selected_items, count, count);
-        actionMode.setTitle(title);
-    }
-
-    private void checkActivity() {
-        Context context = adapterView.getContext();
-        if (context instanceof ListActivity) {
-            throw new RuntimeException("ListView cannot belong to an activity which subclasses ListActivity");
-        }
-        if (context instanceof SherlockActivity || context instanceof SherlockFragmentActivity || context instanceof SherlockPreferenceActivity) {
-            return;
-        }
-        throw new RuntimeException("ListView must belong to an activity which subclasses SherlockActivity");
-    }
-
-    private void startActionMode() {
-        try {
-            Activity activity = (Activity) adapterView.getContext();
-            Method method = activity.getClass().getMethod("startActionMode", ActionMode.Callback.class);
-            actionMode = (ActionMode) method.invoke(activity, this);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
-    }
-
-    private void extractBackgroundColor() {
-        Context ctx = getContext();
-        int styleAttr = R.attr.multiChoiceAdapterStyle;
-        int defStyle = R.style.MultiChoiceAdapter_DefaultSelectedItemBackground;
-        TypedArray ta = ctx.obtainStyledAttributes(null, R.styleable.MultiChoiceAdapter, styleAttr, defStyle);
-        selectedItemBackground = ta.getDrawable(0);
-        ta.recycle();
-        Resources res = ctx.getResources();
-        unselectedItemBackground = new ColorDrawable(res.getColor(android.R.color.transparent));
-    }
-
-    //
-    // OnItemLongClickListener implementation
-    //
-
-    @Override
-    public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
-        boolean wasChecked = isSelected(position);
-        select(position, !wasChecked);
-        return true;
-    }
 
     //
     // ActionMode.Callback implementation
     //
 
     @Override
-    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-        return false;
-    }
-
-    @Override
     public void onDestroyActionMode(ActionMode mode) {
-        selection.clear();
-        actionMode = null;
-        notifyDataSetChanged();
-    }
-
-    //
-    // OnItemClickListener implementation
-    //
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-        if (actionMode != null) {
-            actionMode.finish();
-            return;
-        }
-        if (itemClickListener != null) {
-            itemClickListener.onItemClick(adapterView, view, position, id);
-        }
+        helper.onDestroyActionMode(mode);
     }
 
     //
@@ -341,52 +197,7 @@ public abstract class MultiChoiceBaseAdapter extends BaseAdapter
 
     @Override
     public final View getView(int position, View convertView, ViewGroup parent) {
-        View v = getViewImpl(position, convertView, parent);
-        if (itemIncludesCheckBox(v)) {
-            initItemCheckbox(position, convertView, (ViewGroup) v);
-        }
-        updateItemBackground(position, v);
-        return v;
-    }
-
-    private boolean itemIncludesCheckBox(View v) {
-        if (itemIncludesCheckBox == null) {
-            if (!(v instanceof ViewGroup)) {
-                itemIncludesCheckBox = false;
-            }
-            else {
-                ViewGroup root = (ViewGroup)v;
-                itemIncludesCheckBox = root.findViewById(android.R.id.checkbox) != null;
-            }
-        }
-        return itemIncludesCheckBox;
-    }
-
-    private void initItemCheckbox(int position, View convertView, ViewGroup root) {
-        CheckBox checkBox = (CheckBox) root.findViewById(android.R.id.checkbox);
-        boolean selected = isSelected(position);
-        checkBox.setTag(position);
-        checkBox.setChecked(selected);
-        tags.put(checkBox, position);
-        if (convertView == null) {
-            checkBox.setOnCheckedChangeListener(this);
-        }
-    }
-
-    @SuppressWarnings("deprecation")
-    private void updateItemBackground(int position, View v) {
-        boolean selected = isSelected(position);
-        Drawable bg = selected ? selectedItemBackground : unselectedItemBackground;
-        v.setBackgroundDrawable(bg);
-    }
-    
-    //
-    // OnCheckedChangeListener implementation
-    //
-    
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        int position = (Integer) buttonView.getTag();
-        select(position, isChecked);
+        View viewWithoutSelection = getViewImpl(position, convertView, parent);
+        return helper.getView(position, viewWithoutSelection);
     }
 }

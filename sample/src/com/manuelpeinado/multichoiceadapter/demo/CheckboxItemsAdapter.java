@@ -17,6 +17,9 @@ package com.manuelpeinado.multichoiceadapter.demo;
 
 import java.util.List;
 
+import com.actionbarsherlock.view.ActionMode;
+import com.actionbarsherlock.view.Menu;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,5 +48,10 @@ public class CheckboxItemsAdapter extends BaseAdapter {
         String item = getItem(position);
         textView.setText(item);
         return root;
+    }
+
+    @Override
+    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+        return false;
     }
 }

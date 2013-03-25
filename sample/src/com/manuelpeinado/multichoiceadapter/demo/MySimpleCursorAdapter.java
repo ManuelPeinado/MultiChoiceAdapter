@@ -15,10 +15,8 @@
  */
 package com.manuelpeinado.multichoiceadapter.demo;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
+import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -26,16 +24,16 @@ import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.manuelpeinado.multichoiceadapter.MultiChoiceBaseAdapter;
+import com.manuelpeinado.multichoiceadapter.MultiChoiceSimpleCursorAdapter;
 
-public abstract class BaseAdapter extends MultiChoiceBaseAdapter {
+public class MySimpleCursorAdapter extends MultiChoiceSimpleCursorAdapter {
 
-    protected static final String TAG = BaseAdapter.class.getSimpleName();
-    private List<String> items;
+    protected static final String TAG = MySimpleCursorAdapter.class.getSimpleName();
+    private static final String[] FROM = { "name" };
+    private static final int[] TO = { android.R.id.text1 };
 
-    public BaseAdapter(Bundle savedInstanceState, List<String> items) {
-        super(savedInstanceState);
-        this.items = items;
+    public MySimpleCursorAdapter(Bundle savedInstanceState, Context context, Cursor cursor) {
+        super(savedInstanceState, context, android.R.layout.simple_list_item_1, cursor, FROM, TO, 0);
     }
 
     @Override
@@ -58,28 +56,19 @@ public abstract class BaseAdapter extends MultiChoiceBaseAdapter {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     private void discardSelectedItems() {
-        // http://stackoverflow.com/a/4950905/244576
-        List<Long> positions = new ArrayList<Long>(getSelection());
-        Collections.sort(positions, Collections.reverseOrder());
-        for (long position : positions) {
-            items.remove((int)position);
+        String whereClause = BuildingsContract._ID + " = ?";
+        for (long id : getSelection()) {
+            String[] whereArgs = { Long.toString(id) };
+            getContext().getContentResolver().delete(BuildingsContract.CONTENT_URI, whereClause, whereArgs);
         }
+        getCursor().requery();
         finishActionMode();
     }
 
     @Override
-    public int getCount() {
-        return items.size();
-    }
-
-    @Override
-    public String getItem(int position) {
-        return items.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
+    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+        return false;
     }
 }

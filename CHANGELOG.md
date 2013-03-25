@@ -1,6 +1,14 @@
 Change Log
 ===============================================================================
 
+Version 1.0.4 *(2013-03-25)*
+----------------------------
+
+ * Added MultiChoiceSimpleCursorAdapter
+ * Added new activity to the sample app to showcase new MultiChoiceSimpleCursorAdapter, and necessary DB infraestructure
+ * Refactored MultiChoiceBaseAdapter to avoid code duplication when implementing MultiChoiceSimpleCursorAdapter
+
+
 Version 1.0.3 *(2013-03-24)*
 ----------------------------
 
