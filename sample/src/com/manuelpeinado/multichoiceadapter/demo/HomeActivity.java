@@ -26,13 +26,17 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockListActivity;
+import com.manuelpeinado.multichoiceadapter.demo.arraysample.ArrayAdapterActivity;
+import com.manuelpeinado.multichoiceadapter.demo.basicsample.BasicUsageActivity;
+import com.manuelpeinado.multichoiceadapter.demo.checkboxsample.CheckboxItemsActivity;
+import com.manuelpeinado.multichoiceadapter.demo.dbsample.SimpleCursorAdapterActivity;
 
 public class HomeActivity extends SherlockListActivity {
     private List<ActivityInfo> activitiesInfo = Arrays.asList(
             new ActivityInfo(BasicUsageActivity.class, R.string.activity_title_basic_usage),
+            new ActivityInfo(ArrayAdapterActivity.class, R.string.activity_title_array_adapter),
             new ActivityInfo(CheckboxItemsActivity.class, R.string.activity_title_checkbox_items),
-            new ActivityInfo(SimpleCursorAdapterActivity.class, R.string.activity_title_simple_cursor_adapter),
-            new ActivityInfo(SimpleCursorAdapterActivity.class, R.string.activity_title_loader));
+            new ActivityInfo(SimpleCursorAdapterActivity.class, R.string.activity_title_simple_cursor_adapter));
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {

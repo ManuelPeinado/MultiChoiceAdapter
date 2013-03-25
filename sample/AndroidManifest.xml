@@ -23,17 +23,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".BasicUsageActivity"
+            android:name=".basicsample.BasicUsageActivity"
             android:label="@string/activity_title_basic_usage" />
         <activity
-            android:name=".CheckboxItemsActivity"
+            android:name=".arraysample.ArrayAdapterActivity"
+            android:label="@string/activity_title_array_adapter" />
+        <activity
+            android:name=".checkboxsample.CheckboxItemsActivity"
             android:label="@string/activity_title_checkbox_items" />
         <activity
-            android:name=".SimpleCursorAdapterActivity"
+            android:name=".dbsample.SimpleCursorAdapterActivity"
             android:label="@string/activity_title_simple_cursor_adapter" />
         
         <provider
-            android:name="com.manuelpeinado.multichoiceadapter.demo.BuildingsContentProvider"
+            android:name="com.manuelpeinado.multichoiceadapter.demo.dbsample.BuildingsContentProvider"
             android:authorities="com.manuelpeinado.multichoiceadapter.demo"
             android:exported="false" />
     </application>
