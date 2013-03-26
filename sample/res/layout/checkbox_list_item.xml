@@ -6,8 +6,8 @@
     android:gravity="center_vertical"
     android:minHeight="64dp"
     android:orientation="horizontal"
-    android:paddingEnd="6dp"
-    android:paddingStart="6dp"
+    android:paddingRight="6dp"
+    android:paddingLeft="6dp"
     tools:context=".MainActivity" >
 
     <TextView

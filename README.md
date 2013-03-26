@@ -12,6 +12,12 @@ Try out the [sample application][4] on Google Play.
 
 Browse the source code of the [sample application][5] for a complete example of use.
 
+Including in your project
+-------------------------
+
+If you’re using the Eclipse Development Environment with the ADT plugin you can include MultiChoiceAdaptar as a library project. Create a new Android project in Eclipse using the library/ folder as the existing source. Then, open the properties of this new project and, in the 'Android' category, add a reference to the ActionBarSherlock library project. Finally, in your application project properties, add a reference to the created library project.
+
+
 Usage
 ---------
 
@@ -53,6 +59,11 @@ You can use a custom background (drawable or color) for the selected items of yo
     </style>
 
 See the sample application for a complete example.
+
+Coming soon
+-----------------
+
+* Maven integration
 
 Libraries used
 --------------------
