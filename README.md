@@ -8,9 +8,14 @@ with every version of Android from 2.x. Of course, this requires that your proje
 
 ![Example Image][3]
 
-Try out the [sample application][4] on Google Play.
+Try out the sample application:
 
-Browse the source code of the [sample application][5] for a complete example of use.
+<a href="https://play.google.com/store/apps/details?id=com.manuelpeinado.multichoiceadapter">
+  <img alt="Android app on Google Play"
+       src="https://developer.android.com/images/brand/en_app_rgb_wo_45.png" />
+</a>
+
+Or browse the [source code of the sample application][5] for a complete example of use.
 
 Including in your project
 -------------------------
