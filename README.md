@@ -54,11 +54,6 @@ You can use a custom background (drawable or color) for the selected items of yo
 
 See the sample application for a complete example.
 
-Coming soon
--------------------
-
-* Support for array adapters
-
 Libraries used
 --------------------
 
