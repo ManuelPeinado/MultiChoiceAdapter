@@ -8,9 +8,9 @@
 	<packaging>apklib</packaging>
 
 	<parent>
-		<groupId>com.manuelpeinado.multichoiceadapter</groupId>
+		<groupId>com.github.manuelpeinado.multichoiceadapter</groupId>
 		<artifactId>parent</artifactId>
-		<version>1.0.5</version>
+		<version>1.0.5-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	

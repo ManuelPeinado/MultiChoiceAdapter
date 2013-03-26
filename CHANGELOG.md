@@ -1,7 +1,13 @@
 Change Log
 ===============================================================================
 
-Version 1.0.5 *(2013-03-XX)*
+Version 1.0.6 *(2013-03-XX)*
+----------------------------
+
+ * Added maven support including deployment to Maven Central
+ * Removed ABS from repo
+
+Version 1.0.5 *(2013-03-25)*
 ----------------------------
 
  * The 'SimpleCursorAdapter' sample now uses loaders 
