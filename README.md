@@ -3,8 +3,12 @@ MultiChoiceAdapter
 
 MultiChoiceAdapter is an implementation of ListAdapter which adds support for modal multiple choice selection as in the native Gmail app. 
 
-It provides a functionality similar to that of the [`CHOICE_MODE_MULTIPLE_MODAL`][1] ListView mode, but in a manner that is compatible 
-with every version of Android from 2.x. Of course, this requires that your project uses [ActionBarSherlock][2].
+It provides a functionality similar to that of the [`CHOICE_MODE_MULTIPLE_MODAL`][1] ListView mode, with two additional benefits:
+
+* It's easier to use, as it keeps count of the selected items, updates their background accordingly and handles checkboxes transparently.
+* It is compatible with every version of Android from 2.x. Of course, this implies that your project must use [ActionBarSherlock][2].
+
+
 
 ![Example Image][3]
 
