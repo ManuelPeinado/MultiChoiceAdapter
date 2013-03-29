@@ -86,7 +86,7 @@ You can also customize the way the adapter behaves when an item is clicked and *
 Two values are supported:
 
 * <code>selectItem</code>. Changes the selection state of the clicked item, just as if it had been long clicked. This is what the native MULTICHOICE_MODAL mode of List does, and what almost every app does, and thus the default value.
- * <code>openItem</code>. Opens the clicked item, just as if it had been clicked outside of the action mode. This is what the native Gmail app does.
+* <code>openItem</code>. Opens the clicked item, just as if it had been clicked outside of the action mode. This is what the native Gmail app does.
 
 
 Libraries used
