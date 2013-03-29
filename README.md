@@ -29,7 +29,7 @@ If you use maven to build your Android project you can simply add a dependency f
     <dependency>
         <groupId>com.github.manuelpeinado.multichoiceadapter</groupId>
         <artifactId>library</artifactId>
-        <version>1.0.5</version>
+        <version>1.0.6</version>
         <type>apklib</type>
     </dependency>
 
