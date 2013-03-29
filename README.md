@@ -8,8 +8,6 @@ It provides a functionality similar to that of the [`CHOICE_MODE_MULTIPLE_MODAL`
 * It's easier to use, as it keeps count of the selected items, updates their background accordingly and handles checkboxes transparently.
 * It is compatible with every version of Android from 2.x. Of course, this implies that your project must use [ActionBarSherlock][2].
 
-
-
 ![Example Image][3]
 
 Try out the sample application:
