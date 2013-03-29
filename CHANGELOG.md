@@ -6,6 +6,11 @@ Version 1.0.6 *(2013-03-XX)*
 
  * Added maven support including deployment to Maven Central
  * Removed ABS from repo
+ * Added new attribute "itemClickInActionMode" which enables customization of the adapter's behavior when an item is clicked and the action mode is already active. Two modes are supported: 
+ 	* "selectItem". Changes the selection state of the clicked item, just as if it had been long clicked. This is what the native MULTICHOICE_MODAL mode of List does, and what almost every app does.
+ 	* "openItem". Opens the clicked item, just as if it had been clicked outside of the action mode. This is what the Gmail app does.
+ 
+
 
 Version 1.0.5 *(2013-03-25)*
 ----------------------------

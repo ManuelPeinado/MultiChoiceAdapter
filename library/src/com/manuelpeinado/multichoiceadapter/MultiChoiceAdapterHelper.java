@@ -30,6 +30,18 @@ import com.manuelpeinado.multichoicelistadapter.R;
 
 class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickListener, OnCheckedChangeListener {
     private static final String BUNDLE_KEY = "mca__selection";
+    
+    /**
+     *  Changes the selection state of the clicked item, just as if it had been 
+     *  long clicked. This is what the native MULTICHOICE_MODAL mode of List does,
+     *  and what almost every app does
+     */
+    public static final int SELECT = 0;
+    /**
+     * Opens the clicked item, just as if it had been clicked outside of the action 
+     * mode. This is what the Gmail app does
+     */
+    public static final int OPEN = 1;
     private Set<Long> selection = new HashSet<Long>();
     private AdapterView<? super MultiChoiceBaseAdapter> adapterView;
     private BaseAdapter owner;
@@ -38,6 +50,10 @@ class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickLi
     private Drawable selectedItemBackground;
     private Drawable unselectedItemBackground;
     private Boolean itemIncludesCheckBox;
+    /*
+     * Defines what happens when an item is clicked and the action mode was already active
+     */
+    private int itemClickInActionModePolicy;
 
     
     MultiChoiceAdapterHelper(BaseAdapter owner) {
@@ -171,9 +187,10 @@ class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickLi
     private void extractBackgroundColor() {
         Context ctx = getContext();
         int styleAttr = R.attr.multiChoiceAdapterStyle;
-        int defStyle = R.style.MultiChoiceAdapter_DefaultSelectedItemBackground;
+        int defStyle = R.style.MultiChoiceAdapter_DefaultSelectedItemStyle;
         TypedArray ta = ctx.obtainStyledAttributes(null, R.styleable.MultiChoiceAdapter, styleAttr, defStyle);
-        selectedItemBackground = ta.getDrawable(0);
+        selectedItemBackground = ta.getDrawable(R.styleable.MultiChoiceAdapter_selectedItemBackground);
+        itemClickInActionModePolicy = ta.getInt(R.styleable.MultiChoiceAdapter_itemClickInActionMode, SELECT);
         ta.recycle();
         Resources res = ctx.getResources();
         unselectedItemBackground = new ColorDrawable(res.getColor(android.R.color.transparent));
@@ -208,8 +225,16 @@ class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickLi
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         if (actionMode != null) {
-            actionMode.finish();
-            return;
+            switch (itemClickInActionModePolicy) {
+            case SELECT:
+                onItemLongClick(adapterView, view, position, id);
+                return;
+            case OPEN:
+                finishActionMode();
+                break;
+            default:
+                throw new RuntimeException("Invalid \"itemClickInActionMode\" value: " + itemClickInActionModePolicy);
+            }
         }
         if (itemClickListener != null) {
             itemClickListener.onItemClick(adapterView, view, position, id);

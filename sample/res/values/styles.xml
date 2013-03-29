@@ -6,6 +6,7 @@
 
     <style name="MultiChoiceAdapter">
         <item name="selectedItemBackground">@color/selected_item_background</item>
+        <item name="itemClickInActionMode">selectItem</item>
     </style>
 
 </resources>

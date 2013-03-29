@@ -2,7 +2,25 @@
 <resources>
 
     <declare-styleable name="MultiChoiceAdapter">
+
+        <!-- Defines the look of selected list items -->
         <attr name="selectedItemBackground" format="reference|color" />
+
+        <!-- Defines what happens when an item is clicked and the action mode was already active -->
+        <attr name="itemClickInActionMode">
+
+            <!--
+                 Changes the selection state of the clicked item, just as if it had been 
+                 long clicked. This is what the native MULTICHOICE_MODAL mode of List does,
+                  and what almost every app does
+            -->
+            <enum name="selectItem" value="0" />
+            <!--
+                 Opens the clicked item, just as if it had been clicked outside of the action 
+                 mode. This is what the Gmail app does
+            -->
+            <enum name="openItem" value="1" />
+        </attr>
     </declare-styleable>
 
     <attr name="multiChoiceAdapterStyle" format="reference" />

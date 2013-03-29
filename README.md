@@ -69,13 +69,24 @@ MultiChoiceAdapter handles list items with check-boxes transparently. Just add a
 Customization
 ---------------------
 
-You can use a custom background (drawable or color) for the selected items of your list. To do so, add an item named <code>multiChoiceAdapterStyle</code> to your theme, and have it reference an additional style which you define like this:
+You can use a **custom background** (drawable or color) for the selected items of your list. To do so, add an item named <code>multiChoiceAdapterStyle</code> to your theme, and have it reference an additional style which you define like this:
 
     <style name="MyCustomMultiChoiceAdapter">
         <item name="selectedItemBackground">@color/my_custom_selected_item_background</item>
     </style>
 
 See the sample application for a complete example.
+
+You can also customize the way the adapter behaves when an item is clicked and **the action mode was already active**. Just add the following item to your style:
+
+    <style name="MyCustomMultiChoiceAdapter">
+        <item name="itemClickInActionMode">selectItem
+    </style>
+    
+Two values are supported:
+
+* <code>selectItem</code>. Changes the selection state of the clicked item, just as if it had been long clicked. This is what the native MULTICHOICE_MODAL mode of List does, and what almost every app does. This is the default.
+ * <code>openItem</code>. Opens the clicked item, just as if it had been clicked outside of the action mode. This is what the native Gmail app does.
 
 
 Libraries used
