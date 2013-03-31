@@ -96,7 +96,8 @@ Libraries used
 Developed By
 --------------------
 
-* Manuel Peinado - <manuelpeinado@gmail.com>
+Manuel Peinado Gallego - <manuel.peinado@gmail.com>
+
 
 
 License
