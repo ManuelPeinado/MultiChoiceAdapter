@@ -98,6 +98,17 @@ Developed By
 
 Manuel Peinado Gallego - <manuel.peinado@gmail.com>
 
+<a href="https://twitter.com/mpg2">
+  <img alt="Follow me on Twitter"
+       src="https://raw.github.com/ManuelPeinado/NumericPageIndicator/master/art/twitter.png" />
+</a>
+<a href="https://plus.google.com/106514622630861903655">
+  <img alt="Follow me on Twitter"
+       src="https://raw.github.com/ManuelPeinado/NumericPageIndicator/master/art/google-plus.png" />
+</a>
+<a href="http://www.linkedin.com/pub/manuel-peinado-gallego/1b/435/685">
+  <img alt="Follow me on Twitter"
+       src="https://raw.github.com/ManuelPeinado/NumericPageIndicator/master/art/linkedin.png" />
 
 
 License
