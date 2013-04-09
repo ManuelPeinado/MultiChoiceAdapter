@@ -3,7 +3,7 @@ MultiChoiceAdapter
 
 MultiChoiceAdapter is an implementation of ListAdapter which adds support for modal multiple choice selection as in the native Gmail app. 
 
-It provides a functionality similar to that of the [`CHOICE_MODE_MULTIPLE_MODAL`][1] ListView mode, with two additional benefits:
+It provides a functionality similar to that of the [<tt>CHOICE_MODE_MULTIPLE_MODAL</tt>][1] ListView mode, with two additional benefits:
 
 * It's easier to use, as it keeps count of the selected items, updates their background accordingly and handles checkboxes transparently.
 * It is compatible with every version of Android from 2.x. Of course, this implies that your project must use [ActionBarSherlock][2].
@@ -36,38 +36,38 @@ If you use maven to build your Android project you can simply add a dependency f
 Usage
 ---------
 
-### If you need <code>BaseAdapter</code>-like functionality
+### If you need <tt>BaseAdapter</tt>-like functionality
 
-Instead of deriving your adapter from BaseAdapter derive it from MultiChoiceBaseAdapter. You'll have to implement the usual BaseAdapter methods (getCount(), getItem()...), but instead of implementing BaseAdapter.getView(), implement getViewImpl(). You'll also have to implement the different ActionMode.Callback methods (onCreateActionMode, onActionModeClicked()...)
+Instead of deriving your adapter from <tt>BaseAdapter</tt> derive it from <tt>MultiChoiceBaseAdapter</tt>. You'll have to implement the usual <tt>BaseAdapter</tt> methods, but instead of implementing <tt>BaseAdapter#getView()</tt>, implement <tt>getViewImpl()</tt>. You'll also have to implement the different <tt>ActionMode.Callback</tt> methods.
 
-Once you've implemented your class that derives from MultiChoiceBaseAdapter, you attach an instance of it to your ListView like this:
+Once you've implemented your class that derives from <tt>MultiChoiceBaseAdapter</tt>, you attach an instance of it to your ListView like this:
 
 	multiChoiceAdapter.setAdapterView(listView);
 	multiChoiceAdapter.setOnItemClickListener(myItemListClickListener);
 
-Do not call <code>setOnItemClickListener()</code> on your ListView, call it on the adapter instead.
+Do not call <tt>setOnItemClickListener()</tt> on your ListView, call it on the adapter instead.
 
 Do not forget to derive your activity from one of the ActionBarSherlock activities, except SherlockListActivity which is not supported.
 
-Finally, do not forget to call <code>save(outState)</code> from your activity's <code>onSaveInstanceState()</code> method. This is necessary for the selection state to be persisted across configuration changes.
+Finally, do not forget to call <tt>save(outState)</tt> from your activity's <tt>onSaveInstanceState()</tt> method. This is necessary for the selection state to be persisted across configuration changes.
 
-### If you need <code>SimpleCursorAdapter</code>-like functionality
+### If you need <tt>SimpleCursorAdapter</tt>-like functionality
 
 Derive your adapter from MultiChoiceSimpleCursorAdapter, implement the ActionMode.Callback methods and configure it at construction time using the different parameters of the MultiChoiceSimpleCursorAdapter constructor (cursor, from, to...)
 
-### If you need <code>ArrayAdapter</code>-like functionality
+### If you need <tt>ArrayAdapter</tt>-like functionality
 
-Derive your adapter from MultiChoiceArrayAdapter, implement the ActionMode.Callback methods and configure it at construction time using the different parameters of the MultiChoiceArrayAdapter constructor (layoutResourceId, textViewResourceId)
+Derive your adapter from <tt>MultiChoiceArrayAdapter</tt>, implement the ActionMode.Callback methods and configure it at construction time using the different parameters of the <tt>MultiChoiceArrayAdapter</tt> constructor (<tt>layoutResourceId</tt>, <tt>textViewResourceId</tt>).
 
 Checkboxes
 ------------------
 
-MultiChoiceAdapter handles list items with check-boxes transparently. Just add a CheckBox to your item's XML layout and give it the id <code>android.R.id.checkbox</code>.
+MultiChoiceAdapter handles list items with check-boxes transparently. Just add a CheckBox to your item's XML layout and give it the id <tt>android.R.id.checkbox</tt>.
 
 Customization
 ---------------------
 
-You can use a **custom background** (drawable or color) for the selected items of your list. To do so, add an item named <code>multiChoiceAdapterStyle</code> to your theme, and have it reference an additional style which you define like this:
+You can use a **custom background** (drawable or color) for the selected items of your list. To do so, add an item named <tt>multiChoiceAdapterStyle</tt> to your theme, and have it reference an additional style which you define like this:
 
     <style name="MyCustomMultiChoiceAdapter">
         <item name="selectedItemBackground">@color/my_custom_selected_item_background</item>
@@ -83,8 +83,8 @@ You can also customize the way the adapter behaves when an item is clicked and *
     
 Two values are supported:
 
-* <code>selectItem</code>. Changes the selection state of the clicked item, just as if it had been long clicked. This is what the native MULTICHOICE_MODAL mode of List does, and what almost every app does, and thus the default value.
-* <code>openItem</code>. Opens the clicked item, just as if it had been clicked outside of the action mode. This is what the native Gmail app does.
+* <tt>selectItem</tt>. Changes the selection state of the clicked item, just as if it had been long clicked. This is what the native MULTICHOICE_MODAL mode of List does, and what almost every app does, and thus the default value.
+* <tt>openItem</tt>. Opens the clicked item, just as if it had been clicked outside of the action mode. This is what the native Gmail app does.
 
 
 Libraries used
