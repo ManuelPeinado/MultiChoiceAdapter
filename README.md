@@ -26,12 +26,14 @@ If you’re using Eclipse with the ADT plugin you can include MultiChoiceAdaptar
 
 If you use maven to build your Android project you can simply add a dependency for this library.
 
-    <dependency>
-        <groupId>com.github.manuelpeinado.multichoiceadapter</groupId>
-        <artifactId>library</artifactId>
-        <version>1.0.6</version>
-        <type>apklib</type>
-    </dependency>
+```xml
+<dependency>
+    <groupId>com.github.manuelpeinado.multichoiceadapter</groupId>
+    <artifactId>library</artifactId>
+    <version>1.0.6</version>
+    <type>apklib</type>
+</dependency>
+```
 
 Usage
 ---------
@@ -42,8 +44,10 @@ Instead of deriving your adapter from <tt>BaseAdapter</tt> derive it from <tt>Mu
 
 Once you've implemented your class that derives from <tt>MultiChoiceBaseAdapter</tt>, you attach an instance of it to your ListView like this:
 
-	multiChoiceAdapter.setAdapterView(listView);
-	multiChoiceAdapter.setOnItemClickListener(myItemListClickListener);
+```java
+multiChoiceAdapter.setAdapterView(listView);
+multiChoiceAdapter.setOnItemClickListener(myItemListClickListener);
+```
 
 Do not call <tt>setOnItemClickListener()</tt> on your ListView, call it on the adapter instead.
 
@@ -69,17 +73,21 @@ Customization
 
 You can use a **custom background** (drawable or color) for the selected items of your list. To do so, add an item named <tt>multiChoiceAdapterStyle</tt> to your theme, and have it reference an additional style which you define like this:
 
-    <style name="MyCustomMultiChoiceAdapter">
-        <item name="selectedItemBackground">@color/my_custom_selected_item_background</item>
-    </style>
+```xml
+<style name="MyCustomMultiChoiceAdapter">
+    <item name="selectedItemBackground">@color/my_custom_selected_item_background</item>
+</style>
+```
 
 See the sample application for a complete example.
 
 You can also customize the way the adapter behaves when an item is clicked and **the action mode was already active**. Just add the following item to your style:
 
-    <style name="MyCustomMultiChoiceAdapter">
-        <item name="itemClickInActionMode">selectItem</item>
-    </style>
+```xml
+<style name="MyCustomMultiChoiceAdapter">
+    <item name="itemClickInActionMode">selectItem</item>
+</style>
+```
     
 Two values are supported:
 
