@@ -12,7 +12,7 @@
     <groupId>com.github.manuelpeinado.multichoiceadapter</groupId>
     <artifactId>parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.7-SNAPSHOT</version>
+    <version>1.0.7</version>
 
     <name>Android-MultiChoiceAdapter (Parent)</name>
     <description>Android library for.</description>
