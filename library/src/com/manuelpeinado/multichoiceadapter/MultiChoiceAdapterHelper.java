@@ -93,6 +93,11 @@ class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickLi
         adapterView.setOnItemClickListener(this);
         adapterView.setAdapter(owner);
         extractBackgroundColor();
+
+        if (!selection.isEmpty()) {
+            startActionMode();
+            onItemSelectedStateChanged();
+        }
     }
     
     void checkActivity() {

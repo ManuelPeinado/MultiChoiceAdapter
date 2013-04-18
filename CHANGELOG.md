@@ -1,5 +1,9 @@
 Change Log
-===============================================================================
+=======================================
+
+Version 1.0.7 *(2013-04-18)*
+----------------------------
+ * Fixed bug which prevented the lib from dealing with orientation changes properly (the action mode was lost, and if a long click was performed afterwards the app crashed)
 
 Version 1.0.6 *(2013-03-29)*
 ----------------------------
