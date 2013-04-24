@@ -101,6 +101,17 @@ Libraries used
 * [ActionBarSherlock][2] by Jake Wharton
 * The sample app uses the [ProviGen library][6] by Timothee Jeannin
 
+Who's using it
+--------------
+<a href="https://play.google.com/store/apps/details?id=com.projectsexception.myapplist">
+  <img alt="Android app on Google Play"
+       src="https://raw.github.com/ManuelPeinado/MultiChoiceAdapter/master/art/my_app_list_icon.png" />
+</a>
+ With 'My App List' you can save installed applications in a list to restore them after flash or install a new ROM.
+ 
+*Does your app use MultiChoiceAdapter? If you want to be featured on this list drop me a line.*
+
+
 Developed By
 --------------------
 
