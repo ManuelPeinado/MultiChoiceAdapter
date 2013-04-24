@@ -103,11 +103,7 @@ Libraries used
 
 Who's using it
 --------------
-<a href="https://play.google.com/store/apps/details?id=com.projectsexception.myapplist">
-  <img alt="Android app on Google Play"
-       src="https://raw.github.com/ManuelPeinado/MultiChoiceAdapter/master/art/my_app_list_icon.png" />
-</a>
- With 'My App List' you can save installed applications in a list to restore them after flash or install a new ROM.
+* [My App List][7]. With this app you can save installed applications in a list to restore them after flash or install a new ROM. 
  
 *Does your app use MultiChoiceAdapter? If you want to be featured on this list drop me a line.*
 
@@ -157,3 +153,4 @@ License
  [4]: https://play.google.com/store/apps/details?id=com.manuelpeinado.multichoiceadapter.demo
  [5]: https://github.com/ManuelPeinado/MultiChoiceAdapter/tree/master/sample
  [6]: https://github.com/TimotheeJeannin/ProviGen
+ [7]: https://play.google.com/store/apps/details?id=com.projectsexception.myapplist
