@@ -2,7 +2,6 @@
 <resources>
 
     <style name="MultiChoiceAdapter_DefaultSelectedItemStyle">
-        <item name="selectedItemBackground">@color/mca__default_selected_item_background</item>
         <item name="itemClickInActionMode">selectItem</item>
     </style>
 

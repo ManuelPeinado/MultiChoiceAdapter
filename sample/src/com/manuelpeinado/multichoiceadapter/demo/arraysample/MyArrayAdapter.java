@@ -60,7 +60,7 @@ public class MyArrayAdapter extends MultiChoiceArrayAdapter<String> {
     }
 
     private void discardSelectedItems() {
-        Set<Long> selection = getSelection();
+        Set<Long> selection = getCheckedItems();
         String[] items = new String[selection.size()];
         int i = 0;
         for (long position : selection) {

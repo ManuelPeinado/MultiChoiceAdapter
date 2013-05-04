@@ -78,7 +78,7 @@ public class TwoLinesArrayAdapter extends MultiChoiceArrayAdapter<Building> {
     }
 
     private void discardSelectedItems() {
-        Set<Long> selection = getSelection();
+        Set<Long> selection = getCheckedItems();
         Building[] items = new Building[selection.size()];
         int i = 0;
         for (long position : selection) {

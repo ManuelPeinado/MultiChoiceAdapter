@@ -97,31 +97,10 @@ public abstract class MultiChoiceBaseAdapter extends BaseAdapter
      * specified state, nothing is done. May cause the activation of the action
      * mode if an item is selected an no items were previously selected
      * @param position The position of the item to select
-     * @param selected The desired state (selected or not) for the item
+     * @param checked The desired state (selected or not) for the item
      */
-    public void select(int position, boolean selected) {
-        helper.select(position, selected);
-    }
-
-    /**
-     * Causes an item to be selected. If the item was already selected, nothing
-     * is done May cause the activation of the action mode if no items were
-     * previously selected
-     * @param position The position of the item to select
-     */
-    public void select(int position) {
-        helper.select(position);
-    }
-
-    /**
-     * Causes an item to stop being selected. If the item was not selected,
-     * nothing is done May cause the deactivation of the action mode if this was
-     * the only selected item
-     * 
-     * @param position The position of the item to select
-     */
-    public void unselect(int position) {
-        helper.unselect(position);
+    public void setItemChecked(int position, boolean checked) {
+        helper.setItemChecked(position, checked);
     }
 
     /**
@@ -130,8 +109,8 @@ public abstract class MultiChoiceBaseAdapter extends BaseAdapter
      * @return Indices of the currently selectly items. The empty set if no item
      *         is selected
      */
-    public Set<Long> getSelection() {
-        return helper.getSelection();
+    public Set<Long> getCheckedItems() {
+        return helper.getCheckedItems();
     }
 
     /**
@@ -139,8 +118,8 @@ public abstract class MultiChoiceBaseAdapter extends BaseAdapter
      * 
      * @return Number of selected items
      */
-    public int getSelectionCount() {
-        return helper.getSelectionCount();
+    public int getCheckedItemCount() {
+        return helper.getCheckedItemCount();
     }
 
     /**
@@ -149,8 +128,8 @@ public abstract class MultiChoiceBaseAdapter extends BaseAdapter
      * @param position The item position
      * @return Whether the item is selected
      */
-    public boolean isSelected(int position) {
-        return helper.isSelected(position);
+    public boolean isChecked(int position) {
+        return helper.isChecked(position);
     }
 
     /**

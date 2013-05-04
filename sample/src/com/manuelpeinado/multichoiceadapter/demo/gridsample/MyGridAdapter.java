@@ -16,18 +16,19 @@
 
 package com.manuelpeinado.multichoiceadapter.demo.gridsample;
 
+import java.util.ArrayList;
+import java.util.Set;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.widget.Toast;
+
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.manuelpeinado.multichoiceadapter.MultiChoiceArrayAdapter;
 import com.manuelpeinado.multichoiceadapter.demo.R;
-
-import java.util.ArrayList;
-import java.util.Set;
 
 public class MyGridAdapter  extends MultiChoiceArrayAdapter<String> {
 
@@ -58,7 +59,7 @@ public class MyGridAdapter  extends MultiChoiceArrayAdapter<String> {
     }
 
     private void discardSelectedItems() {
-        Set<Long> selection = getSelection();
+        Set<Long> selection = getCheckedItems();
         String[] items = new String[selection.size()];
         int i = 0;
         for (long position : selection) {

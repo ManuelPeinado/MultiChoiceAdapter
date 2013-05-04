@@ -75,28 +75,20 @@ public abstract class MultiChoiceArrayAdapter<T> extends ArrayAdapter<T>
         helper.save(outState);
     }
 
-    public void select(int position, boolean selected) {
-        helper.select(position, selected);
+    public void setItemChecked(int position, boolean checked) {
+        helper.setItemChecked(position, checked);
     }
 
-    public void select(int position) {
-        helper.select(position);
+    public Set<Long> getCheckedItems() {
+        return helper.getCheckedItems();
     }
 
-    public void unselect(int position) {
-        helper.unselect(position);
+    public int getCheckedItemCount() {
+        return helper.getCheckedItemCount();
     }
 
-    public Set<Long> getSelection() {
-        return helper.getSelection();
-    }
-
-    public int getSelectionCount() {
-        return helper.getSelectionCount();
-    }
-
-    public boolean isSelected(int position) {
-        return helper.isSelected(position);
+    public boolean isChecked(int position) {
+        return helper.isChecked(position);
     }
 
     protected void finishActionMode() {

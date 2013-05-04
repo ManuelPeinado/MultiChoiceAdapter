@@ -24,8 +24,6 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,13 +56,11 @@ class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickLi
      * mode. This is what the Gmail app does
      */
     public static final int OPEN = 1;
-    private Set<Long> selection = new HashSet<Long>();
+    private Set<Long> checkedItems = new HashSet<Long>();
     private AdapterView<? super MultiChoiceBaseAdapter> adapterView;
     private BaseAdapter owner;
     private OnItemClickListener itemClickListener;
     private ActionMode actionMode;
-    private Drawable selectedItemBackground;
-    private Drawable unselectedItemBackground;
     private Boolean itemIncludesCheckBox;
     /*
      * Defines what happens when an item is clicked and the action mode was already active
@@ -81,9 +77,9 @@ class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickLi
             return;
         }
         long[] array = savedInstanceState.getLongArray(BUNDLE_KEY);
-        selection.clear();
+        checkedItems.clear();
         for (long id : array) {
-            selection.add(id);
+            checkedItems.add(id);
         }
     }
 
@@ -93,9 +89,9 @@ class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickLi
         adapterView.setOnItemLongClickListener(this);
         adapterView.setOnItemClickListener(this);
         adapterView.setAdapter(owner);
-        extractBackgroundColor();
+        parseAttrs();
 
-        if (!selection.isEmpty()) {
+        if (!checkedItems.isEmpty()) {
             startActionMode();
             onItemSelectedStateChanged();
         }
@@ -117,42 +113,42 @@ class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickLi
     }
 
     void save(Bundle outState) {
-        long[] array = new long[selection.size()];
+        long[] array = new long[checkedItems.size()];
         int i = 0;
-        for (Long id : selection) {
+        for (Long id : checkedItems) {
             array[i++] = id;
         }
         outState.putLongArray(BUNDLE_KEY, array);
     }
 
-    void select(long handle, boolean selected) {
-        if (selected) {
-            select(handle);
+    void setItemChecked(long handle, boolean checked) {
+        if (checked) {
+            checkItem(handle);
         } else {
-            unselect(handle);
+            uncheckItem(handle);
         }
     }
 
-    void select(long handle) {
-        boolean wasSelected = isSelected(handle);
+    void checkItem(long handle) {
+        boolean wasSelected = isChecked(handle);
         if (wasSelected) {
             return;
         }
         if (actionMode == null) {
             startActionMode();
         }
-        selection.add((long)handle);
+        checkedItems.add((long)handle);
         owner.notifyDataSetChanged();
         onItemSelectedStateChanged();
     }
 
-    void unselect(long handle) {
-        boolean wasSelected = isSelected(handle);
+    void uncheckItem(long handle) {
+        boolean wasSelected = isChecked(handle);
         if (!wasSelected) {
             return;
         }
-        selection.remove(handle);
-        if (getSelectionCount() == 0) {
+        checkedItems.remove(handle);
+        if (getCheckedItemCount() == 0) {
             finishActionMode();
             return;
         }
@@ -160,17 +156,17 @@ class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickLi
         onItemSelectedStateChanged();
     }
 
-    Set<Long> getSelection() {
+    Set<Long> getCheckedItems() {
         // Return a copy to prevent concurrent modification problems
-        return new HashSet<Long>(selection);
+        return new HashSet<Long>(checkedItems);
     }
 
-    int getSelectionCount() {
-        return selection.size();
+    int getCheckedItemCount() {
+        return checkedItems.size();
     }
 
-    boolean isSelected(long handle) {
-        return selection.contains(handle);
+    boolean isChecked(long handle) {
+        return checkedItems.contains(handle);
     }
 
     void finishActionMode() {
@@ -184,7 +180,7 @@ class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickLi
     }
     
     private void onItemSelectedStateChanged() {
-        int count = getSelectionCount();
+        int count = getCheckedItemCount();
         if (count == 0) {
             finishActionMode();
             return;
@@ -205,16 +201,13 @@ class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickLi
         }
     }
     
-    private void extractBackgroundColor() {
+    private void parseAttrs() {
         Context ctx = getContext();
         int styleAttr = R.attr.multiChoiceAdapterStyle;
         int defStyle = R.style.MultiChoiceAdapter_DefaultSelectedItemStyle;
         TypedArray ta = ctx.obtainStyledAttributes(null, R.styleable.MultiChoiceAdapter, styleAttr, defStyle);
-        selectedItemBackground = ta.getDrawable(R.styleable.MultiChoiceAdapter_selectedItemBackground);
         itemClickInActionModePolicy = ta.getInt(R.styleable.MultiChoiceAdapter_itemClickInActionMode, SELECT);
         ta.recycle();
-        Resources res = ctx.getResources();
-        unselectedItemBackground = new ColorDrawable(res.getColor(android.R.color.transparent));
     }
 
     //
@@ -224,8 +217,8 @@ class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickLi
     @Override
     public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
         long handle = positionToSelectionHandle(position);
-        boolean wasChecked = isSelected(handle);
-        select(handle, !wasChecked);
+        boolean wasChecked = isChecked(handle);
+        setItemChecked(handle, !wasChecked);
         return true;
     }
     
@@ -238,7 +231,7 @@ class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickLi
     //
 
     void onDestroyActionMode(ActionMode mode) {
-        selection.clear();
+        checkedItems.clear();
         actionMode = null;
         owner.notifyDataSetChanged();
     }
@@ -265,7 +258,7 @@ class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickLi
     View getView(int position, View viewWithoutSelection) {
         if (viewWithoutSelection instanceof Checkable) {
             long handle = positionToSelectionHandle(position);
-            boolean selected = isSelected(handle);
+            boolean selected = isChecked(handle);
             ((Checkable)viewWithoutSelection).setChecked(selected);
         }
         if (itemIncludesCheckBox(viewWithoutSelection)) {
@@ -289,7 +282,7 @@ class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickLi
 
     private void initItemCheckbox(int position, ViewGroup view) {
         CheckBox checkBox = (CheckBox) view.findViewById(android.R.id.checkbox);
-        boolean selected = isSelected(position);
+        boolean selected = isChecked(position);
         checkBox.setTag(position);
         checkBox.setChecked(selected);
         checkBox.setOnCheckedChangeListener(this);
@@ -298,6 +291,6 @@ class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickLi
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         int position = (Integer) buttonView.getTag();
-        select(position, isChecked);
+        setItemChecked(position, isChecked);
     }
 }

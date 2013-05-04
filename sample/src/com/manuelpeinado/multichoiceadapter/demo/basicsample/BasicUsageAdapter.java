@@ -65,7 +65,7 @@ public class BasicUsageAdapter extends MultiChoiceBaseAdapter {
 
     private void discardSelectedItems() {
         // http://stackoverflow.com/a/4950905/244576
-        List<Long> positions = new ArrayList<Long>(getSelection());
+        List<Long> positions = new ArrayList<Long>(getCheckedItems());
         Collections.sort(positions, Collections.reverseOrder());
         for (long position : positions) {
             items.remove((int)position);

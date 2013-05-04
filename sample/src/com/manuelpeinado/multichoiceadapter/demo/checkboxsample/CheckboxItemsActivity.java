@@ -79,7 +79,7 @@ public class CheckboxItemsActivity extends SherlockActivity
 
     private void selectAll() {
         for (int i = 0; i < adapter.getCount(); ++i) {
-            adapter.select(i);
+            adapter.setItemChecked(i, true);
         }
     }
 
