@@ -7,8 +7,10 @@
     <string name="menu_share">Share</string>
     <string name="menu_discard">Discard</string>
     <string name="activity_title_basic_usage">Basic usage sample</string>
-	<string name="activity_title_array_adapter">ArrayAdapter sample</string>
+    <string name="activity_title_array_adapter">ArrayAdapter sample</string>
+    <string name="activity_title_array_adapter_two_lines">ArrayAdapter sample (two lines)</string>
     <string name="activity_title_checkbox_items">Checkbox items sample</string>
     <string name="activity_title_simple_cursor_adapter">SimpleCursorAdapter sample</string>
     <string name="activity_title_grid_adapter">GridAdapter sample</string>
+
 </resources>

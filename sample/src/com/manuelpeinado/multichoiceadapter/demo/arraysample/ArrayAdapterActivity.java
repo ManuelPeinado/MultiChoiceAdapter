@@ -83,7 +83,7 @@ public class ArrayAdapterActivity extends SherlockActivity
     }
 
     private void rebuildList(Bundle savedInstanceState) {
-        String[] itemArray = getResources().getStringArray(R.array.items);
+        String[] itemArray = getResources().getStringArray(R.array.names);
         ArrayList<String> items = new ArrayList<String>(Arrays.asList(itemArray));
         adapter = new MyArrayAdapter(savedInstanceState, this, items);
         adapter.setOnItemClickListener(this);

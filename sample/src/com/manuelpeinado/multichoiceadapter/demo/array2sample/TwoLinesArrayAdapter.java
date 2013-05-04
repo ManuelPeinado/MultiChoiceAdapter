@@ -13,34 +13,48 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.manuelpeinado.multichoiceadapter.demo.basicsample;
+package com.manuelpeinado.multichoiceadapter.demo.array2sample;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.manuelpeinado.multichoiceadapter.MultiChoiceBaseAdapter;
+import com.manuelpeinado.multichoiceadapter.CheckableTwoLineListItem;
+import com.manuelpeinado.multichoiceadapter.MultiChoiceArrayAdapter;
 import com.manuelpeinado.multichoiceadapter.demo.R;
 
-public class MyBaseAdapter extends MultiChoiceBaseAdapter {
+@SuppressLint("ViewConstructor")
+public class TwoLinesArrayAdapter extends MultiChoiceArrayAdapter<Building> {
 
-    protected static final String TAG = MyBaseAdapter.class.getSimpleName();
-    private List<String> items;
+    protected static final String TAG = TwoLinesArrayAdapter.class.getSimpleName();
 
-    public MyBaseAdapter(Bundle savedInstanceState, List<String> items) {
-        super(savedInstanceState);
-        this.items = items;
+    public TwoLinesArrayAdapter(Bundle savedInstanceState, Context context, ArrayList<Building> items) {
+        super(savedInstanceState, context, R.layout.mca__simple_list_item_checkable_2, items);
+    }
+
+    @Override
+    public View getViewImpl(int position, View convertView, ViewGroup parent) {
+        if (convertView == null) {
+            LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(
+                    Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(R.layout.mca__simple_list_item_checkable_2, null);
+        }
+        CheckableTwoLineListItem row = (CheckableTwoLineListItem) convertView;
+        Building item = getItem(position);
+        row.getText1().setText(item.name);
+        row.getText2().setText(item.height);
+        return row;
     }
 
     @Override
@@ -64,47 +78,20 @@ public class MyBaseAdapter extends MultiChoiceBaseAdapter {
     }
 
     private void discardSelectedItems() {
-        // http://stackoverflow.com/a/4950905/244576
-        List<Long> positions = new ArrayList<Long>(getSelection());
-        Collections.sort(positions, Collections.reverseOrder());
-        for (long position : positions) {
-            items.remove((int)position);
+        Set<Long> selection = getSelection();
+        Building[] items = new Building[selection.size()];
+        int i = 0;
+        for (long position : selection) {
+            items[i++] = getItem((int) position);
+        }
+        for (Building item : items) {
+            remove(item);
         }
         finishActionMode();
     }
 
     @Override
-    public int getCount() {
-        return items.size();
-    }
-
-    @Override
-    public String getItem(int position) {
-        return items.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
     public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
         return false;
-    }
-
-    @Override
-    protected View getViewImpl(int position, View convertView, ViewGroup parent) {
-        TextView textView;
-        if (convertView != null) {
-            textView = (TextView) convertView;
-        } else {
-            int layout = android.R.layout.simple_list_item_1;
-            LayoutInflater inflater = LayoutInflater.from(getContext());
-            textView = (TextView) inflater.inflate(layout, parent, false);
-        }
-        String item = getItem(position);
-        textView.setText(item);
-        return textView;
     }
 }

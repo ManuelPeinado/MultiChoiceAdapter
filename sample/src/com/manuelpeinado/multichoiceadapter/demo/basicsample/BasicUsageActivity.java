@@ -84,9 +84,9 @@ public class BasicUsageActivity extends SherlockActivity
     }
 
     private void rebuildList(Bundle savedInstanceState) {
-        String[] itemArray = getResources().getStringArray(R.array.items);
+        String[] itemArray = getResources().getStringArray(R.array.names);
         ArrayList<String> items = new ArrayList<String>(Arrays.asList(itemArray));
-        adapter = new MyBaseAdapter(savedInstanceState, items);
+        adapter = new BasicUsageAdapter(savedInstanceState, items);
         adapter.setOnItemClickListener(this);
         adapter.setAdapterView(getListView());
     }

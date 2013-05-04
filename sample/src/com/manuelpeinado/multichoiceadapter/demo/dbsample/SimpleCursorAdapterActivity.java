@@ -112,7 +112,7 @@ public class SimpleCursorAdapterActivity extends SherlockFragmentActivity
     private void rebuildList() {
         getContentResolver().delete(BuildingsContract.CONTENT_URI, null, null);
         ContentValues values = new ContentValues();
-        String[] items = getResources().getStringArray(R.array.items);
+        String[] items = getResources().getStringArray(R.array.names);
         for (String item : items) {
             values.put(BuildingsContract.NAME, item);
             getContentResolver().insert(BuildingsContract.CONTENT_URI, values);

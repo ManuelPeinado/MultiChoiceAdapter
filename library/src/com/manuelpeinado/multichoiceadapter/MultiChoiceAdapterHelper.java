@@ -34,6 +34,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.Checkable;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
@@ -262,10 +263,14 @@ class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickLi
     }
 
     View getView(int position, View viewWithoutSelection) {
+        if (viewWithoutSelection instanceof Checkable) {
+            long handle = positionToSelectionHandle(position);
+            boolean selected = isSelected(handle);
+            ((Checkable)viewWithoutSelection).setChecked(selected);
+        }
         if (itemIncludesCheckBox(viewWithoutSelection)) {
             initItemCheckbox(position, (ViewGroup)viewWithoutSelection);
         }
-        updateItemBackground(position, viewWithoutSelection);
         return viewWithoutSelection;
     }
     
@@ -290,14 +295,6 @@ class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickLi
         checkBox.setOnCheckedChangeListener(this);
     }
 
-    @SuppressWarnings("deprecation")
-    private void updateItemBackground(int position, View v) {
-        long handle = positionToSelectionHandle(position);
-        boolean selected = isSelected(handle);
-        Drawable bg = selected ? selectedItemBackground : unselectedItemBackground;
-        v.setBackgroundDrawable(bg);
-    }
-    
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         int position = (Integer) buttonView.getTag();

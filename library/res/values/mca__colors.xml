@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="mca__default_selected_item_background">#1000</color>
+    <color name="mca__default_selected_item_background">#1077</color>
+     <color name="mca__holo_blue_light">#ff33b5e5</color>
+    <color name="mca__list_item_bg_normal">@android:color/transparent</color>
+    <color name="mca__list_item_bg_checked">@color/mca__default_selected_item_background</color>
+    <color name="mca__list_item_bg_pressed">@color/mca__holo_blue_light</color>
 
 </resources>

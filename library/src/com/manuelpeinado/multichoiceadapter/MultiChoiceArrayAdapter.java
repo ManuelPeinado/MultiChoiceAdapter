@@ -110,8 +110,11 @@ public abstract class MultiChoiceArrayAdapter<T> extends ArrayAdapter<T>
     
     @Override
     public final View getView(int position, View convertView, ViewGroup parent) {
-        View viewWithoutSelection = super.getView(position, convertView, parent);
+        View viewWithoutSelection = getViewImpl(position, convertView, parent);
         return helper.getView(position, viewWithoutSelection);
     }
-
+    
+    protected View getViewImpl(int position, View convertView, ViewGroup parent) {
+        return super.getView(position, convertView, parent);
+    }
 }

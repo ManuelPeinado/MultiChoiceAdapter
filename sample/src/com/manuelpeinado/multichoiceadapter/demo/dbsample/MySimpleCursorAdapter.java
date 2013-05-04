@@ -34,7 +34,7 @@ public class MySimpleCursorAdapter extends MultiChoiceSimpleCursorAdapter {
     private static final int[] TO = { android.R.id.text1 };
 
     public MySimpleCursorAdapter(Bundle savedInstanceState, Context context, Cursor cursor) {
-        super(savedInstanceState, context, android.R.layout.simple_list_item_1, cursor, FROM, TO, 0);
+        super(savedInstanceState, context, R.layout.mca__simple_list_item_checkable_1, cursor, FROM, TO, 0);
     }
 
     @Override

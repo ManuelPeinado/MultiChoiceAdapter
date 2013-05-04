@@ -8,6 +8,7 @@
     android:orientation="horizontal"
     android:paddingRight="6dp"
     android:paddingLeft="6dp"
+    android:background="@drawable/mca__list_item_selector"
     tools:context=".MainActivity" >
 
     <TextView

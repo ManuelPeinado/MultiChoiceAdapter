@@ -29,6 +29,9 @@
             android:name=".arraysample.ArrayAdapterActivity"
             android:label="@string/activity_title_array_adapter" />
         <activity
+            android:name=".array2sample.TwoLinesArrayAdapterActivity"
+            android:label="@string/activity_title_array_adapter_two_lines" />
+        <activity
             android:name=".checkboxsample.CheckboxItemsActivity"
             android:label="@string/activity_title_checkbox_items" />
         <activity

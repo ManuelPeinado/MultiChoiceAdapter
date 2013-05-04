@@ -13,10 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.manuelpeinado.multichoiceadapter.demo.checkboxsample;
+package com.manuelpeinado.multichoiceadapter.demo.array2sample;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,13 +27,12 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import com.manuelpeinado.multichoiceadapter.MultiChoiceBaseAdapter;
 import com.manuelpeinado.multichoiceadapter.demo.HomeActivity;
 import com.manuelpeinado.multichoiceadapter.demo.R;
 
-public class CheckboxItemsActivity extends SherlockActivity 
-                                   implements OnItemClickListener {
-    private MultiChoiceBaseAdapter adapter;
+public class TwoLinesArrayAdapterActivity extends SherlockActivity
+                                  implements OnItemClickListener {
+    private TwoLinesArrayAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,9 +82,13 @@ public class CheckboxItemsActivity extends SherlockActivity
     }
 
     private void rebuildList(Bundle savedInstanceState) {
-        String[] itemArray = getResources().getStringArray(R.array.names);
-        ArrayList<String> items = new ArrayList<String>(Arrays.asList(itemArray));
-        adapter = new CheckboxItemsAdapter(savedInstanceState, items);
+        String[] names = getResources().getStringArray(R.array.names);
+        String[] heights = getResources().getStringArray(R.array.heights);
+        ArrayList<Building> items = new ArrayList<Building>(names.length);
+        for (int i = 0; i < names.length; ++i) {
+            items.add(new Building(names[i], heights[i]));
+        }
+        adapter = new TwoLinesArrayAdapter(savedInstanceState, this, items);
         adapter.setOnItemClickListener(this);
         adapter.setAdapterView(getListView());
     }
@@ -95,5 +97,4 @@ public class CheckboxItemsActivity extends SherlockActivity
     protected void onSaveInstanceState(Bundle outState) {
         adapter.save(outState);
     }
-
 }
