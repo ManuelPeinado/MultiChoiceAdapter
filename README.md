@@ -38,50 +38,16 @@ If you use maven to build your Android project you can simply add a dependency f
 Usage
 ---------
 
-### If you need <tt>BaseAdapter</tt>-like functionality
+Check any of the provided tutorials:
 
-Instead of deriving your adapter from <tt>BaseAdapter</tt> derive it from <tt>MultiChoiceBaseAdapter</tt>. You'll have to implement the usual <tt>BaseAdapter</tt> methods, but instead of implementing <tt>BaseAdapter#getView()</tt>, implement <tt>getViewImpl()</tt>. You'll also have to implement the different <tt>ActionMode.Callback</tt> methods.
-
-Once you've implemented your class that derives from <tt>MultiChoiceBaseAdapter</tt>, you attach an instance of it to your ListView like this:
-
-```java
-multiChoiceAdapter.setAdapterView(listView);
-multiChoiceAdapter.setOnItemClickListener(myItemListClickListener);
-```
-
-Do not call <tt>setOnItemClickListener()</tt> on your ListView, call it on the adapter instead.
-
-Do not forget to derive your activity from one of the ActionBarSherlock activities, except SherlockListActivity which is not supported.
-
-Finally, do not forget to call <tt>save(outState)</tt> from your activity's <tt>onSaveInstanceState()</tt> method. This is necessary for the selection state to be persisted across configuration changes.
-
-### If you need <tt>SimpleCursorAdapter</tt>-like functionality
-
-Derive your adapter from MultiChoiceSimpleCursorAdapter, implement the ActionMode.Callback methods and configure it at construction time using the different parameters of the MultiChoiceSimpleCursorAdapter constructor (cursor, from, to...)
-
-### If you need <tt>ArrayAdapter</tt>-like functionality
-
-Derive your adapter from <tt>MultiChoiceArrayAdapter</tt>, implement the ActionMode.Callback methods and configure it at construction time using the different parameters of the <tt>MultiChoiceArrayAdapter</tt> constructor (<tt>layoutResourceId</tt>, <tt>textViewResourceId</tt>).
-
-Checkboxes
-------------------
-
-MultiChoiceAdapter handles list items with check-boxes transparently. Just add a CheckBox to your item's XML layout and give it the id <tt>android.R.id.checkbox</tt>.
+* [Using MultiChoiceArrayAdapter][8]
+* [Using MultiChoiceBaseAdapter][9]
+* [Using MultiChoiceSimpleCursorAdapter][10]
+* [Usage with GridView][11]
 
 Customization
 ---------------------
-
-You can use a **custom background** (drawable or color) for the selected items of your list. To do so, add an item named <tt>multiChoiceAdapterStyle</tt> to your theme, and have it reference an additional style which you define like this:
-
-```xml
-<style name="MyCustomMultiChoiceAdapter">
-    <item name="selectedItemBackground">@color/my_custom_selected_item_background</item>
-</style>
-```
-
-See the sample application for a complete example.
-
-You can also customize the way the adapter behaves when an item is clicked and **the action mode was already active**. Just add the following item to your style:
+You can customize the way the adapter behaves when an item is clicked and **the action mode was already active**. o do so, add an item named <tt>multiChoiceAdapterStyle</tt> to your theme, and have it reference an additional style which you define like this:
 
 ```xml
 <style name="MyCustomMultiChoiceAdapter">
@@ -94,6 +60,7 @@ Two values are supported:
 * <tt>selectItem</tt>. Changes the selection state of the clicked item, just as if it had been long clicked. This is what the native MULTICHOICE_MODAL mode of List does, and what almost every app does, and thus the default value.
 * <tt>openItem</tt>. Opens the clicked item, just as if it had been clicked outside of the action mode. This is what the native Gmail app does.
 
+A common need is to customize the background of checked items. This is usually acomplished by changing the background selector of the 
 
 Libraries used
 --------------------
@@ -154,3 +121,7 @@ License
  [5]: https://github.com/ManuelPeinado/MultiChoiceAdapter/tree/master/sample
  [6]: https://github.com/TimotheeJeannin/ProviGen
  [7]: https://play.google.com/store/apps/details?id=com.projectsexception.myapplist
+ [8]: https://github.com/ManuelPeinado/MultiChoiceAdapter/wiki/MultiChoiceArrayAdapter-tutorial
+ [9]: https://github.com/ManuelPeinado/MultiChoiceAdapter/wiki/MultiChoiceBaseAdapter-tutorial
+ [10]: https://github.com/ManuelPeinado/MultiChoiceAdapter/wiki/MultiChoiceSimpleCursorAdapter-tutorial
+ [11]: https://github.com/ManuelPeinado/MultiChoiceAdapter/wiki/Gallery-tutorial
