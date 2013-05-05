@@ -16,32 +16,33 @@
 
 package com.manuelpeinado.multichoiceadapter.demo.gallerysample;
 
+import java.util.ArrayList;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
+
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.manuelpeinado.multichoiceadapter.demo.Building;
 import com.manuelpeinado.multichoiceadapter.demo.HomeActivity;
 import com.manuelpeinado.multichoiceadapter.demo.R;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class GalleryActivity extends SherlockActivity
         implements AdapterView.OnItemClickListener {
     private GalleryAdapter adapter;
-    private String[] names;
+    private ArrayList<Building> items;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        names = getResources().getStringArray(R.array.names);
+        items = Building.createList(this);
         rebuildList(savedInstanceState);
     }
 
@@ -50,7 +51,7 @@ public class GalleryActivity extends SherlockActivity
     }
 
     public void onItemClick(android.widget.AdapterView<?> adapterView, View view, int position, long id) {
-        Toast.makeText(this, "Item click: " + names[position], Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Item click: " + items.get(position).name, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -85,8 +86,6 @@ public class GalleryActivity extends SherlockActivity
     }
 
     private void rebuildList(Bundle savedInstanceState) {
-        ArrayList<Integer> items = new ArrayList<Integer>(Arrays.asList(
-                R.drawable.one_wtc, R.drawable.empire_state, R.drawable.bank_of_america, R.drawable.chrysler));
         adapter = new GalleryAdapter(savedInstanceState, items);
         adapter.setOnItemClickListener(this);
         adapter.setAdapterView(getGridView());

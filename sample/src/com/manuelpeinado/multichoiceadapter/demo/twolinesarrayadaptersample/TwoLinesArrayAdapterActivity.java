@@ -83,12 +83,7 @@ public class TwoLinesArrayAdapterActivity extends SherlockActivity
     }
 
     private void rebuildList(Bundle savedInstanceState) {
-        String[] names = getResources().getStringArray(R.array.names);
-        String[] heights = getResources().getStringArray(R.array.heights);
-        ArrayList<Building> items = new ArrayList<Building>(names.length);
-        for (int i = 0; i < names.length; ++i) {
-            items.add(new Building(names[i], heights[i]));
-        }
+        ArrayList<Building> items = new ArrayList<Building>(Building.createList(this));
         adapter = new TwoLinesArrayAdapter(savedInstanceState, this, items);
         adapter.setOnItemClickListener(this);
         adapter.setAdapterView(getListView());

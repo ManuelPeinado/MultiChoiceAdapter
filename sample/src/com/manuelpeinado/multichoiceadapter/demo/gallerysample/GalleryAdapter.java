@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,16 +32,17 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.manuelpeinado.multichoiceadapter.MultiChoiceBaseAdapter;
+import com.manuelpeinado.multichoiceadapter.demo.Building;
 import com.manuelpeinado.multichoiceadapter.demo.R;
 
 public class GalleryAdapter extends MultiChoiceBaseAdapter {
 
     protected static final String TAG = GalleryAdapter.class.getSimpleName();
-    private ArrayList<Integer> imageResIds;
+    private List<Building> buildings;
 
-    public GalleryAdapter(Bundle savedInstanceState, ArrayList<Integer> imageResIds) {
+    public GalleryAdapter(Bundle savedInstanceState, List<Building> buildings) {
         super(savedInstanceState);
-        this.imageResIds = imageResIds;
+        this.buildings = buildings;
     }
 
     @Override
@@ -70,7 +70,7 @@ public class GalleryAdapter extends MultiChoiceBaseAdapter {
         List<Long> positions = new ArrayList<Long>(getCheckedItems());
         Collections.sort(positions, Collections.reverseOrder());
         for (long position : positions) {
-            imageResIds.remove((int)position);
+            buildings.remove((int)position);
         }
         finishActionMode();
     }
@@ -82,12 +82,12 @@ public class GalleryAdapter extends MultiChoiceBaseAdapter {
 
     @Override
     public int getCount() {
-        return imageResIds.size();
+        return buildings.size();
     }
 
     @Override
-    public Integer getItem(int position) {
-        return imageResIds.get(position);
+    public Building getItem(int position) {
+        return buildings.get(position);
     }
 
     @Override
@@ -103,9 +103,8 @@ public class GalleryAdapter extends MultiChoiceBaseAdapter {
             convertView = inflater.inflate(layout, parent, false);
         }
         ImageView imageView = (ImageView) convertView;
-        int resId = getItem(position);
-        Drawable drawable = parent.getResources().getDrawable(resId);
-        imageView.setImageDrawable(drawable);
+        Building building = getItem(position);
+        imageView.setImageDrawable(building.photo);
         return imageView;
     }
 }
