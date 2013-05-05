@@ -43,7 +43,7 @@
         <activity
             android:name=".gallerysample.GalleryActivity"
             android:label="@string/activity_title_gallery" />
-        
+
         <provider
             android:name="com.manuelpeinado.multichoiceadapter.demo.dbsample.BuildingsContentProvider"
             android:authorities="com.manuelpeinado.multichoiceadapter.demo"
