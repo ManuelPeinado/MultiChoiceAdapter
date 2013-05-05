@@ -22,7 +22,7 @@ Or browse the [source code of the sample application][5] for a complete example 
 Including in your project
 -------------------------
 
-If you’re using Eclipse with the ADT plugin you can include MultiChoiceAdaptar as a library project. Create a new Android project in Eclipse using the library/ folder as the existing source. Then, open the properties of this new project and, in the 'Android' category, add a reference to the ActionBarSherlock library project. Finally, in your application project properties, add a reference to the created library project.
+If you’re using Eclipse with the ADT plugin you can include MultiChoiceAdapter as a library project. Create a new Android project using the library/ folder as the existing source. Then, open the properties of this new project and, in the 'Android' category, add a reference to the ActionBarSherlock library project. Finally, in your application project properties, add a reference to the created library project.
 
 If you use maven to build your Android project you can simply add a dependency for this library.
 
@@ -47,7 +47,7 @@ Check any of the provided tutorials:
 
 Customization
 ---------------------
-You can customize the way the adapter behaves when an item is clicked and **the action mode was already active**. o do so, add an item named <tt>multiChoiceAdapterStyle</tt> to your theme, and have it reference an additional style which you define like this:
+You can customize the way the adapter behaves when an item is clicked and **the action mode was already active**. To do so, add an item named <tt>multiChoiceAdapterStyle</tt> to your theme, and have it reference an additional style which you define like this:
 
 ```xml
 <style name="MyCustomMultiChoiceAdapter">
@@ -57,10 +57,9 @@ You can customize the way the adapter behaves when an item is clicked and **the 
     
 Two values are supported:
 
-* <tt>selectItem</tt>. Changes the selection state of the clicked item, just as if it had been long clicked. This is what the native MULTICHOICE_MODAL mode of List does, and what almost every app does, and thus the default value.
+* <tt>selectItem</tt>. Changes the selection state of the clicked item, just as if it had been long clicked. This is what the native MULTICHOICE_MODAL mode of ListView does, and what almost every app does, and thus the default value.
 * <tt>openItem</tt>. Opens the clicked item, just as if it had been clicked outside of the action mode. This is what the native Gmail app does.
 
-A common need is to customize the background of checked items. This is usually acomplished by changing the background selector of the 
 
 Libraries used
 --------------------
