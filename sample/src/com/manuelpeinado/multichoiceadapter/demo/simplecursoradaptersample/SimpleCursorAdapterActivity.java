@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.manuelpeinado.multichoiceadapter.demo.dbsample;
+package com.manuelpeinado.multichoiceadapter.demo.simplecursoradaptersample;
 
 import android.content.ContentValues;
 import android.content.Intent;

@@ -13,13 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.manuelpeinado.multichoiceadapter.demo.arraysample;
+package com.manuelpeinado.multichoiceadapter.demo.simplecursoradaptersample;
 
-import java.util.ArrayList;
-import java.util.Set;
-
-import android.annotation.SuppressLint;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -27,16 +24,17 @@ import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.manuelpeinado.multichoiceadapter.MultiChoiceArrayAdapter;
+import com.manuelpeinado.multichoiceadapter.MultiChoiceSimpleCursorAdapter;
 import com.manuelpeinado.multichoiceadapter.demo.R;
 
-@SuppressLint("ViewConstructor")
-public class MyArrayAdapter extends MultiChoiceArrayAdapter<String> {
+public class MySimpleCursorAdapter extends MultiChoiceSimpleCursorAdapter {
 
-    protected static final String TAG = MyArrayAdapter.class.getSimpleName();
+    protected static final String TAG = MySimpleCursorAdapter.class.getSimpleName();
+    private static final String[] FROM = { "name" };
+    private static final int[] TO = { android.R.id.text1 };
 
-    public MyArrayAdapter(Bundle savedInstanceState, Context context, ArrayList<String> items) {
-        super(savedInstanceState, context, R.layout.mca__simple_list_item_checkable_1, android.R.id.text1, items);
+    public MySimpleCursorAdapter(Bundle savedInstanceState, Context context, Cursor cursor) {
+        super(savedInstanceState, context, R.layout.mca__simple_list_item_checkable_1, cursor, FROM, TO, 0);
     }
 
     @Override
@@ -60,14 +58,10 @@ public class MyArrayAdapter extends MultiChoiceArrayAdapter<String> {
     }
 
     private void discardSelectedItems() {
-        Set<Long> selection = getCheckedItems();
-        String[] items = new String[selection.size()];
-        int i = 0;
-        for (long position : selection) {
-            items[i++] = getItem((int)position);
-        }
-        for (String item : items) {
-            remove(item);
+        String whereClause = BuildingsContract._ID + " = ?";
+        for (long id : getCheckedItems()) {
+            String[] whereArgs = { Long.toString(id) };
+            getContext().getContentResolver().delete(BuildingsContract.CONTENT_URI, whereClause, whereArgs);
         }
         finishActionMode();
     }

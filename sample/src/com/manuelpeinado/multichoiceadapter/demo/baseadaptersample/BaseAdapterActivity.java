@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.manuelpeinado.multichoiceadapter.demo.array2sample;
+package com.manuelpeinado.multichoiceadapter.demo.baseadaptersample;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,12 +27,13 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.manuelpeinado.multichoiceadapter.MultiChoiceBaseAdapter;
+import com.manuelpeinado.multichoiceadapter.demo.Building;
 import com.manuelpeinado.multichoiceadapter.demo.HomeActivity;
 import com.manuelpeinado.multichoiceadapter.demo.R;
 
-public class TwoLinesArrayAdapterActivity extends SherlockActivity
-                                  implements OnItemClickListener {
-    private TwoLinesArrayAdapter adapter;
+public class BaseAdapterActivity extends SherlockActivity implements OnItemClickListener {
+    private MultiChoiceBaseAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,19 +83,15 @@ public class TwoLinesArrayAdapterActivity extends SherlockActivity
     }
 
     private void rebuildList(Bundle savedInstanceState) {
-        String[] names = getResources().getStringArray(R.array.names);
-        String[] heights = getResources().getStringArray(R.array.heights);
-        ArrayList<Building> items = new ArrayList<Building>(names.length);
-        for (int i = 0; i < names.length; ++i) {
-            items.add(new Building(names[i], heights[i]));
-        }
-        adapter = new TwoLinesArrayAdapter(savedInstanceState, this, items);
+        List<Building> items = Building.createList(this);
+        adapter = new MyBaseAdapter(savedInstanceState, items);
         adapter.setOnItemClickListener(this);
         adapter.setAdapterView(getListView());
     }
-    
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         adapter.save(outState);
     }
+
 }

@@ -13,10 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.manuelpeinado.multichoiceadapter.demo.arraysample;
+package com.manuelpeinado.multichoiceadapter.demo.twolinesarrayadaptersample;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,12 +27,13 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.manuelpeinado.multichoiceadapter.demo.Building;
 import com.manuelpeinado.multichoiceadapter.demo.HomeActivity;
 import com.manuelpeinado.multichoiceadapter.demo.R;
 
-public class ArrayAdapterActivity extends SherlockActivity
+public class TwoLinesArrayAdapterActivity extends SherlockActivity
                                   implements OnItemClickListener {
-    private MyArrayAdapter adapter;
+    private TwoLinesArrayAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,9 +83,13 @@ public class ArrayAdapterActivity extends SherlockActivity
     }
 
     private void rebuildList(Bundle savedInstanceState) {
-        String[] itemArray = getResources().getStringArray(R.array.names);
-        ArrayList<String> items = new ArrayList<String>(Arrays.asList(itemArray));
-        adapter = new MyArrayAdapter(savedInstanceState, this, items);
+        String[] names = getResources().getStringArray(R.array.names);
+        String[] heights = getResources().getStringArray(R.array.heights);
+        ArrayList<Building> items = new ArrayList<Building>(names.length);
+        for (int i = 0; i < names.length; ++i) {
+            items.add(new Building(names[i], heights[i]));
+        }
+        adapter = new TwoLinesArrayAdapter(savedInstanceState, this, items);
         adapter.setOnItemClickListener(this);
         adapter.setAdapterView(getListView());
     }

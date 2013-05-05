@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.manuelpeinado.multichoiceadapter.demo.checkboxsample;
+package com.manuelpeinado.multichoiceadapter.demo.arrayadaptersample;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +21,7 @@ import java.util.Arrays;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -28,13 +29,12 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import com.manuelpeinado.multichoiceadapter.MultiChoiceBaseAdapter;
 import com.manuelpeinado.multichoiceadapter.demo.HomeActivity;
 import com.manuelpeinado.multichoiceadapter.demo.R;
 
-public class CheckboxItemsActivity extends SherlockActivity 
-                                   implements OnItemClickListener {
-    private MultiChoiceBaseAdapter adapter;
+public class ArrayAdapterActivity extends SherlockActivity
+                                  implements OnItemClickListener {
+    private MyArrayAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class CheckboxItemsActivity extends SherlockActivity
         return (ListView) findViewById(android.R.id.list);
     }
 
-    public void onItemClick(android.widget.AdapterView<?> adapterView, View view, int position, long id) {
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         Toast.makeText(this, "Item click: " + adapter.getItem(position), Toast.LENGTH_SHORT).show();
     }
 
@@ -86,7 +86,7 @@ public class CheckboxItemsActivity extends SherlockActivity
     private void rebuildList(Bundle savedInstanceState) {
         String[] itemArray = getResources().getStringArray(R.array.names);
         ArrayList<String> items = new ArrayList<String>(Arrays.asList(itemArray));
-        adapter = new CheckboxItemsAdapter(savedInstanceState, items);
+        adapter = new MyArrayAdapter(savedInstanceState, this, items);
         adapter.setOnItemClickListener(this);
         adapter.setAdapterView(getListView());
     }
@@ -95,5 +95,4 @@ public class CheckboxItemsActivity extends SherlockActivity
     protected void onSaveInstanceState(Bundle outState) {
         adapter.save(outState);
     }
-
 }

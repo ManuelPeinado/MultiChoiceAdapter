@@ -26,20 +26,18 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockListActivity;
-import com.manuelpeinado.multichoiceadapter.demo.array2sample.TwoLinesArrayAdapterActivity;
-import com.manuelpeinado.multichoiceadapter.demo.arraysample.ArrayAdapterActivity;
-import com.manuelpeinado.multichoiceadapter.demo.basicsample.BasicUsageActivity;
-import com.manuelpeinado.multichoiceadapter.demo.checkboxsample.CheckboxItemsActivity;
-import com.manuelpeinado.multichoiceadapter.demo.dbsample.SimpleCursorAdapterActivity;
+import com.manuelpeinado.multichoiceadapter.demo.arrayadaptersample.ArrayAdapterActivity;
+import com.manuelpeinado.multichoiceadapter.demo.baseadaptersample.BaseAdapterActivity;
 import com.manuelpeinado.multichoiceadapter.demo.gallerysample.GalleryActivity;
 import com.manuelpeinado.multichoiceadapter.demo.gridsample.GridActivity;
+import com.manuelpeinado.multichoiceadapter.demo.simplecursoradaptersample.SimpleCursorAdapterActivity;
+import com.manuelpeinado.multichoiceadapter.demo.twolinesarrayadaptersample.TwoLinesArrayAdapterActivity;
 
 public class HomeActivity extends SherlockListActivity {
     private List<ActivityInfo> activitiesInfo = Arrays.asList(
-            new ActivityInfo(BasicUsageActivity.class, R.string.activity_title_basic_usage),
             new ActivityInfo(ArrayAdapterActivity.class, R.string.activity_title_array_adapter),
             new ActivityInfo(TwoLinesArrayAdapterActivity.class, R.string.activity_title_array_adapter_two_lines),
-            new ActivityInfo(CheckboxItemsActivity.class, R.string.activity_title_checkbox_items),
+            new ActivityInfo(BaseAdapterActivity.class, R.string.activity_title_base_adapter),
             new ActivityInfo(SimpleCursorAdapterActivity.class, R.string.activity_title_simple_cursor_adapter),
             new ActivityInfo(GridActivity.class, R.string.activity_title_grid),
             new ActivityInfo(GalleryActivity.class, R.string.activity_title_gallery));

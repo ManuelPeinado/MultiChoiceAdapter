@@ -1,4 +1,4 @@
-package com.manuelpeinado.multichoiceadapter.demo.dbsample;
+package com.manuelpeinado.multichoiceadapter.demo.simplecursoradaptersample;
 
 import android.net.Uri;
 

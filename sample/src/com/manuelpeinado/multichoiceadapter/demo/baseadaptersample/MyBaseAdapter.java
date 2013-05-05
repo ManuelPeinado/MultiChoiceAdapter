@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.manuelpeinado.multichoiceadapter.demo.checkboxsample;
+package com.manuelpeinado.multichoiceadapter.demo.baseadaptersample;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,32 +31,30 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.manuelpeinado.multichoiceadapter.MultiChoiceBaseAdapter;
+import com.manuelpeinado.multichoiceadapter.demo.Building;
 import com.manuelpeinado.multichoiceadapter.demo.R;
 
-public class CheckboxItemsAdapter extends MultiChoiceBaseAdapter {
-    protected static final String TAG = CheckboxItemsAdapter.class.getSimpleName();
-    private List<String> items;
+public class MyBaseAdapter extends MultiChoiceBaseAdapter {
+    protected static final String TAG = MyBaseAdapter.class.getSimpleName();
+    private List<Building> items;
 
-    public CheckboxItemsAdapter(Bundle savedInstanceState, List<String> items) {
+    public MyBaseAdapter(Bundle savedInstanceState, List<Building> items) {
         super(savedInstanceState);
         this.items = items;
     }
 
     @Override
     protected View getViewImpl(int position, View convertView, ViewGroup parent) {
-        ViewGroup root;
-        if (convertView != null) {
-            root = (ViewGroup) convertView;
-        } else {
-            int layout = R.layout.checkbox_list_item;
+        if (convertView == null) {
+            int layout = R.layout.baseadapter_list_item;
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            root = (ViewGroup) inflater.inflate(layout, parent, false);
+            convertView = inflater.inflate(layout, parent, false);
         }
-        TextView textView = (TextView) root.findViewById(android.R.id.text1);
-        String item = getItem(position);
-        textView.setText(item);
-        return root;
-    }
+        ViewGroup group = (ViewGroup)convertView;
+        Building building = getItem(position);
+        ((TextView)group.findViewById(android.R.id.text1)).setText(building.name);
+        ((TextView)group.findViewById(android.R.id.text2)).setText(building.height);
+        return group;    }
 
     @Override
     public boolean onCreateActionMode(ActionMode mode, Menu menu) {
@@ -94,7 +92,7 @@ public class CheckboxItemsAdapter extends MultiChoiceBaseAdapter {
     }
 
     @Override
-    public String getItem(int position) {
+    public Building getItem(int position) {
         return items.get(position);
     }
 

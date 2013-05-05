@@ -1,4 +1,4 @@
-package com.manuelpeinado.multichoiceadapter.demo.dbsample;
+package com.manuelpeinado.multichoiceadapter.demo.simplecursoradaptersample;
 
 import com.tjeannin.provigen.InvalidContractException;
 import com.tjeannin.provigen.ProviGenProvider;

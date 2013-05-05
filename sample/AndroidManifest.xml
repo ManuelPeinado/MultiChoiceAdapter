@@ -23,19 +23,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".basicsample.BasicUsageActivity"
-            android:label="@string/activity_title_basic_usage" />
+            android:name="com.manuelpeinado.multichoiceadapter.demo.baseadaptersample.BaseAdapterActivity"
+            android:label="@string/activity_title_base_adapter" />
         <activity
-            android:name=".arraysample.ArrayAdapterActivity"
+            android:name="com.manuelpeinado.multichoiceadapter.demo.arrayadaptersample.ArrayAdapterActivity"
             android:label="@string/activity_title_array_adapter" />
         <activity
-            android:name=".array2sample.TwoLinesArrayAdapterActivity"
+            android:name="com.manuelpeinado.multichoiceadapter.demo.twolinesarrayadaptersample.TwoLinesArrayAdapterActivity"
             android:label="@string/activity_title_array_adapter_two_lines" />
         <activity
-            android:name=".checkboxsample.CheckboxItemsActivity"
-            android:label="@string/activity_title_checkbox_items" />
-        <activity
-            android:name=".dbsample.SimpleCursorAdapterActivity"
+            android:name="com.manuelpeinado.multichoiceadapter.demo.simplecursoradaptersample.SimpleCursorAdapterActivity"
             android:label="@string/activity_title_simple_cursor_adapter" />
         <activity
             android:name=".gridsample.GridActivity"
@@ -45,7 +42,7 @@
             android:label="@string/activity_title_gallery" />
 
         <provider
-            android:name="com.manuelpeinado.multichoiceadapter.demo.dbsample.BuildingsContentProvider"
+            android:name="com.manuelpeinado.multichoiceadapter.demo.simplecursoradaptersample.BuildingsContentProvider"
             android:authorities="com.manuelpeinado.multichoiceadapter.demo"
             android:exported="false" />
     </application>
