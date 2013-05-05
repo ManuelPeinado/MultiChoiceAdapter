@@ -22,4 +22,10 @@
 
     <attr name="multiChoiceAdapterStyle" format="reference" />
 
+    <declare-styleable name="CheckableImageView">
+        <attr name="android:foreground" />
+    </declare-styleable>
+    
+    <attr name="checkableImageViewStyle" format="reference" />
+    
 </resources>

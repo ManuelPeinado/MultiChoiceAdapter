@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <style name="MultiChoiceAdapter_DefaultSelectedItemStyle">
         <item name="itemClickInActionMode">selectItem</item>
     </style>
-
+    <style name="MultiChoiceAdapter_DefaultCheckableImageViewStyle">
+        <item name="android:foreground">@drawable/mca__gallery_selector</item>
+    </style>
+    
 </resources>

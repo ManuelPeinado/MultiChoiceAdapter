@@ -62,23 +62,15 @@ public abstract class MultiChoiceSimpleCursorAdapter extends SimpleCursorAdapter
         helper.setItemChecked(itemId, checked);
     }
 
-    public void select(long itemId) {
-        helper.checkItem(itemId);
-    }
-
-    public void unselect(long itemId) {
-        helper.uncheckItem(itemId);
-    }
-
-    public Set<Long> getSelection() {
+    public Set<Long> getCheckedItems() {
         return helper.getCheckedItems();
     }
 
-    public int getSelectionCount() {
+    public int getCheckedItemCount() {
         return helper.getCheckedItemCount();
     }
 
-    public boolean isSelected(long itemId) {
+    public boolean isChecked(long itemId) {
         return helper.isChecked(itemId);
     }
 

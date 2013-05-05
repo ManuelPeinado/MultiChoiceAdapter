@@ -89,7 +89,7 @@ public class SimpleCursorAdapterActivity extends SherlockFragmentActivity
 
     private void selectAll() {
         for (int i = 0; i < adapter.getCount(); ++i) {
-            adapter.select(adapter.getItemId(i));
+            adapter.setItemChecked(adapter.getItemId(i), true   );
         }
     }
     

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle" >
+
+    <solid android:color="@color/mca__holo_blue_light_transparent" />
+    <stroke android:width="3dp" android:color="@color/mca__holo_blue_light" />
+
+</shape>

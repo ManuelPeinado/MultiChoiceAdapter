@@ -39,7 +39,10 @@
             android:label="@string/activity_title_simple_cursor_adapter" />
         <activity
             android:name=".gridsample.GridActivity"
-            android:label="@string/activity_title_grid_adapter" />
+            android:label="@string/activity_title_grid" />
+        <activity
+            android:name=".gallerysample.GalleryActivity"
+            android:label="@string/activity_title_gallery" />
         
         <provider
             android:name="com.manuelpeinado.multichoiceadapter.demo.dbsample.BuildingsContentProvider"

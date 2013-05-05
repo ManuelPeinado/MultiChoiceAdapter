@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="150dp">
-
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@android:id/text1"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:textAppearance="?android:attr/textAppearanceMedium"
-              android:padding="6dip"
-              android:gravity="center"
-              android:minHeight="120dp"/>
-
-</LinearLayout>
+<CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/grid_item_selector"
+    android:id="@android:id/text1"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:gravity="center"
+    android:minHeight="120dp"
+    android:padding="6dip"
+    android:textAppearance="?android:attr/textAppearanceMedium" />

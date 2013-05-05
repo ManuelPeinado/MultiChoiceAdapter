@@ -59,7 +59,7 @@ public class MySimpleCursorAdapter extends MultiChoiceSimpleCursorAdapter {
 
     private void discardSelectedItems() {
         String whereClause = BuildingsContract._ID + " = ?";
-        for (long id : getSelection()) {
+        for (long id : getCheckedItems()) {
             String[] whereArgs = { Long.toString(id) };
             getContext().getContentResolver().delete(BuildingsContract.CONTENT_URI, whereClause, whereArgs);
         }
