@@ -1,6 +1,12 @@
 Change Log
 =======================================
 
+Version 2.0.0 *(2013-05-5)*
+----------------------------
+ * Major rewrite of the adapter classes so that they are more consistent with the way the framework deals with selection of list view items:
+   - The library no longer changes the background of checked items. Instead, items must implement the Checkable interface and take care of their background themselves. This is importante because it adds the flexibility that is needed to implement a grid like the one in the "Gallery" sample.
+   - Methods like "select", "getSelectedItems" and "getSelectedCount" are not "setCheckedItem", "getCheckedItems" and "getCheckedItemsCount".
+
 Version 1.0.7 *(2013-04-18)*
 ----------------------------
  * Fixed bug which prevented the lib from dealing with orientation changes properly (the action mode was lost, and if a long click was performed afterwards the app crashed)
