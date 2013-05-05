@@ -29,8 +29,8 @@ If you use maven to build your Android project you can simply add a dependency f
 ```xml
 <dependency>
     <groupId>com.github.manuelpeinado.multichoiceadapter</groupId>
-    <artifactId>library</artifactId>
-    <version>1.0.7</version>
+    <artifactId>multichoiceadapter</artifactId>
+    <version>2.0.0</version>
     <type>apklib</type>
 </dependency>
 ```
