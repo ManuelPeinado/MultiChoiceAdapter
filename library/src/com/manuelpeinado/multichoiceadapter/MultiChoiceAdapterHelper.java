@@ -44,18 +44,6 @@ import com.manuelpeinado.multichoicelistadapter.R;
 
 class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickListener, OnCheckedChangeListener {
     private static final String BUNDLE_KEY = "mca__selection";
-    
-    /**
-     *  Changes the selection state of the clicked item, just as if it had been 
-     *  long clicked. This is what the native MULTICHOICE_MODAL mode of List does,
-     *  and what almost every app does
-     */
-    public static final int SELECT = 0;
-    /**
-     * Opens the clicked item, just as if it had been clicked outside of the action 
-     * mode. This is what the Gmail app does
-     */
-    public static final int OPEN = 1;
     private Set<Long> checkedItems = new HashSet<Long>();
     private AdapterView<? super MultiChoiceBaseAdapter> adapterView;
     private BaseAdapter owner;
@@ -65,9 +53,8 @@ class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickLi
     /*
      * Defines what happens when an item is clicked and the action mode was already active
      */
-    private int itemClickInActionModePolicy;
+    private ItemClickInActionModePolicy itemClickInActionModePolicy = null;
 
-    
     MultiChoiceAdapterHelper(BaseAdapter owner) {
         this.owner = owner;
     }
@@ -96,13 +83,14 @@ class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickLi
             onItemSelectedStateChanged();
         }
     }
-    
+
     void checkActivity() {
         Context context = adapterView.getContext();
         if (context instanceof ListActivity) {
             throw new RuntimeException("ListView cannot belong to an activity which subclasses ListActivity");
         }
-        if (context instanceof SherlockActivity || context instanceof SherlockFragmentActivity || context instanceof SherlockPreferenceActivity) {
+        if (context instanceof SherlockActivity || context instanceof SherlockFragmentActivity
+                || context instanceof SherlockPreferenceActivity) {
             return;
         }
         throw new RuntimeException("ListView must belong to an activity which subclasses SherlockActivity");
@@ -137,7 +125,7 @@ class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickLi
         if (actionMode == null) {
             startActionMode();
         }
-        checkedItems.add((long)handle);
+        checkedItems.add((long) handle);
         owner.notifyDataSetChanged();
         onItemSelectedStateChanged();
     }
@@ -178,7 +166,15 @@ class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickLi
     Context getContext() {
         return adapterView.getContext();
     }
-    
+
+    void setItemClickInActionModePolicy(ItemClickInActionModePolicy policy) {
+        itemClickInActionModePolicy = policy;
+    }
+
+    ItemClickInActionModePolicy getItemClickInActionModePolicy() {
+        return itemClickInActionModePolicy;
+    }
+
     private void onItemSelectedStateChanged() {
         int count = getCheckedItemCount();
         if (count == 0) {
@@ -189,7 +185,7 @@ class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickLi
         String title = res.getQuantityString(R.plurals.selected_items, count, count);
         actionMode.setTitle(title);
     }
-    
+
     private void startActionMode() {
         try {
             Activity activity = (Activity) adapterView.getContext();
@@ -200,13 +196,18 @@ class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickLi
             throw new RuntimeException(e);
         }
     }
-    
+
     private void parseAttrs() {
         Context ctx = getContext();
         int styleAttr = R.attr.multiChoiceAdapterStyle;
         int defStyle = R.style.MultiChoiceAdapter_DefaultSelectedItemStyle;
         TypedArray ta = ctx.obtainStyledAttributes(null, R.styleable.MultiChoiceAdapter, styleAttr, defStyle);
-        itemClickInActionModePolicy = ta.getInt(R.styleable.MultiChoiceAdapter_itemClickInActionMode, SELECT);
+        // If it's not null it means that it has been set programmatically, which has precedence over the theme attribute
+        if (itemClickInActionModePolicy == null) {
+            int ordinal = ta.getInt(R.styleable.MultiChoiceAdapter_itemClickInActionMode,
+                    ItemClickInActionModePolicy.SELECT.ordinal());
+            itemClickInActionModePolicy = ItemClickInActionModePolicy.values()[ordinal];
+        }
         ta.recycle();
     }
 
@@ -221,7 +222,7 @@ class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickLi
         setItemChecked(handle, !wasChecked);
         return true;
     }
-    
+
     protected long positionToSelectionHandle(int position) {
         return position;
     }
@@ -235,7 +236,7 @@ class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickLi
         actionMode = null;
         owner.notifyDataSetChanged();
     }
-    
+
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         if (actionMode != null) {
@@ -259,21 +260,20 @@ class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickLi
         if (viewWithoutSelection instanceof Checkable) {
             long handle = positionToSelectionHandle(position);
             boolean selected = isChecked(handle);
-            ((Checkable)viewWithoutSelection).setChecked(selected);
+            ((Checkable) viewWithoutSelection).setChecked(selected);
         }
         if (itemIncludesCheckBox(viewWithoutSelection)) {
-            initItemCheckbox(position, (ViewGroup)viewWithoutSelection);
+            initItemCheckbox(position, (ViewGroup) viewWithoutSelection);
         }
         return viewWithoutSelection;
     }
-    
+
     private boolean itemIncludesCheckBox(View v) {
         if (itemIncludesCheckBox == null) {
             if (!(v instanceof ViewGroup)) {
                 itemIncludesCheckBox = false;
-            }
-            else {
-                ViewGroup root = (ViewGroup)v;
+            } else {
+                ViewGroup root = (ViewGroup) v;
                 itemIncludesCheckBox = root.findViewById(android.R.id.checkbox) != null;
             }
         }

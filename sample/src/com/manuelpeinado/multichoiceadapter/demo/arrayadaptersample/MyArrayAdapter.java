@@ -29,6 +29,7 @@ import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.manuelpeinado.multichoiceadapter.ItemClickInActionModePolicy;
 import com.manuelpeinado.multichoiceadapter.MultiChoiceArrayAdapter;
 import com.manuelpeinado.multichoiceadapter.demo.R;
 
@@ -39,6 +40,7 @@ public class MyArrayAdapter extends MultiChoiceArrayAdapter<String> {
 
     public MyArrayAdapter(Bundle savedInstanceState, Context context, ArrayList<String> items) {
         super(savedInstanceState, context, R.layout.mca__simple_list_item_checkable_1, android.R.id.text1, items);
+        setItemClickInActionModePolicy(ItemClickInActionModePolicy.OPEN);
     }
 
     @Override

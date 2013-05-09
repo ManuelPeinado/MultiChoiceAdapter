@@ -31,21 +31,22 @@ import com.actionbarsherlock.view.ActionMode;
 
 /**
  */
-public abstract class MultiChoiceSimpleCursorAdapter extends SimpleCursorAdapter 
-                                                     implements ActionMode.Callback {
-    
+public abstract class MultiChoiceSimpleCursorAdapter extends SimpleCursorAdapter implements ActionMode.Callback,
+        MultiChoiceAdapter {
+
     private MultiChoiceAdapterHelper helper = new MultiChoiceAdapterHelper(this) {
         @Override
         protected long positionToSelectionHandle(int position) {
             return getItemId(position);
         }
     };
-    
-    public MultiChoiceSimpleCursorAdapter(Bundle savedInstanceState, Context context, int layout, Cursor cursor, String[] from, int[] to, int flags) {
+
+    public MultiChoiceSimpleCursorAdapter(Bundle savedInstanceState, Context context, int layout, Cursor cursor,
+            String[] from, int[] to, int flags) {
         super(context, layout, cursor, from, to, flags);
         helper.restoreSelectionFromSavedInstanceState(savedInstanceState);
     }
-    
+
     public void setAdapterView(AdapterView<? super BaseAdapter> adapterView) {
         helper.setAdapterView(adapterView);
     }
@@ -53,7 +54,7 @@ public abstract class MultiChoiceSimpleCursorAdapter extends SimpleCursorAdapter
     public void setOnItemClickListener(OnItemClickListener listener) {
         helper.setOnItemClickListener(listener);
     }
-    
+
     public void save(Bundle outState) {
         helper.save(outState);
     }
@@ -74,14 +75,26 @@ public abstract class MultiChoiceSimpleCursorAdapter extends SimpleCursorAdapter
         return helper.isChecked(itemId);
     }
 
+    public void setItemChecked(int position, boolean checked) {
+        helper.setItemChecked(position, checked);
+    }
+
+    public void setItemClickInActionModePolicy(ItemClickInActionModePolicy policy) {
+        helper.setItemClickInActionModePolicy(policy);
+    }
+
+    public ItemClickInActionModePolicy getItemClickInActionModePolicy() {
+        return helper.getItemClickInActionModePolicy();
+    }
+
     protected void finishActionMode() {
-       helper.finishActionMode();
+        helper.finishActionMode();
     }
 
     protected Context getContext() {
         return helper.getContext();
     }
-    
+
     @Override
     public void onDestroyActionMode(ActionMode mode) {
         helper.onDestroyActionMode(mode);

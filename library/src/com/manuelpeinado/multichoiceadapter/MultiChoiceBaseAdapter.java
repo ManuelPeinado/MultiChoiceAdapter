@@ -50,7 +50,7 @@ import com.actionbarsherlock.view.ActionMode;
  * <p><br>See the accompanying sample project for a full working application that implements this class</p>
  */
 public abstract class MultiChoiceBaseAdapter extends BaseAdapter 
-                                         implements ActionMode.Callback {
+                                         implements ActionMode.Callback, MultiChoiceAdapter {
     
     private MultiChoiceAdapterHelper helper = new MultiChoiceAdapterHelper(this);
     
@@ -99,7 +99,7 @@ public abstract class MultiChoiceBaseAdapter extends BaseAdapter
      * @param position The position of the item to select
      * @param checked The desired state (selected or not) for the item
      */
-    public void setItemChecked(int position, boolean checked) {
+    public void setItemChecked(long position, boolean checked) {
         helper.setItemChecked(position, checked);
     }
 
@@ -128,8 +128,16 @@ public abstract class MultiChoiceBaseAdapter extends BaseAdapter
      * @param position The item position
      * @return Whether the item is selected
      */
-    public boolean isChecked(int position) {
+    public boolean isChecked(long position) {
         return helper.isChecked(position);
+    }
+
+    public void setItemClickInActionModePolicy(ItemClickInActionModePolicy policy) {
+        helper.setItemClickInActionModePolicy(policy);
+    }
+
+    public ItemClickInActionModePolicy getItemClickInActionModePolicy() {
+        return helper.getItemClickInActionModePolicy();
     }
 
     /**

@@ -30,7 +30,7 @@ import android.widget.BaseAdapter;
 import com.actionbarsherlock.view.ActionMode;
 
 public abstract class MultiChoiceArrayAdapter<T> extends ArrayAdapter<T> 
-                                                 implements ActionMode.Callback {
+                                                 implements ActionMode.Callback, MultiChoiceAdapter {
     private MultiChoiceAdapterHelper helper = new MultiChoiceAdapterHelper(this);
 
     public MultiChoiceArrayAdapter(Bundle savedInstanceState, Context context, int resource, int textViewResourceId, List<T> objects) {
@@ -75,7 +75,7 @@ public abstract class MultiChoiceArrayAdapter<T> extends ArrayAdapter<T>
         helper.save(outState);
     }
 
-    public void setItemChecked(int position, boolean checked) {
+    public void setItemChecked(long position, boolean checked) {
         helper.setItemChecked(position, checked);
     }
 
@@ -87,10 +87,18 @@ public abstract class MultiChoiceArrayAdapter<T> extends ArrayAdapter<T>
         return helper.getCheckedItemCount();
     }
 
-    public boolean isChecked(int position) {
+    public boolean isChecked(long position) {
         return helper.isChecked(position);
     }
+    
+    public void setItemClickInActionModePolicy(ItemClickInActionModePolicy policy) {
+        helper.setItemClickInActionModePolicy(policy);
+    }
 
+    public ItemClickInActionModePolicy getItemClickInActionModePolicy() {
+        return helper.getItemClickInActionModePolicy();
+    }
+    
     protected void finishActionMode() {
         helper.finishActionMode();
     }
