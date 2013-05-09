@@ -1,5 +1,8 @@
 Change Log
 =======================================
+Version 2.1.0 *(2013-05-9)*
+----------------------------
+* Added methods get/setItemClickInActionModePolicy
 
 Version 2.0.0 *(2013-05-5)*
 ----------------------------
