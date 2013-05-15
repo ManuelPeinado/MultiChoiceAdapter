@@ -4,6 +4,7 @@ Change Log
 Version 2.1.1 *(2013-05-15)*
 ----------------------------
 * Added support for list views with headers
+* Updated versions of ABS (4.3.1) and android maven plugin (3.3.2)
 
 Version 2.1.0 *(2013-05-9)*
 ----------------------------
