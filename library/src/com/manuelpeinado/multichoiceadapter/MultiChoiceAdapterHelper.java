@@ -35,6 +35,7 @@ import android.widget.CheckBox;
 import android.widget.Checkable;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -217,10 +218,20 @@ class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickLi
 
     @Override
     public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
-        long handle = positionToSelectionHandle(position);
+        int correctedPosition = correctPositionAccountingForHeader(adapterView, position);
+        long handle = positionToSelectionHandle(correctedPosition);
         boolean wasChecked = isChecked(handle);
         setItemChecked(handle, !wasChecked);
         return true;
+    }
+
+    private int correctPositionAccountingForHeader(AdapterView<?> adapterView, int position) {
+        ListView listView = (adapterView instanceof ListView) ? (ListView)adapterView : null;
+        int headersCount = listView == null ? 0 : listView.getHeaderViewsCount();
+        if (headersCount > 0) {
+            position -= listView.getHeaderViewsCount();
+        }
+        return position;
     }
 
     protected long positionToSelectionHandle(int position) {

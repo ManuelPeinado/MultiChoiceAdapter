@@ -5,6 +5,6 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:minHeight="?android:attr/listPreferredItemHeight"
-    android:paddingLeft="6dip"
+    android:paddingLeft="@dimen/mca__listPreferredItemPaddingLeft"
     android:background="@drawable/mca__list_item_selector"
     android:textAppearance="?android:attr/textAppearanceMedium" />

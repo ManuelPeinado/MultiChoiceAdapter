@@ -1,5 +1,10 @@
 Change Log
 =======================================
+
+Version 2.1.1 *(2013-05-15)*
+----------------------------
+* Added support for list views with headers
+
 Version 2.1.0 *(2013-05-9)*
 ----------------------------
 * Added methods get/setItemClickInActionModePolicy

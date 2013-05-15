@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.manuelpeinado.multichoiceadapter.demo"
     android:versionCode="9"
-    android:versionName="2.1.0" >
+    android:versionName="2.1.1" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -40,7 +40,9 @@
         <activity
             android:name=".gallerysample.GalleryActivity"
             android:label="@string/activity_title_gallery" />
-
+        <activity
+            android:name=".headersample.HeaderActivity"
+            android:label="@string/activity_title_header" />
         <provider
             android:name="com.manuelpeinado.multichoiceadapter.demo.simplecursoradaptersample.BuildingsContentProvider"
             android:authorities="com.manuelpeinado.multichoiceadapter.demo"
