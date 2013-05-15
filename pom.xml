@@ -70,7 +70,7 @@
         <android.platform>16</android.platform>
         <android.support.version>r7</android.support.version>
 
-        <android-maven.version>3.3.0</android-maven.version>
+        <android-maven.version>3.3.2/android-maven.version>
     </properties>
 
     <dependencyManagement>
@@ -90,7 +90,7 @@
 			<dependency>
 			  <groupId>com.actionbarsherlock</groupId>
 			  <artifactId>actionbarsherlock</artifactId>
-			  <version>4.2.0</version>
+			  <version>4.3.1</version>
 			  <type>apklib</type>
 			</dependency>
 
