@@ -1,6 +1,10 @@
 Change Log
 =======================================
 
+Version 2.1.2 *(2013-05-19)*
+----------------------------
+* Fixed bug which caused selection to be lost when scrolling on a large list (only when items had checkboxes)
+
 Version 2.1.1 *(2013-05-15)*
 ----------------------------
 * Added support for list views with headers
