@@ -25,6 +25,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -44,6 +45,7 @@ import com.actionbarsherlock.view.ActionMode;
 import com.manuelpeinado.multichoicelistadapter.R;
 
 class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickListener, OnCheckedChangeListener {
+    protected static final String TAG = MultiChoiceAdapterHelper.class.getSimpleName();
     private static final String BUNDLE_KEY = "mca__selection";
     private Set<Long> checkedItems = new HashSet<Long>();
     private AdapterView<? super MultiChoiceBaseAdapter> adapterView;
@@ -55,6 +57,7 @@ class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickLi
      * Defines what happens when an item is clicked and the action mode was already active
      */
     private ItemClickInActionModePolicy itemClickInActionModePolicy = null;
+    private boolean ignoreCheckedListener;
 
     MultiChoiceAdapterHelper(BaseAdapter owner) {
         this.owner = owner;
@@ -226,7 +229,7 @@ class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickLi
     }
 
     private int correctPositionAccountingForHeader(AdapterView<?> adapterView, int position) {
-        ListView listView = (adapterView instanceof ListView) ? (ListView)adapterView : null;
+        ListView listView = (adapterView instanceof ListView) ? (ListView) adapterView : null;
         int headersCount = listView == null ? 0 : listView.getHeaderViewsCount();
         if (headersCount > 0) {
             position -= listView.getHeaderViewsCount();
@@ -271,7 +274,9 @@ class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickLi
         if (viewWithoutSelection instanceof Checkable) {
             long handle = positionToSelectionHandle(position);
             boolean selected = isChecked(handle);
+            ignoreCheckedListener = true;
             ((Checkable) viewWithoutSelection).setChecked(selected);
+            ignoreCheckedListener = false;
         }
         if (itemIncludesCheckBox(viewWithoutSelection)) {
             initItemCheckbox(position, (ViewGroup) viewWithoutSelection);
@@ -293,14 +298,17 @@ class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickLi
 
     private void initItemCheckbox(int position, ViewGroup view) {
         CheckBox checkBox = (CheckBox) view.findViewById(android.R.id.checkbox);
-        boolean selected = isChecked(position);
+        boolean checked = isChecked(position);
+        checkBox.setChecked(checked);
         checkBox.setTag(position);
-        checkBox.setChecked(selected);
         checkBox.setOnCheckedChangeListener(this);
     }
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (ignoreCheckedListener) {
+            return;
+        }
         int position = (Integer) buttonView.getTag();
         setItemChecked(position, isChecked);
     }

@@ -43,6 +43,9 @@
         <activity
             android:name=".headersample.HeaderActivity"
             android:label="@string/activity_title_header" />
+        <activity
+            android:name=".manyitemssample.ManyItemsActivity"
+            android:label="@string/activity_title_many_items" />
         <provider
             android:name="com.manuelpeinado.multichoiceadapter.demo.simplecursoradaptersample.BuildingsContentProvider"
             android:authorities="com.manuelpeinado.multichoiceadapter.demo"

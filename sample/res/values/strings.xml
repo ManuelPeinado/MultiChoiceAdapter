@@ -13,5 +13,6 @@
     <string name="activity_title_grid">GridView sample</string>
     <string name="activity_title_gallery">Gallery sample</string>
     <string name="activity_title_header">Header sample</string>
+    <string name="activity_title_many_items">Long list sample</string>
     <string name="header_text">Header view</string>
 </resources>

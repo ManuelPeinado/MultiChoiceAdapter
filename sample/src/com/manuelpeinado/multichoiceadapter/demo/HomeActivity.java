@@ -31,6 +31,7 @@ import com.manuelpeinado.multichoiceadapter.demo.baseadaptersample.BaseAdapterAc
 import com.manuelpeinado.multichoiceadapter.demo.gallerysample.GalleryActivity;
 import com.manuelpeinado.multichoiceadapter.demo.gridsample.GridActivity;
 import com.manuelpeinado.multichoiceadapter.demo.headersample.HeaderActivity;
+import com.manuelpeinado.multichoiceadapter.demo.manyitemssample.ManyItemsActivity;
 import com.manuelpeinado.multichoiceadapter.demo.simplecursoradaptersample.SimpleCursorAdapterActivity;
 import com.manuelpeinado.multichoiceadapter.demo.twolinesarrayadaptersample.TwoLinesArrayAdapterActivity;
 
@@ -42,7 +43,8 @@ public class HomeActivity extends SherlockListActivity {
             new ActivityInfo(SimpleCursorAdapterActivity.class, R.string.activity_title_simple_cursor_adapter),
             new ActivityInfo(GridActivity.class, R.string.activity_title_grid),
             new ActivityInfo(GalleryActivity.class, R.string.activity_title_gallery),
-            new ActivityInfo(HeaderActivity.class, R.string.activity_title_header));
+            new ActivityInfo(HeaderActivity.class, R.string.activity_title_header),
+            new ActivityInfo(ManyItemsActivity.class, R.string.activity_title_many_items));
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
