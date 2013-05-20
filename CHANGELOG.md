@@ -1,6 +1,11 @@
 Change Log
 =======================================
 
+Version 2.1.3 *(2013-05-21)*
+----------------------------
+* Fixed bug in "header" sample which caused the application to crash when the header was clicked
+* Added two more buildings to the various samples
+
 Version 2.1.2 *(2013-05-19)*
 ----------------------------
 * Fixed bug which caused selection to be lost when scrolling on a large list (only when items had checkboxes)
