@@ -43,7 +43,7 @@ public class HeaderActivity extends SherlockActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getListView().addHeaderView(createHeaderView());
+        getListView().addHeaderView(createHeaderView(), null, false);
         rebuildList(savedInstanceState);
     }
 
@@ -55,6 +55,7 @@ public class HeaderActivity extends SherlockActivity
         return (ListView) findViewById(android.R.id.list);
     }
 
+    @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         // Subtract 1 from position to account for header
         Toast.makeText(this, "Item click: " + adapter.getItem(position - 1), Toast.LENGTH_SHORT).show();
