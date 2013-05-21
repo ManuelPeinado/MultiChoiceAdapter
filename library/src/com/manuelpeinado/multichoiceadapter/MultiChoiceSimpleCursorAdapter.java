@@ -105,4 +105,8 @@ public abstract class MultiChoiceSimpleCursorAdapter extends SimpleCursorAdapter
         View viewWithoutSelection = super.getView(position, convertView, parent);
         return helper.getView(position, viewWithoutSelection);
     }
+    
+    protected View getViewImpl(int position, View convertView, ViewGroup parent) {
+        return super.getView(position, convertView, parent);
+    }
 }
