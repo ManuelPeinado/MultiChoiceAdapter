@@ -102,10 +102,15 @@ public abstract class MultiChoiceSimpleCursorAdapter extends SimpleCursorAdapter
 
     @Override
     public final View getView(int position, View convertView, ViewGroup parent) {
-        View viewWithoutSelection = super.getView(position, convertView, parent);
+        View viewWithoutSelection = getViewImpl(position, convertView, parent);
         return helper.getView(position, viewWithoutSelection);
     }
-    
+
+    /**
+     * Override this method if you need to customize the model-to-view mapping
+     * performed by SimpleCursorAdapter (for instance, to populate an image view
+     * based on a URL stored in a DB column)
+     */
     protected View getViewImpl(int position, View convertView, ViewGroup parent) {
         return super.getView(position, convertView, parent);
     }
