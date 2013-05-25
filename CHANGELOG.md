@@ -1,6 +1,10 @@
 Change Log
 =======================================
 
+Version 2.1.4 *(2013-?-?)*
+----------------------------
+* Added getViewImpl() to MultiChoiceSimpleCursorAdapter so that implementations can customize the model-to-view mapping
+
 Version 2.1.3 *(2013-05-21)*
 ----------------------------
 * Fixed bug in "header" sample which caused the application to crash when the header was clicked
