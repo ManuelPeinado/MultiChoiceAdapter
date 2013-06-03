@@ -26,8 +26,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockListActivity;
+import com.manuelpeinado.multichoiceadapter.demo.alphabetindexersample.AlphabetIndexerActivity;
 import com.manuelpeinado.multichoiceadapter.demo.arrayadaptersample.ArrayAdapterActivity;
 import com.manuelpeinado.multichoiceadapter.demo.baseadaptersample.BaseAdapterActivity;
+import com.manuelpeinado.multichoiceadapter.demo.complexitemlayoutsample.ComplexItemLayoutActivity;
 import com.manuelpeinado.multichoiceadapter.demo.gallerysample.GalleryActivity;
 import com.manuelpeinado.multichoiceadapter.demo.gridsample.GridActivity;
 import com.manuelpeinado.multichoiceadapter.demo.headersample.HeaderActivity;
@@ -44,7 +46,9 @@ public class HomeActivity extends SherlockListActivity {
             new ActivityInfo(GridActivity.class, R.string.activity_title_grid),
             new ActivityInfo(GalleryActivity.class, R.string.activity_title_gallery),
             new ActivityInfo(HeaderActivity.class, R.string.activity_title_header),
-            new ActivityInfo(ManyItemsActivity.class, R.string.activity_title_many_items));
+            new ActivityInfo(ManyItemsActivity.class, R.string.activity_title_many_items),
+            new ActivityInfo(ComplexItemLayoutActivity.class, R.string.activity_title_complex_item_layout),
+            new ActivityInfo(AlphabetIndexerActivity.class, R.string.activity_title_alphabet_indexer));
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {

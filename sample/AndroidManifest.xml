@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.manuelpeinado.multichoiceadapter.demo"
-    android:versionCode="11"
-    android:versionName="2.1.3" >
+    android:versionCode="12"
+    android:versionName="2.2.3" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -46,8 +46,14 @@
         <activity
             android:name=".manyitemssample.ManyItemsActivity"
             android:label="@string/activity_title_many_items" />
+        <activity
+            android:name=".complexitemlayoutsample.ComplexItemLayoutActivity"
+            android:label="@string/activity_title_complex_item_layout" />
+        <activity
+            android:name=".alphabetindexersample.AlphabetIndexerActivity"
+            android:label="@string/activity_title_alphabet_indexer" />
         <provider
-            android:name="com.manuelpeinado.multichoiceadapter.demo.simplecursoradaptersample.BuildingsContentProvider"
+            android:name=".simplecursoradaptersample.BuildingsContentProvider"
             android:authorities="com.manuelpeinado.multichoiceadapter.demo"
             android:exported="false" />
     </application>

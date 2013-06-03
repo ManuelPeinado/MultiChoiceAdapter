@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.manuelpeinado.multichoiceadapter.demo.simplecursoradaptersample;
+package com.manuelpeinado.multichoiceadapter.demo.alphabetindexersample;
 
 import java.util.ArrayList;
 
@@ -37,8 +37,9 @@ import com.manuelpeinado.multichoiceadapter.MultiChoiceSimpleCursorAdapter;
 import com.manuelpeinado.multichoiceadapter.demo.HomeActivity;
 import com.manuelpeinado.multichoiceadapter.demo.R;
 import com.manuelpeinado.multichoiceadapter.demo.manyitemssample.ManyItemsActivity;
+import com.manuelpeinado.multichoiceadapter.demo.simplecursoradaptersample.BuildingsContract;
 
-public class SimpleCursorAdapterActivity extends SherlockFragmentActivity
+public class AlphabetIndexerActivity extends SherlockFragmentActivity
                             implements OnItemClickListener,
                                        LoaderManager.LoaderCallbacks<Cursor>{
     private MultiChoiceSimpleCursorAdapter adapter;
@@ -103,15 +104,17 @@ public class SimpleCursorAdapterActivity extends SherlockFragmentActivity
             rebuildList();
         }
         if (adapter == null) {
-            adapter = new MySimpleCursorAdapter(savedInstanceState, this, cursor);
+            adapter = new AlphabetIndexerCursorAdapter(savedInstanceState, this, cursor);
             adapter.setOnItemClickListener(this);
-            adapter.setAdapterView(getListView());
+            ListView listView = getListView();
+            listView.setFastScrollEnabled(true);
+            adapter.setAdapterView(listView);
         }
         else {
             adapter.changeCursor(cursor);
         }
     }
-
+    
     private void rebuildList() {
         getContentResolver().delete(BuildingsContract.CONTENT_URI, null, null);
         ContentValues values = new ContentValues();
@@ -133,8 +136,7 @@ public class SimpleCursorAdapterActivity extends SherlockFragmentActivity
     
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        String sortOrder = BuildingsContract.NAME +  " ASC";
-        return new CursorLoader(this, BuildingsContract.CONTENT_URI, null, null, null, sortOrder);
+        return new CursorLoader(this, BuildingsContract.CONTENT_URI, null, null, null, null);
     }
 
     @Override

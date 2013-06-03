@@ -13,15 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.manuelpeinado.multichoiceadapter.demo.manyitemssample;
+package com.manuelpeinado.multichoiceadapter.demo.complexitemlayoutsample;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
+import java.util.List;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -35,34 +30,17 @@ import com.actionbarsherlock.view.MenuItem;
 import com.manuelpeinado.multichoiceadapter.MultiChoiceBaseAdapter;
 import com.manuelpeinado.multichoiceadapter.demo.HomeActivity;
 import com.manuelpeinado.multichoiceadapter.demo.R;
+import com.manuelpeinado.multichoiceadapter.demo.manyitemssample.ManyItemsActivity;
 
-public class ManyItemsActivity extends SherlockActivity implements OnItemClickListener {
+public class ComplexItemLayoutActivity extends SherlockActivity implements OnItemClickListener {
     private MultiChoiceBaseAdapter adapter;
-    private ArrayList<String> countries = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        countries = loadCountries(this);
         rebuildList(savedInstanceState);
-    }
-
-    public static ArrayList<String> loadCountries(Context context) {
-        try {
-            ArrayList<String> countries = new ArrayList<String>();
-            InputStream inputStream = context.getResources().openRawResource(R.raw.countries);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                countries.add(line);
-            }
-            reader.close();
-            return countries;
-        } catch (IOException e) {
-            return null;
-        }
     }
 
     private ListView getListView() {
@@ -105,7 +83,8 @@ public class ManyItemsActivity extends SherlockActivity implements OnItemClickLi
     }
 
     private void rebuildList(Bundle savedInstanceState) {
-        adapter = new CountriesAdapter(savedInstanceState, countries);
+        List<String> items = ManyItemsActivity.loadCountries(this);
+        adapter = new ComplexItemLayoutAdapter(savedInstanceState, items);
         adapter.setOnItemClickListener(this);
         adapter.setAdapterView(getListView());
     }
@@ -114,5 +93,4 @@ public class ManyItemsActivity extends SherlockActivity implements OnItemClickLi
     protected void onSaveInstanceState(Bundle outState) {
         adapter.save(outState);
     }
-
 }
