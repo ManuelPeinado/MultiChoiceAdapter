@@ -40,7 +40,6 @@ public class MyArrayAdapter extends MultiChoiceArrayAdapter<String> {
 
     public MyArrayAdapter(Bundle savedInstanceState, Context context, ArrayList<String> items) {
         super(savedInstanceState, context, R.layout.mca__simple_list_item_checkable_1, android.R.id.text1, items);
-        setItemClickInActionModePolicy(ItemClickInActionModePolicy.OPEN);
     }
 
     @Override
