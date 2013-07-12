@@ -30,7 +30,7 @@ If you use maven to build your Android project you can simply add a dependency f
 <dependency>
     <groupId>com.github.manuelpeinado.multichoiceadapter</groupId>
     <artifactId>multichoiceadapter</artifactId>
-    <version>2.1.3</version>
+    <version>2.2.4</version>
     <type>apklib</type>
 </dependency>
 ```
