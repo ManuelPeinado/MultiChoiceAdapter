@@ -34,6 +34,7 @@ import com.manuelpeinado.multichoiceadapter.demo.gallerysample.GalleryActivity;
 import com.manuelpeinado.multichoiceadapter.demo.gridsample.GridActivity;
 import com.manuelpeinado.multichoiceadapter.demo.headersample.HeaderActivity;
 import com.manuelpeinado.multichoiceadapter.demo.manyitemssample.ManyItemsActivity;
+import com.manuelpeinado.multichoiceadapter.demo.noncheckableitemssample.NonCheckableItemsActivity;
 import com.manuelpeinado.multichoiceadapter.demo.simplecursoradaptersample.SimpleCursorAdapterActivity;
 import com.manuelpeinado.multichoiceadapter.demo.twolinesarrayadaptersample.TwoLinesArrayAdapterActivity;
 
@@ -48,7 +49,8 @@ public class HomeActivity extends SherlockListActivity {
             new ActivityInfo(HeaderActivity.class, R.string.activity_title_header),
             new ActivityInfo(ManyItemsActivity.class, R.string.activity_title_many_items),
             new ActivityInfo(ComplexItemLayoutActivity.class, R.string.activity_title_complex_item_layout),
-            new ActivityInfo(AlphabetIndexerActivity.class, R.string.activity_title_alphabet_indexer));
+            new ActivityInfo(AlphabetIndexerActivity.class, R.string.activity_title_alphabet_indexer),
+            new ActivityInfo(NonCheckableItemsActivity.class, R.string.activity_title_non_checkable_items));
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -106,10 +106,14 @@ public abstract class MultiChoiceSimpleCursorAdapter extends SimpleCursorAdapter
         return helper.getView(position, viewWithoutSelection);
     }
 
+    @Override
+    public boolean isItemCheckable(int position) {
+        return true;
+    }
+
     /**
-     * Override this method if you need to customize the model-to-view mapping
-     * performed by SimpleCursorAdapter (for instance, to populate an image view
-     * based on a URL stored in a DB column)
+     * Override this method if you need to customize the model-to-view mapping performed by SimpleCursorAdapter (for
+     * instance, to populate an image view based on a URL stored in a DB column)
      */
     protected View getViewImpl(int position, View convertView, ViewGroup parent) {
         return super.getView(position, convertView, parent);

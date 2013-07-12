@@ -32,4 +32,5 @@ public interface MultiChoiceAdapter {
     boolean isChecked(long position);
     void setItemClickInActionModePolicy(ItemClickInActionModePolicy policy);
     ItemClickInActionModePolicy getItemClickInActionModePolicy();
+    boolean isItemCheckable(int position);
 }

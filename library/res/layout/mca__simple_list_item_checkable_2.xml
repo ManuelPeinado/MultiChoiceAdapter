@@ -20,6 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@android:id/text1"
         android:layout_below="@android:id/text1"
+        android:paddingLeft="@dimen/mca__listPreferredItemPaddingLeft"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </com.manuelpeinado.multichoiceadapter.CheckableTwoLineListItem>

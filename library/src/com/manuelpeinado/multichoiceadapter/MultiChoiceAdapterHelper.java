@@ -220,6 +220,10 @@ class MultiChoiceAdapterHelper implements OnItemLongClickListener, OnItemClickLi
 
     @Override
     public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
+        MultiChoiceAdapter adapter = (MultiChoiceAdapter) owner;
+        if (!adapter.isItemCheckable(position)) {
+            return false;
+        }
         int correctedPosition = correctPositionAccountingForHeader(adapterView, position);
         long handle = positionToSelectionHandle(correctedPosition);
         boolean wasChecked = isChecked(handle);

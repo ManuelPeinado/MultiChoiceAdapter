@@ -52,10 +52,13 @@
         <activity
             android:name=".alphabetindexersample.AlphabetIndexerActivity"
             android:label="@string/activity_title_alphabet_indexer" />
+        <activity
+            android:name=".noncheckableitemssample.NonCheckableItemsActivity"
+            android:label="@string/activity_title_non_checkable_items" />
         <provider
             android:name=".simplecursoradaptersample.BuildingsContentProvider"
             android:authorities="com.manuelpeinado.multichoiceadapter.demo"
             android:exported="false" />
-    </application>
+        </application>
 
 </manifest>

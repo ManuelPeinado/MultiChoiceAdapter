@@ -29,16 +29,18 @@ import android.widget.BaseAdapter;
 
 import com.actionbarsherlock.view.ActionMode;
 
-public abstract class MultiChoiceArrayAdapter<T> extends ArrayAdapter<T> 
-                                                 implements ActionMode.Callback, MultiChoiceAdapter {
+public abstract class MultiChoiceArrayAdapter<T> extends ArrayAdapter<T> implements ActionMode.Callback,
+        MultiChoiceAdapter {
     private MultiChoiceAdapterHelper helper = new MultiChoiceAdapterHelper(this);
 
-    public MultiChoiceArrayAdapter(Bundle savedInstanceState, Context context, int resource, int textViewResourceId, List<T> objects) {
+    public MultiChoiceArrayAdapter(Bundle savedInstanceState, Context context, int resource, int textViewResourceId,
+            List<T> objects) {
         super(context, resource, textViewResourceId, objects);
         helper.restoreSelectionFromSavedInstanceState(savedInstanceState);
     }
 
-    public MultiChoiceArrayAdapter(Bundle savedInstanceState, Context context, int resource, int textViewResourceId, T[] objects) {
+    public MultiChoiceArrayAdapter(Bundle savedInstanceState, Context context, int resource, int textViewResourceId,
+            T[] objects) {
         super(context, resource, textViewResourceId, objects);
         helper.restoreSelectionFromSavedInstanceState(savedInstanceState);
     }
@@ -62,7 +64,7 @@ public abstract class MultiChoiceArrayAdapter<T> extends ArrayAdapter<T>
         super(context, textViewResourceId);
         helper.restoreSelectionFromSavedInstanceState(savedInstanceState);
     }
-    
+
     public void setAdapterView(AdapterView<? super BaseAdapter> adapterView) {
         helper.setAdapterView(adapterView);
     }
@@ -70,7 +72,7 @@ public abstract class MultiChoiceArrayAdapter<T> extends ArrayAdapter<T>
     public void setOnItemClickListener(OnItemClickListener listener) {
         helper.setOnItemClickListener(listener);
     }
-    
+
     public void save(Bundle outState) {
         helper.save(outState);
     }
@@ -90,7 +92,7 @@ public abstract class MultiChoiceArrayAdapter<T> extends ArrayAdapter<T>
     public boolean isChecked(long position) {
         return helper.isChecked(position);
     }
-    
+
     public void setItemClickInActionModePolicy(ItemClickInActionModePolicy policy) {
         helper.setItemClickInActionModePolicy(policy);
     }
@@ -98,7 +100,7 @@ public abstract class MultiChoiceArrayAdapter<T> extends ArrayAdapter<T>
     public ItemClickInActionModePolicy getItemClickInActionModePolicy() {
         return helper.getItemClickInActionModePolicy();
     }
-    
+
     protected void finishActionMode() {
         helper.finishActionMode();
     }
@@ -107,14 +109,19 @@ public abstract class MultiChoiceArrayAdapter<T> extends ArrayAdapter<T>
     public void onDestroyActionMode(ActionMode mode) {
         helper.onDestroyActionMode(mode);
     }
-    
+
     @Override
     public final View getView(int position, View convertView, ViewGroup parent) {
         View viewWithoutSelection = getViewImpl(position, convertView, parent);
         return helper.getView(position, viewWithoutSelection);
     }
-    
+
     protected View getViewImpl(int position, View convertView, ViewGroup parent) {
         return super.getView(position, convertView, parent);
+    }
+
+    @Override
+    public boolean isItemCheckable(int position) {
+        return true;
     }
 }

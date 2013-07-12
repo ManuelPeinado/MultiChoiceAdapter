@@ -16,6 +16,7 @@
     <string name="activity_title_many_items">Long list sample</string>
     <string name="activity_title_complex_item_layout">Complex item layout sample</string>
     <string name="activity_title_alphabet_indexer">AlphabetIndexer sample</string>
+    <string name="activity_title_non_checkable_items">Non-checkable items sample</string>
     <string name="header_text">Header view</string>
 
 </resources>

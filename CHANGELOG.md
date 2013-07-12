@@ -3,6 +3,7 @@ Change Log
 
 Version 2.2.4 *(2013-06-12)*
 ----------------------------
+* Added support for non-checkable items (useful, for instance,  if you want to have headers between regular, checkable items).
 * Added getViewImpl() to MultiChoiceSimpleCursorAdapter so that implementations can customize the model-to-view mapping
 * Changed order in which we call setTag and setChecked, previous one caused problems to some people
 * Added alphabet indexer sample.
