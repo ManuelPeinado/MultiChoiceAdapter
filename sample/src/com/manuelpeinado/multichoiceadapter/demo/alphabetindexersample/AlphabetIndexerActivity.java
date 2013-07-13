@@ -103,15 +103,16 @@ public class AlphabetIndexerActivity extends SherlockFragmentActivity
             prefs.edit().putBoolean("dbInitialized", true).commit();
             rebuildList();
         }
-        if (adapter == null) {
-            adapter = new AlphabetIndexerCursorAdapter(savedInstanceState, this, cursor);
-            adapter.setOnItemClickListener(this);
-            ListView listView = getListView();
-            listView.setFastScrollEnabled(true);
-            adapter.setAdapterView(listView);
-        }
-        else {
-            adapter.changeCursor(cursor);
+        if (cursor.getCount() > 0) {
+            if (adapter == null) {
+                adapter = new AlphabetIndexerCursorAdapter(savedInstanceState, this, cursor);
+                adapter.setOnItemClickListener(this);
+                ListView listView = getListView();
+                getListView().setFastScrollEnabled(true);
+                adapter.setAdapterView(listView);
+            } else {
+                adapter.changeCursor(cursor);
+            }
         }
     }
     
