@@ -1,7 +1,10 @@
 Change Log
 =======================================
+Version 2.2.5 *(2013-07-12)*
+----------------------------
+* Fixed bug in "AlphabetIndexerActivity".
 
-Version 2.2.4 *(2013-06-12)*
+Version 2.2.4 *(2013-07-12)*
 ----------------------------
 * Added support for non-checkable items (useful, for instance,  if you want to have headers between regular, checkable items).
 * Added getViewImpl() to MultiChoiceSimpleCursorAdapter so that implementations can customize the model-to-view mapping
