@@ -4,6 +4,8 @@ Change Log
 Version 3.0.0 *(2013-11-03)*
 ----------------------------
 * Support for actionbarcompat and for the stock action bar.
+* Added Gradle support.
+* Removed Maven support.
 * New project structure with support for stock action bar, actionbarcompat and actionbarsherlock under the same repo.
 
 Version 2.2.5 *(2013-07-12)*
