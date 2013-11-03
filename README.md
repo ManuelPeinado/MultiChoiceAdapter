@@ -28,9 +28,9 @@ The library is pushed to Maven Central as a AAR, so you just need to add a depen
     
     dependencies {
         // Use the following if your project uses ActionBarCompat
-        compile 'com.github.manuelpeinado.multichoiceadapter:multichoiceadapter-abc:0.3.0'
+        compile 'com.github.manuelpeinado.multichoiceadapter:multichoiceadapter-abc:3.0.0'
         // Or the following if your projet uses ActionBarSherlock
-        compile 'com.github.manuelpeinado.multichoiceadapter:multichoiceadapter-abs:0.3.0'
+        compile 'com.github.manuelpeinado.multichoiceadapter:multichoiceadapter-abs:3.0.0'
     }
     
 Or if your project uses the stock action bar (yes, it makes sense to use MultiChoiceAdapter event in that case, as it will make your life easier):
