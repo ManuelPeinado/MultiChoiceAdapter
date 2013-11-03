@@ -6,9 +6,11 @@ MultiChoiceAdapter is an implementation of ListAdapter which adds support for mo
 It provides a functionality similar to that of the [<tt>CHOICE_MODE_MULTIPLE_MODAL</tt>][1] ListView mode, with two additional benefits:
 
 * It's easier to use, as it keeps count of the selected items, updates their background accordingly and handles checkboxes transparently.
-* It is compatible with every version of Android from 2.x. Of course, this implies that your project must use [ActionBarSherlock][2].
+* It is compatible with every version of Android from 2.x. Of course, this implies that your project must use either [ActionBarSherlock][2] or the support library's [ActionBarCompat][3]. 
 
-![Example Image][3]
+A version of the library that works with the stock action is also provided, for those apps with `minSdkVersion=11` or newer.
+
+![Example Image][4]
 
 Try out the sample application:
 
@@ -22,18 +24,21 @@ Or browse the [source code of the sample application][5] for a complete example 
 Including in your project
 -------------------------
 
-If you’re using Eclipse with the ADT plugin you can include MultiChoiceAdapter as a library project. Create a new Android project using the library/ folder as the existing source. Then, open the properties of this new project and, in the 'Android' category, add a reference to the ActionBarSherlock library project. Finally, in your application project properties, add a reference to the created library project.
+The library is pushed to Maven Central as a AAR, so you just need to add a dependency for it to your `build.gradle`:
+    
+    dependencies {
+        // Use the following if your project uses ActionBarCompat
+        compile 'com.github.manuelpeinado.multichoiceadapter:multichoiceadapter-abc:0.3.0'
+        // Or the following if your projet uses ActionBarSherlock
+        compile 'com.github.manuelpeinado.multichoiceadapter:multichoiceadapter-abs:0.3.0'
+    }
+    
+Or if your project uses the stock action bar (yes, it makes sense to use MultiChoiceAdapter event in that case, as it will make your life easier):
 
-If you use maven to build your Android project you can simply add a dependency for this library.
+        dependencies {
+        compile 'com.github.manuelpeinado.multichoiceadapter:multichoiceadapter:3.0.0'
+    }
 
-```xml
-<dependency>
-    <groupId>com.github.manuelpeinado.multichoiceadapter</groupId>
-    <artifactId>multichoiceadapter</artifactId>
-    <version>2.2.4</version>
-    <type>apklib</type>
-</dependency>
-```
 
 Usage
 ---------
@@ -61,10 +66,9 @@ Two values are supported:
 * <tt>openItem</tt>. Opens the clicked item, just as if it had been clicked outside of the action mode. This is what the native Gmail app does.
 
 
-Libraries used
+Acknowledgements
 --------------------
 
-* [ActionBarSherlock][2] by Jake Wharton
 * The sample app uses the [ProviGen library][6] by Timothee Jeannin
 
 Who's using it
@@ -115,9 +119,9 @@ License
 
  [1]: http://developer.android.com/reference/android/widget/AbsListView.MultiChoiceModeListener.html
  [2]: http://actionbarsherlock.com
- [3]: https://raw.github.com/ManuelPeinado/MultiChoiceAdapter/master/art/readme_pic.png
- [4]: https://play.google.com/store/apps/details?id=com.manuelpeinado.multichoiceadapter.demo
- [5]: https://github.com/ManuelPeinado/MultiChoiceAdapter/tree/master/sample
+ [3]: http://www.youtube.com/watch?v=6TGgYqfJnyc
+ [4]: https://raw.github.com/ManuelPeinado/MultiChoiceAdapter/master/art/readme_pic.png
+ [5]: https://github.com/ManuelPeinado/MultiChoiceAdapter/tree/master/samples/stock
  [6]: https://github.com/TimotheeJeannin/ProviGen
  [7]: https://play.google.com/store/apps/details?id=com.projectsexception.myapplist
  [8]: https://github.com/ManuelPeinado/MultiChoiceAdapter/wiki/MultiChoiceArrayAdapter-tutorial
