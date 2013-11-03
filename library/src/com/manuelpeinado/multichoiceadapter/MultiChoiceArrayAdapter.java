@@ -106,7 +106,7 @@ public abstract class MultiChoiceArrayAdapter<T> extends ArrayAdapter<T> impleme
 
     @Override
     public void onDestroyActionMode(ActionMode mode) {
-        helper.onDestroyActionMode(mode);
+        helper.onDestroyActionMode();
     }
 
     @Override

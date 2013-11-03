@@ -96,7 +96,7 @@ public abstract class MultiChoiceSimpleCursorAdapter extends SimpleCursorAdapter
 
     @Override
     public void onDestroyActionMode(ActionMode mode) {
-        helper.onDestroyActionMode(mode);
+        helper.onDestroyActionMode();
     }
 
     @Override

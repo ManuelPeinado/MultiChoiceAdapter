@@ -202,7 +202,7 @@ public abstract class MultiChoiceBaseAdapter extends BaseAdapter implements Acti
 
     @Override
     public void onDestroyActionMode(ActionMode mode) {
-        helper.onDestroyActionMode(mode);
+        helper.onDestroyActionMode();
     }
 
     //

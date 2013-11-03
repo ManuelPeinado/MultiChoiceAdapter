@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="names">
+        <item>One World Trade Center</item>
+        <item>Empire State Building</item>
+        <item>Bank of America Building</item>
+        <item>Chrysler Building</item>
+        <item>New York Times Building</item>
+        <item>American International Building</item>
+    </string-array>
+
+    <string-array name="heights">
+        <item>541 m</item>
+        <item>443 m</item>
+        <item>366</item>
+        <item>319</item>
+        <item>319</item>
+        <item>290</item>
+    </string-array>
+    <array name="photos">
+        <item>@drawable/one_wtc</item>
+        <item>@drawable/empire_state</item>
+        <item>@drawable/bank_of_america</item>
+        <item>@drawable/chrysler</item>
+        <item>@drawable/nyt</item>
+        <item>@drawable/aig</item>
+    </array>
+
+</resources>

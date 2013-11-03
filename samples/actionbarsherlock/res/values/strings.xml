@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MultiChoiceAdapter Demo</string>
+    <string name="menu_select_all">Select all</string>
+    <string name="menu_reset_list">Reset list</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_discard">Discard</string>
+    <string name="activity_title_array_adapter">ArrayAdapter sample</string>
+    <string name="activity_title_array_adapter_two_lines">ArrayAdapter sample (two lines)</string>
+    <string name="activity_title_base_adapter">Base adapter sample</string>
+    <string name="activity_title_simple_cursor_adapter">SimpleCursorAdapter sample</string>
+    <string name="activity_title_grid">GridView sample</string>
+    <string name="activity_title_gallery">Gallery sample</string>
+    <string name="activity_title_header">Header sample</string>
+    <string name="activity_title_many_items">Long list sample</string>
+    <string name="activity_title_complex_item_layout">Complex item layout sample</string>
+    <string name="activity_title_alphabet_indexer">AlphabetIndexer sample</string>
+    <string name="activity_title_non_checkable_items">Non-checkable items sample</string>
+    <string name="header_text">Header view</string>
+
+</resources>

@@ -23,7 +23,6 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.view.ActionMode;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -54,7 +53,7 @@ public abstract class MultiChoiceAdapterHelperBase implements OnItemLongClickLis
         this.owner = owner;
     }
 
-    void restoreSelectionFromSavedInstanceState(Bundle savedInstanceState) {
+    public void restoreSelectionFromSavedInstanceState(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
             return;
         }
@@ -65,7 +64,7 @@ public abstract class MultiChoiceAdapterHelperBase implements OnItemLongClickLis
         }
     }
 
-    void setAdapterView(AdapterView<? super BaseAdapter> adapterView) {
+    public void setAdapterView(AdapterView<? super BaseAdapter> adapterView) {
         this.adapterView = adapterView;
         checkActivity();
         adapterView.setOnItemLongClickListener(this);
@@ -79,18 +78,18 @@ public abstract class MultiChoiceAdapterHelperBase implements OnItemLongClickLis
         }
     }
 
-    void checkActivity() {
+    public void checkActivity() {
         Context context = adapterView.getContext();
         if (context instanceof ListActivity) {
             throw new RuntimeException("ListView cannot belong to an activity which subclasses ListActivity");
         }
     }
 
-    void setOnItemClickListener(OnItemClickListener listener) {
+    public void setOnItemClickListener(OnItemClickListener listener) {
         this.itemClickListener = listener;
     }
 
-    void save(Bundle outState) {
+    public void save(Bundle outState) {
         long[] array = new long[checkedItems.size()];
         int i = 0;
         for (Long id : checkedItems) {
@@ -99,7 +98,7 @@ public abstract class MultiChoiceAdapterHelperBase implements OnItemLongClickLis
         outState.putLongArray(BUNDLE_KEY, array);
     }
 
-    void setItemChecked(long handle, boolean checked) {
+    public void setItemChecked(long handle, boolean checked) {
         if (checked) {
             checkItem(handle);
         } else {
@@ -107,7 +106,7 @@ public abstract class MultiChoiceAdapterHelperBase implements OnItemLongClickLis
         }
     }
 
-    void checkItem(long handle) {
+    public void checkItem(long handle) {
         boolean wasSelected = isChecked(handle);
         if (wasSelected) {
             return;
@@ -120,7 +119,7 @@ public abstract class MultiChoiceAdapterHelperBase implements OnItemLongClickLis
         onItemSelectedStateChanged();
     }
 
-    void uncheckItem(long handle) {
+    public void uncheckItem(long handle) {
         boolean wasSelected = isChecked(handle);
         if (!wasSelected) {
             return;
@@ -134,28 +133,28 @@ public abstract class MultiChoiceAdapterHelperBase implements OnItemLongClickLis
         onItemSelectedStateChanged();
     }
 
-    Set<Long> getCheckedItems() {
+    public Set<Long> getCheckedItems() {
         // Return a copy to prevent concurrent modification problems
         return new HashSet<Long>(checkedItems);
     }
 
-    int getCheckedItemCount() {
+    public int getCheckedItemCount() {
         return checkedItems.size();
     }
 
-    boolean isChecked(long handle) {
+    public boolean isChecked(long handle) {
         return checkedItems.contains(handle);
     }
 
-    Context getContext() {
+    public Context getContext() {
         return adapterView.getContext();
     }
 
-    void setItemClickInActionModePolicy(ItemClickInActionModePolicy policy) {
+    public void setItemClickInActionModePolicy(ItemClickInActionModePolicy policy) {
         itemClickInActionModePolicy = policy;
     }
 
-    ItemClickInActionModePolicy getItemClickInActionModePolicy() {
+    public ItemClickInActionModePolicy getItemClickInActionModePolicy() {
         return itemClickInActionModePolicy;
     }
 
@@ -224,7 +223,7 @@ public abstract class MultiChoiceAdapterHelperBase implements OnItemLongClickLis
     // ActionMode.Callback related methods
     //
 
-    void onDestroyActionMode(ActionMode mode) {
+    public void onDestroyActionMode() {
         checkedItems.clear();
         clearActionMode();
         owner.notifyDataSetChanged();
@@ -249,7 +248,7 @@ public abstract class MultiChoiceAdapterHelperBase implements OnItemLongClickLis
         }
     }
 
-    View getView(int position, View viewWithoutSelection) {
+    public View getView(int position, View viewWithoutSelection) {
         if (viewWithoutSelection instanceof Checkable) {
             long handle = positionToSelectionHandle(position);
             boolean selected = isChecked(handle);
