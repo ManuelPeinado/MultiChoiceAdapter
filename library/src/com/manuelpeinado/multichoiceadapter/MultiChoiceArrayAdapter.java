@@ -20,14 +20,13 @@ import java.util.Set;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.ActionMode;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-
-import com.actionbarsherlock.view.ActionMode;
 
 public abstract class MultiChoiceArrayAdapter<T> extends ArrayAdapter<T> implements ActionMode.Callback,
         MultiChoiceAdapter {

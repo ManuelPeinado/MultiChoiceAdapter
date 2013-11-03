@@ -19,13 +19,13 @@ import java.util.Set;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.ActionMode;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 
-import com.actionbarsherlock.view.ActionMode;
 
 /**
  * MultiChoiceBaseAdapter is an implementation of ListAdapter which adds support for modal multiple choice selection as

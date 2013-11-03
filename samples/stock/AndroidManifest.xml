@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.manuelpeinado.multichoiceadapter.samples.stock"
+    android:versionCode="300"
+    android:versionName="3.0.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="19" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.manuelpeinado.multichoiceadapter.demo.HomeActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.manuelpeinado.multichoiceadapter.demo.baseadaptersample.BaseAdapterActivity"
+            android:label="@string/activity_title_base_adapter" />
+        <activity
+            android:name="com.manuelpeinado.multichoiceadapter.demo.arrayadaptersample.ArrayAdapterActivity"
+            android:label="@string/activity_title_array_adapter" />
+        <activity
+            android:name="com.manuelpeinado.multichoiceadapter.demo.twolinesarrayadaptersample.TwoLinesArrayAdapterActivity"
+            android:label="@string/activity_title_array_adapter_two_lines" />
+        <activity
+            android:name="com.manuelpeinado.multichoiceadapter.demo.simplecursoradaptersample.SimpleCursorAdapterActivity"
+            android:label="@string/activity_title_simple_cursor_adapter" />
+        <activity
+            android:name="com.manuelpeinado.multichoiceadapter.demo.gridsample.GridActivity"
+            android:label="@string/activity_title_grid" />
+        <activity
+            android:name="com.manuelpeinado.multichoiceadapter.demo.gallerysample.GalleryActivity"
+            android:label="@string/activity_title_gallery" />
+        <activity
+            android:name="com.manuelpeinado.multichoiceadapter.demo.headersample.HeaderActivity"
+            android:label="@string/activity_title_header" />
+        <activity
+            android:name="com.manuelpeinado.multichoiceadapter.demo.manyitemssample.ManyItemsActivity"
+            android:label="@string/activity_title_many_items" />
+        <activity
+            android:name="com.manuelpeinado.multichoiceadapter.demo.complexitemlayoutsample.ComplexItemLayoutActivity"
+            android:label="@string/activity_title_complex_item_layout" />
+        <activity
+            android:name="com.manuelpeinado.multichoiceadapter.demo.alphabetindexersample.AlphabetIndexerActivity"
+            android:label="@string/activity_title_alphabet_indexer" />
+        <activity
+            android:name="com.manuelpeinado.multichoiceadapter.demo.noncheckableitemssample.NonCheckableItemsActivity"
+            android:label="@string/activity_title_non_checkable_items" />
+        <provider
+            android:name="com.manuelpeinado.multichoiceadapter.demo.simplecursoradaptersample.BuildingsContentProvider"
+            android:authorities="com.manuelpeinado.multichoiceadapter.demo"
+            android:exported="false" />
+        </application>
+
+</manifest>

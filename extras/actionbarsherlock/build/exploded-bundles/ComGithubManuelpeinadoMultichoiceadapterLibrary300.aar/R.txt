@@ -1,0 +1,23 @@
+int attr checkableImageViewStyle 0x7f010000
+int attr itemClickInActionMode 0x7f010002
+int attr multiChoiceAdapterStyle 0x7f010001
+int color mca__holo_blue_light 0x7f040000
+int color mca__holo_blue_light_transparent 0x7f040001
+int color mca__list_item_bg_checked 0x7f040002
+int color mca__list_item_bg_normal 0x7f040003
+int color mca__list_item_bg_pressed 0x7f040004
+int dimen mca__listPreferredItemPaddingLeft 0x7f060000
+int drawable mca__gallery_selector 0x7f020000
+int drawable mca__grid_item_fg_pressed 0x7f020001
+int drawable mca__list_item_selector 0x7f020002
+int id openItem 0x7f050001
+int id selectItem 0x7f050000
+int layout mca__simple_list_item_checkable_1 0x7f030000
+int layout mca__simple_list_item_checkable_2 0x7f030001
+int plurals selected_items 0x7f070000
+int style MultiChoiceAdapter_DefaultCheckableImageViewStyle 0x7f080000
+int style MultiChoiceAdapter_DefaultSelectedItemStyle 0x7f080001
+int[] styleable CheckableImageView { 0x01010109 }
+int styleable CheckableImageView_android_foreground 0
+int[] styleable MultiChoiceAdapter { 0x7f010002 }
+int styleable MultiChoiceAdapter_itemClickInActionMode 0

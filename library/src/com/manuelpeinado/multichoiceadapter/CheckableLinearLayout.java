@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Checkable;
 import android.widget.LinearLayout;
 
-import com.manuelpeinado.multichoicelistadapter.R;
+import com.manuelpeinado.multichoiceadapter.R;
 
 public class CheckableLinearLayout extends LinearLayout implements Checkable {
 

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/mca__grid_item_fg_pressed" android:state_pressed="true"/>
+    <item android:drawable="@drawable/mca__grid_item_fg_pressed" android:state_checked="true"/>
+    <item android:drawable="@android:color/transparent"/>
+
+</selector><!-- From: file:/Users/manuel/MultiChoiceAdapter/library/res/drawable/mca__gallery_selector.xml --><!-- From: file:/Users/manuel/MultiChoiceAdapter/extras/actionbarsherlock/build/exploded-bundles/ComGithubManuelpeinadoMultichoiceadapterLibrary300.aar/res/drawable/mca__gallery_selector.xml -->

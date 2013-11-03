@@ -1,0 +1,11 @@
+<resources>
+
+    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+        <item name="multiChoiceAdapterStyle">@style/MultiChoiceAdapter</item>
+    </style>
+
+    <style name="MultiChoiceAdapter">
+        <item name="itemClickInActionMode">selectItem</item>
+    </style>
+
+</resources>

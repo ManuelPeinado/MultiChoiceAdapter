@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 import android.widget.Checkable;
 import android.widget.ImageView;
 
-import com.manuelpeinado.multichoicelistadapter.R;
+import com.manuelpeinado.multichoiceadapter.R;
 
 public class CheckableImageView extends ImageView implements Checkable {
     private static final int[] CHECKED_STATE_SET = { android.R.attr.state_checked };
