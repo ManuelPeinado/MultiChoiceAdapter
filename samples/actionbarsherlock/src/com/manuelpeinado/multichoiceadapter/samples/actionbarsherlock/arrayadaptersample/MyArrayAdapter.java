@@ -21,15 +21,15 @@ import java.util.Set;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
-import android.view.ActionMode;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.manuelpeinado.multichoiceadapter.MultiChoiceArrayAdapter;
+import com.actionbarsherlock.view.ActionMode;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
+import com.manuelpeinado.multichoiceadapter.extras.actionbarsherlock.MultiChoiceArrayAdapter;
 import com.manuelpeinado.multichoiceadapter.samples.actionbarsherlock.R;
 
 @SuppressLint("ViewConstructor")

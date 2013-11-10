@@ -15,11 +15,9 @@
  */
 package com.manuelpeinado.multichoiceadapter.extras.actionbarsherlock;
 
-import java.lang.reflect.Method;
-
-import android.app.Activity;
 import android.widget.BaseAdapter;
 
+import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.ActionMode;
 import com.manuelpeinado.multichoiceadapter.MultiChoiceAdapterHelperBase;
 
@@ -32,14 +30,14 @@ public class MultiChoiceAdapterHelper extends MultiChoiceAdapterHelperBase {
 
     @Override
     protected void startActionMode() {
-        try {
-            Activity activity = (Activity) adapterView.getContext();
-            Method method = activity.getClass().getMethod("startActionMode", ActionMode.Callback.class);
-            actionMode = (ActionMode) method.invoke(activity, owner);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
+        if (!(adapterView.getContext() instanceof SherlockActivity)) {
+            throw new IllegalStateException("List view must belong to a SherlockActivity");
         }
+        if (!(owner instanceof ActionMode.Callback)) {
+            throw new IllegalStateException("Owner adapter must implement ActionMode.Callback");
+        }
+        SherlockActivity activity = (SherlockActivity) adapterView.getContext();
+        actionMode = activity.startActionMode((ActionMode.Callback)owner); 
     }
 
     @Override

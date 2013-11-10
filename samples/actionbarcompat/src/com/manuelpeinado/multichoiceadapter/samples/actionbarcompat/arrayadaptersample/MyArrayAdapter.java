@@ -21,7 +21,7 @@ import java.util.Set;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
-import android.view.ActionMode;
+import android.support.v7.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -29,7 +29,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.manuelpeinado.multichoiceadapter.MultiChoiceArrayAdapter;
+import com.manuelpeinado.multichoiceadapter.extras.actionbarcompat.MultiChoiceArrayAdapter;
 import com.manuelpeinado.multichoiceadapter.samples.actionbarcompat.R;
 
 @SuppressLint("ViewConstructor")

@@ -18,21 +18,21 @@ package com.manuelpeinado.multichoiceadapter.samples.actionbarsherlock.arrayadap
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import com.manuelpeinado.multichoiceadapter.samples.actionbarsherlock.HomeActivity;
 import com.manuelpeinado.multichoiceadapter.samples.actionbarsherlock.R;
 
-public class ArrayAdapterActivity extends Activity
+public class ArrayAdapterActivity extends SherlockActivity
                                   implements OnItemClickListener {
     private MyArrayAdapter adapter;
 
@@ -40,7 +40,7 @@ public class ArrayAdapterActivity extends Activity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         rebuildList(savedInstanceState);
     }
 
@@ -54,7 +54,7 @@ public class ArrayAdapterActivity extends Activity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_main, menu);
+        getSupportMenuInflater().inflate(R.menu.activity_main, menu);
         return true;
     }
 
