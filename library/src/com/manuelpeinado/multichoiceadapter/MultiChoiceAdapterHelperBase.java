@@ -59,8 +59,10 @@ public abstract class MultiChoiceAdapterHelperBase implements OnItemLongClickLis
         }
         long[] array = savedInstanceState.getLongArray(BUNDLE_KEY);
         checkedItems.clear();
-        for (long id : array) {
-            checkedItems.add(id);
+        if (array != null) {
+            for (long id : array) {
+                checkedItems.add(id);
+            }
         }
     }
 
