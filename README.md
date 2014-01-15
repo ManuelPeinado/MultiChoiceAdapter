@@ -74,6 +74,7 @@ Acknowledgements
 Who's using it
 --------------
 * [My App List][7]. With this app you can save installed applications in a list to restore them after flash or install a new ROM. 
+* [NFC Basic][12]. NFC Basic is an application that allows writing and reading data using wireless technology NFC. It allows you to write content following the NFC-FORUM standards, writing tasks for Android phones, create your custom profiles (so you can do some actions in the same time), delete and clone any tags, 
  
 *Does your app use MultiChoiceAdapter? If you want to be featured on this list drop me a line.*
 
@@ -128,3 +129,4 @@ License
  [9]: https://github.com/ManuelPeinado/MultiChoiceAdapter/wiki/MultiChoiceBaseAdapter-tutorial
  [10]: https://github.com/ManuelPeinado/MultiChoiceAdapter/wiki/MultiChoiceSimpleCursorAdapter-tutorial
  [11]: https://github.com/ManuelPeinado/MultiChoiceAdapter/wiki/Gallery-tutorial
+ [12]: https://play.google.com/store/apps/details?id=com.dpizarro.nfc.basic
