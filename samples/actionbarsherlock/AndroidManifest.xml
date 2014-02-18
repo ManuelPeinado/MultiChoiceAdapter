@@ -50,7 +50,7 @@
             android:name="com.manuelpeinado.multichoiceadapter.samples.actionbarsherlock.complexitemlayoutsample.ComplexItemLayoutActivity"
             android:label="@string/activity_title_complex_item_layout" />
         <activity
-            android:name="com.manuelpeinado.multichoiceadapter.demo.alphabetindexersample.AlphabetIndexerActivity"
+            android:name="com.manuelpeinado.multichoiceadapter.samples.alphabetindexersample.AlphabetIndexerActivity"
             android:label="@string/activity_title_alphabet_indexer" />
         <activity
             android:name="com.manuelpeinado.multichoiceadapter.samples.actionbarsherlock.noncheckableitemssample.NonCheckableItemsActivity"

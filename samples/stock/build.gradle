@@ -1,9 +1,5 @@
 apply plugin: 'android'
 
-dependencies {
-    compile project(':library')
-}
-
 android {
     compileSdkVersion 19
     buildToolsVersion '19'
@@ -20,4 +16,8 @@ android {
             res.srcDirs = ['res']
         }
     }
+}
+
+dependencies {
+    compile project(':library')
 }

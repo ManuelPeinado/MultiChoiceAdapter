@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Set;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.view.ActionMode;
 import android.view.View;
@@ -125,5 +126,11 @@ public abstract class MultiChoiceArrayAdapter<T> extends ArrayAdapter<T> impleme
     @Override
     public boolean isItemCheckable(int position) {
         return true;
+    }
+
+    @Override
+    public String getActionModeTitle(int count) {
+        Resources res = getContext().getResources();
+        return res.getQuantityString(R.plurals.selected_items, count, count);
     }
 }

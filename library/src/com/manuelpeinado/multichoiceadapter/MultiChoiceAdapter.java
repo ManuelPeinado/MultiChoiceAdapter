@@ -33,4 +33,5 @@ public interface MultiChoiceAdapter {
     void setItemClickInActionModePolicy(ItemClickInActionModePolicy policy);
     ItemClickInActionModePolicy getItemClickInActionModePolicy();
     boolean isItemCheckable(int position);
+    String getActionModeTitle(int count);
 }
