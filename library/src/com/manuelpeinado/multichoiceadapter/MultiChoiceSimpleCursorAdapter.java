@@ -18,6 +18,7 @@ package com.manuelpeinado.multichoiceadapter;
 import java.util.Set;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.ActionMode;
@@ -108,6 +109,12 @@ public abstract class MultiChoiceSimpleCursorAdapter extends SimpleCursorAdapter
     @Override
     public boolean isItemCheckable(int position) {
         return true;
+    }
+
+    @Override
+    public String getActionModeTitle(int count) {
+        Resources res = getContext().getResources();
+        return res.getQuantityString(R.plurals.selected_items, count, count);
     }
 
     /**

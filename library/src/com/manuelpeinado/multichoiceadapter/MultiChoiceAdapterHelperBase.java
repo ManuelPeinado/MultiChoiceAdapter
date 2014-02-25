@@ -166,9 +166,8 @@ public abstract class MultiChoiceAdapterHelperBase implements OnItemLongClickLis
             finishActionMode();
             return;
         }
-        Resources res = adapterView.getResources();
-        String title = res.getQuantityString(R.plurals.selected_items, count, count);
-        setActionModeTitle(title);
+        MultiChoiceAdapter adapter = (MultiChoiceAdapter) owner;
+        setActionModeTitle(adapter.getActionModeTitle(count));
     }
 
     protected abstract void setActionModeTitle(String title);
