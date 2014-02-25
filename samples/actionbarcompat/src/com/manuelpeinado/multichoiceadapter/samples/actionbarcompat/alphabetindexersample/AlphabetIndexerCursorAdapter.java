@@ -45,7 +45,7 @@ public class AlphabetIndexerCursorAdapter extends MultiChoiceSimpleCursorAdapter
         alphabetIndexer = new AlphabetIndexer(cursor, columnIndex, " ABCDEFGHIJKLMNOPQRTSUVWXYZ");
         alphabetIndexer.setCursor(cursor);
     }
-
+    
     @Override
     public boolean onCreateActionMode(ActionMode mode, Menu menu) {
         MenuInflater inflater = mode.getMenuInflater();

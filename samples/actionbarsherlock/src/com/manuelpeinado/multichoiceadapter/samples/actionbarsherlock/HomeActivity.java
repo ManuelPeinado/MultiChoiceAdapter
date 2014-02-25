@@ -30,6 +30,7 @@ import com.manuelpeinado.multichoiceadapter.samples.actionbarsherlock.alphabetin
 import com.manuelpeinado.multichoiceadapter.samples.actionbarsherlock.arrayadaptersample.ArrayAdapterActivity;
 import com.manuelpeinado.multichoiceadapter.samples.actionbarsherlock.baseadaptersample.BaseAdapterActivity;
 import com.manuelpeinado.multichoiceadapter.samples.actionbarsherlock.complexitemlayoutsample.ComplexItemLayoutActivity;
+import com.manuelpeinado.multichoiceadapter.samples.actionbarsherlock.customactionmodetitlesample.CustomActionModeTitleActivity;
 import com.manuelpeinado.multichoiceadapter.samples.actionbarsherlock.gallerysample.GalleryActivity;
 import com.manuelpeinado.multichoiceadapter.samples.actionbarsherlock.gridsample.GridActivity;
 import com.manuelpeinado.multichoiceadapter.samples.actionbarsherlock.headersample.HeaderActivity;
@@ -50,7 +51,8 @@ public class HomeActivity extends SherlockListActivity {
             new ActivityInfo(ManyItemsActivity.class, R.string.activity_title_many_items),
             new ActivityInfo(ComplexItemLayoutActivity.class, R.string.activity_title_complex_item_layout),
             new ActivityInfo(AlphabetIndexerActivity.class, R.string.activity_title_alphabet_indexer),
-            new ActivityInfo(NonCheckableItemsActivity.class, R.string.activity_title_non_checkable_items));
+            new ActivityInfo(NonCheckableItemsActivity.class, R.string.activity_title_non_checkable_items),
+            new ActivityInfo(CustomActionModeTitleActivity.class, R.string.activity_title_custom_action_mode_title));
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {

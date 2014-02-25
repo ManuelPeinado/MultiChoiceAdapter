@@ -18,7 +18,6 @@ package com.manuelpeinado.multichoiceadapter;
 import java.util.Set;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.ActionMode;
 import android.view.View;
@@ -217,8 +216,7 @@ public abstract class MultiChoiceBaseAdapter extends BaseAdapter implements Acti
 
     @Override
     public String getActionModeTitle(int count) {
-        Resources res = getContext().getResources();
-        return res.getQuantityString(R.plurals.selected_items, count, count);
+    	return helper.getActionModeTitle(count);
     }
 
     //

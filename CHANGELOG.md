@@ -1,6 +1,14 @@
 Change Log
 =======================================
 
+Version 3.1.0 *(2014-02-25)*
+----------------------------
+* Added support for customized action mode title (to enable things like "2/5")
+
+Version 3.0.1 *(2013-11-10)*
+----------------------------
+* Fixes bug in actionbarcompat extra
+
 Version 3.0.0 *(2013-11-03)*
 ----------------------------
 * Support for actionbarcompat and for the stock action bar.

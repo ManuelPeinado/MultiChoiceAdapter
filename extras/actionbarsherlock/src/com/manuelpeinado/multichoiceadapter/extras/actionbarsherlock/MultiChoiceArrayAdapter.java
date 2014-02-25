@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Set;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -130,7 +129,6 @@ public abstract class MultiChoiceArrayAdapter<T> extends ArrayAdapter<T> impleme
 
     @Override
     public String getActionModeTitle(int count) {
-        Resources res = getContext().getResources();
-        return res.getQuantityString(R.plurals.selected_items, count, count);
+		return helper.getActionModeTitle(count);
     }
 }

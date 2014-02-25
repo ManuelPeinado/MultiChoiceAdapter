@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.manuelpeinado.multichoiceadapter.samples.stock"
-    android:versionCode="301"
-    android:versionName="3.0.1" >
+    android:versionCode="310"
+    android:versionName="3.1.0" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -55,6 +55,9 @@
         <activity
             android:name="com.manuelpeinado.multichoiceadapter.samples.stock.noncheckableitemssample.NonCheckableItemsActivity"
             android:label="@string/activity_title_non_checkable_items" />
+        <activity
+            android:name="com.manuelpeinado.multichoiceadapter.samples.stock.customactionmodetitlesample.CustomActionModeTitleActivity"
+            android:label="@string/activity_title_custom_action_mode_title" />        
         <provider
             android:name="com.manuelpeinado.multichoiceadapter.samples.stock.simplecursoradaptersample.BuildingsContentProvider"
             android:authorities="com.manuelpeinado.multichoiceadapter.samples.stock"

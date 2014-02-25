@@ -18,15 +18,14 @@ package com.manuelpeinado.multichoiceadapter.extras.actionbarsherlock;
 import java.util.Set;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
+import android.widget.SimpleCursorAdapter;
 
 import com.actionbarsherlock.view.ActionMode;
 import com.manuelpeinado.multichoiceadapter.ItemClickInActionModePolicy;
@@ -116,10 +115,8 @@ public abstract class MultiChoiceSimpleCursorAdapter extends SimpleCursorAdapter
 
     @Override
     public String getActionModeTitle(int count) {
-        Resources res = getContext().getResources();
-        return res.getQuantityString(R.plurals.selected_items, count, count);
+		return helper.getActionModeTitle(count);
     }
-
 
     /**
      * Override this method if you need to customize the model-to-view mapping performed by SimpleCursorAdapter (for

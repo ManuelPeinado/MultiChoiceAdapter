@@ -18,7 +18,6 @@ package com.manuelpeinado.multichoiceadapter.extras.actionbarcompat;
 import java.util.Set;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.widget.SimpleCursorAdapter;
@@ -36,7 +35,6 @@ import com.manuelpeinado.multichoiceadapter.MultiChoiceAdapter;
  */
 public abstract class MultiChoiceSimpleCursorAdapter extends SimpleCursorAdapter implements ActionMode.Callback,
         MultiChoiceAdapter {
-
     private MultiChoiceAdapterHelper helper = new MultiChoiceAdapterHelper(this) {
         @Override
         protected long positionToSelectionHandle(int position) {
@@ -116,10 +114,8 @@ public abstract class MultiChoiceSimpleCursorAdapter extends SimpleCursorAdapter
 
     @Override
     public String getActionModeTitle(int count) {
-        Resources res = getContext().getResources();
-        return res.getQuantityString(R.plurals.selected_items, count, count);
+		return helper.getActionModeTitle(count);
     }
-
 
     /**
      * Override this method if you need to customize the model-to-view mapping performed by SimpleCursorAdapter (for

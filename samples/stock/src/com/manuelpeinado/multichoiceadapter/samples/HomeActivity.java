@@ -33,6 +33,7 @@ import com.manuelpeinado.multichoiceadapter.samples.stock.alphabetindexersample.
 import com.manuelpeinado.multichoiceadapter.samples.stock.arrayadaptersample.ArrayAdapterActivity;
 import com.manuelpeinado.multichoiceadapter.samples.stock.baseadaptersample.BaseAdapterActivity;
 import com.manuelpeinado.multichoiceadapter.samples.stock.complexitemlayoutsample.ComplexItemLayoutActivity;
+import com.manuelpeinado.multichoiceadapter.samples.stock.customactionmodetitlesample.CustomActionModeTitleActivity;
 import com.manuelpeinado.multichoiceadapter.samples.stock.gallerysample.GalleryActivity;
 import com.manuelpeinado.multichoiceadapter.samples.stock.gridsample.GridActivity;
 import com.manuelpeinado.multichoiceadapter.samples.stock.headersample.HeaderActivity;
@@ -53,7 +54,8 @@ public class HomeActivity extends ListActivity {
             new ActivityInfo(ManyItemsActivity.class, R.string.activity_title_many_items),
             new ActivityInfo(ComplexItemLayoutActivity.class, R.string.activity_title_complex_item_layout),
             new ActivityInfo(AlphabetIndexerActivity.class, R.string.activity_title_alphabet_indexer),
-            new ActivityInfo(NonCheckableItemsActivity.class, R.string.activity_title_non_checkable_items));
+            new ActivityInfo(NonCheckableItemsActivity.class, R.string.activity_title_non_checkable_items),
+            new ActivityInfo(CustomActionModeTitleActivity.class, R.string.activity_title_custom_action_mode_title));
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {

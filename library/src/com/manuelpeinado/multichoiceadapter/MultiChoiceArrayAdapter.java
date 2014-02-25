@@ -127,7 +127,6 @@ public abstract class MultiChoiceArrayAdapter<T> extends ArrayAdapter<T> impleme
 
     @Override
     public String getActionModeTitle(int count) {
-        Resources res = getContext().getResources();
-        return res.getQuantityString(R.plurals.selected_items, count, count);
+		return helper.getActionModeTitle(count);
     }
-}
+ }

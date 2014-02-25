@@ -81,7 +81,7 @@ public abstract class MultiChoiceAdapterHelperBase implements OnItemLongClickLis
     }
 
     public void checkActivity() {
-        Context context = adapterView.getContext();
+        Context context = getContext();
         if (context instanceof ListActivity) {
             throw new RuntimeException("ListView cannot belong to an activity which subclasses ListActivity");
         }
@@ -158,6 +158,11 @@ public abstract class MultiChoiceAdapterHelperBase implements OnItemLongClickLis
 
     public ItemClickInActionModePolicy getItemClickInActionModePolicy() {
         return itemClickInActionModePolicy;
+    }
+    
+    public String getActionModeTitle(int count) {
+        Resources res = getContext().getResources();
+        return res.getQuantityString(R.plurals.selected_items, count, count);
     }
 
     private void onItemSelectedStateChanged() {
