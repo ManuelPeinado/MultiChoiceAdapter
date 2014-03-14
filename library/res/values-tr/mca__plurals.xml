@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <plurals name="selected_items">
+        <item quantity="other">%d tane selçildi</item>
+    </plurals>
+
+</resources>
